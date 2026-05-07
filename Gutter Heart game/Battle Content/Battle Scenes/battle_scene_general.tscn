@@ -1,0 +1,556 @@
+[gd_scene load_steps=20 format=3 uid="uid://bb8dlj3nj2gqf"]
+
+[ext_resource type="Script" uid="uid://c4k00kql5vsox" path="res://Battle Content/Battle Scripts/battle_scene_general.gd" id="1_3nfe8"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_o5so7"]
+[ext_resource type="Texture2D" uid="uid://bv35jrik8peif" path="res://Temporary Assets/visual/circle gird.jpg" id="1_ron4p"]
+[ext_resource type="Script" uid="uid://bq28p3v3vsvnr" path="res://Battle Content/Battle Scripts/beat_manager.gd" id="2_6koaw"]
+[ext_resource type="Script" uid="uid://bftalcvetkoqu" path="res://Battle Content/Battle Scripts/insult_spawner.gd" id="3_6koaw"]
+[ext_resource type="Script" uid="uid://b3yj176k57pn0" path="res://Battle Content/Battle Scripts/player_defending.gd" id="3_28jwv"]
+[ext_resource type="AudioStream" uid="uid://bq1ejic4giem2" path="res://Temporary Assets/audio/SFX/Metronome Beep.mp3" id="3_vukif"]
+[ext_resource type="PackedScene" uid="uid://050phl7wkbov" path="res://Battle Content/Battle Scenes/insult_scene.tscn" id="4_6koaw"]
+[ext_resource type="AudioStream" uid="uid://2dy4afuebpxs" path="res://Temporary Assets/audio/Music/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav" id="4_ej53o"]
+
+[sub_resource type="Gradient" id="Gradient_ej53o"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.33398688, 0.2659766, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y2ob7"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w3c6v"]
+noise = SubResource("FastNoiseLite_y2ob7")
+color_ramp = SubResource("Gradient_ej53o")
+seamless = true
+
+[sub_resource type="Animation" id="Animation_ej53o"]
+resource_name = "scroll"
+length = 20.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Background2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-640, -1152), Vector2(-640, -384)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Background1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-640, -384), Vector2(-640, 384)]
+}
+
+[sub_resource type="Animation" id="Animation_y2ob7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Background2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-640, -1152)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Background1:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-640, -384)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3c6v"]
+_data = {
+&"RESET": SubResource("Animation_y2ob7"),
+&"scroll": SubResource("Animation_ej53o")
+}
+
+[sub_resource type="Animation" id="Animation_w3c6v"]
+resource_name = "transition_to_playerturn"
+length = 0.6
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%EnemyTurn:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%EnemyTurn:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%PlayerTurn:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%PlayerTurn:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lfgun"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_tmt65"]
+resource_name = "transition_to_enemyturn"
+length = 0.6
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%EnemyTurn:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%EnemyTurn:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%PlayerTurn:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%PlayerTurn:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p88ah"]
+_data = {
+&"RESET": SubResource("Animation_lfgun"),
+&"transition_to_enemyturn": SubResource("Animation_tmt65"),
+&"transition_to_playerturn": SubResource("Animation_w3c6v")
+}
+
+[node name="BattleScene" type="Node2D"]
+script = ExtResource("1_3nfe8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Visuals" type="Node2D" parent="."]
+
+[node name="Background1" type="TextureRect" parent="Visuals"]
+z_index = -4
+offset_left = -640.0
+offset_top = -384.0
+offset_right = 640.0
+offset_bottom = 384.00024
+texture = SubResource("NoiseTexture2D_w3c6v")
+expand_mode = 1
+
+[node name="Background2" type="TextureRect" parent="Visuals"]
+z_index = -4
+offset_left = -640.0
+offset_top = -1152.0
+offset_right = 640.0
+offset_bottom = -384.0
+texture = SubResource("NoiseTexture2D_w3c6v")
+expand_mode = 1
+
+[node name="Backgroundscroll" type="AnimationPlayer" parent="Visuals"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_w3c6v")
+}
+autoplay = "scroll"
+
+[node name="TurnTransition" type="AnimationPlayer" parent="Visuals"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_p88ah")
+}
+
+[node name="BeatManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_6koaw")
+bpm = 160.0
+
+[node name="BeatNrLabel" type="Label" parent="BeatManager"]
+unique_name_in_owner = true
+visible = false
+offset_left = 327.0
+offset_top = -275.0
+offset_right = 380.0
+offset_bottom = -252.0
+text = "Beatnr"
+
+[node name="MetronomeSFX" type="AudioStreamPlayer" parent="BeatManager"]
+unique_name_in_owner = true
+stream = ExtResource("3_vukif")
+volume_db = -80.0
+pitch_scale = 1.16
+bus = &"SFX"
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="BeatManager"]
+unique_name_in_owner = true
+stream = ExtResource("3_vukif")
+volume_db = 5.026
+pitch_scale = 1.7
+bus = &"SFX"
+
+[node name="BGMusic" type="AudioStreamPlayer" parent="BeatManager"]
+stream = ExtResource("4_ej53o")
+autoplay = true
+bus = &"Music"
+
+[node name="EnemyTurn" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="PlayerDefending" type="Node2D" parent="EnemyTurn"]
+unique_name_in_owner = true
+script = ExtResource("3_28jwv")
+
+[node name="PlayerSprite" type="Sprite2D" parent="EnemyTurn/PlayerDefending"]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_o5so7")
+
+[node name="HitsLabel" type="Label" parent="EnemyTurn/PlayerDefending"]
+unique_name_in_owner = true
+offset_left = 327.0
+offset_top = -233.0
+offset_right = 367.0
+offset_bottom = -210.0
+text = "Hits"
+
+[node name="HurtsLabel" type="Label" parent="EnemyTurn/PlayerDefending"]
+unique_name_in_owner = true
+offset_left = 327.0
+offset_top = -209.0
+offset_right = 371.0
+offset_bottom = -186.0
+text = "Hurts"
+
+[node name="HitzonePivot" type="Node2D" parent="EnemyTurn/PlayerDefending"]
+unique_name_in_owner = true
+
+[node name="Hitzone" type="ColorRect" parent="EnemyTurn/PlayerDefending/HitzonePivot"]
+unique_name_in_owner = true
+visible = false
+offset_left = 29.0
+offset_top = -48.0
+offset_right = 61.0
+offset_bottom = 48.0
+color = Color(0, 1, 0, 0.69411767)
+
+[node name="HitzoneVisibilityTimer" type="Timer" parent="EnemyTurn/PlayerDefending/HitzonePivot"]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[node name="InsultSpawner" type="Node2D" parent="EnemyTurn"]
+unique_name_in_owner = true
+script = ExtResource("3_6koaw")
+insultRef = ExtResource("4_6koaw")
+
+[node name="Grid" type="Sprite2D" parent="EnemyTurn"]
+z_index = -1
+texture = ExtResource("1_ron4p")
+
+[node name="AttackTimer" type="Timer" parent="EnemyTurn"]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[node name="PlayerTurn" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PlayerUI" type="Control" parent="PlayerTurn"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -538.0
+offset_top = -289.0
+offset_right = 538.0
+offset_bottom = 289.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerTurn/PlayerUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -272.0
+offset_right = 416.0
+offset_bottom = 272.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 244
+
+[node name="TopTextBox" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="TopTextBoxOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox"]
+layout_mode = 1
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 840.0
+offset_bottom = 136.0
+color = Color(0.7666196, 0.76661956, 0.76661956, 1)
+
+[node name="TopTextBox" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0.24125901, 0, 0.14820552, 1)
+
+[node name="CombatText" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline/TopTextBox"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -46.5
+offset_right = 762.0
+offset_bottom = 46.5
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "First round 
+Compliment"
+
+[node name="EnemyContainer" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="EnemyPortrait" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer"]
+modulate = Color(1, 0.47058824, 0, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -28.0
+offset_right = 64.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_o5so7")
+
+[node name="ProgOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -76.0
+offset_right = 80.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.69135684, 0.6913568, 0.69135684, 1)
+
+[node name="ProgBackground" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer/ProgOutline"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -24.0
+offset_right = 72.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="ProgFilling" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer/ProgOutline"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -24.0
+offset_right = -24.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.44705883, 0.57254905, 0.21960784, 1)
+
+[node name="PlayerContainer" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PlayerUIBoxOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -416.0
+offset_top = -88.0
+offset_right = 416.0
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+color = Color(0.7647059, 0.7647059, 0.7647059, 1)
+
+[node name="PlayerUIBox" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 7.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.24313726, 0, 0.14901961, 1)
+
+[node name="PlayerAlternatives" type="GridContainer" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.5
+offset_top = -67.5
+offset_right = 264.5
+offset_bottom = 68.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 30
+columns = 2
+
+[node name="ComplimentButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Compliment"
+
+[node name="CriticizeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Criticize"
+
+[node name="RelateButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Relate"
+
+[node name="OpposeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Oppose
+"
+
+[connection signal="timeout" from="EnemyTurn/PlayerDefending/HitzonePivot/HitzoneVisibilityTimer" to="EnemyTurn/PlayerDefending" method="_on_hitzone_visibility_timer_timeout"]
+[connection signal="timeout" from="EnemyTurn/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/ComplimentButton" to="." method="_on_compliment_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/CriticizeButton" to="." method="_on_criticize_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/RelateButton" to="." method="_on_relate_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/OpposeButton" to="." method="_on_oppose_button_pressed"]

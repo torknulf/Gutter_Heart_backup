@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://2dy4afuebpxs"
+path="res://.godot/imported/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav-d44fe2ce443af10ba1b83623532902d3.sample"
+
+[deps]
+
+source_file="res://Temporary Assets/audio/Music/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav"
+dest_files=["res://.godot/imported/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav-d44fe2ce443af10ba1b83623532902d3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

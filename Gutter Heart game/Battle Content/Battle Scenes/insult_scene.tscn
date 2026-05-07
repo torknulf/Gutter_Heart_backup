@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://050phl7wkbov"]
+
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_krp3i"]
+[ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
+[ext_resource type="AudioStream" uid="uid://cn0t67fjyx2wi" path="res://Temporary Assets/audio/SFX/Approach SFX.mp3" id="3_f8dyq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
+size = Vector2(100, 100)
+
+[node name="InsultScene" type="Node2D"]
+script = ExtResource("1_rf25y")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(2.400581, 5.226921e-05, 6.788209e-06, 1)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_krp3i")
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.3, 0.3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_krp3i")
+
+[node name="TimingLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = -19.0
+offset_top = -12.0
+offset_right = 19.0
+offset_bottom = 11.0
+text = "dsad"
+
+[node name="ApproachSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_f8dyq")
+pitch_scale = 1.2
+bus = &"SFX"

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://uollahfe7a55"]
+
+[ext_resource type="Script" uid="uid://drq86dc3bsbsr" path="res://Overworld Content/Overworld Scripts/overworld_player.gd" id="1_defio"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_gjtou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjtou"]
+size = Vector2(128, 128)
+
+[node name="OverworldPlayer" type="CharacterBody2D"]
+script = ExtResource("1_defio")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_gjtou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gjtou")
