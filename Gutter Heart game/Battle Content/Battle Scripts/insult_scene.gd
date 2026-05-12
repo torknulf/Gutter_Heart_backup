@@ -26,7 +26,7 @@ func _ready() -> void:
 	
 	global_position = startPos
 
-	beatManagerRef.newBeat.connect(play_approach_SFX)
+	#beatManagerRef.newBeat.connect(play_approach_SFX)
 	play_approach_SFX()
 
 
@@ -54,8 +54,8 @@ func play_approach_SFX():
 	
 	if currBeat >= beatAmount:
 		return
-	%ApproachSFX.play()
-	%ApproachSFX.pitch_scale -= 0.1
+	%SpawnSFX.play()
+	%SpawnSFX.pitch_scale -= 0.1
 	currBeat += 1
 
 

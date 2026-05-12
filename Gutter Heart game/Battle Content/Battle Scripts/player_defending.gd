@@ -45,6 +45,7 @@ func try_hit(hitDir: Vector2):
 		print(hittableInsults[hitDir])
 		remove_hittable_insult(hittableInsults[hitDir][0])
 		hits += 1
+		%PlayerSlashSFX.play()
 	else:
 		print("empty ", hittableInsults[hitDir])
 
@@ -54,6 +55,7 @@ func try_hit(hitDir: Vector2):
 
 func take_damage(insult: Insult):
 	hurts += 1
+	%PlayerHurtSFX.play()
 	remove_hittable_insult(insult)
 
 

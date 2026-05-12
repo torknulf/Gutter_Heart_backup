@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_krp3i"]
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
-[ext_resource type="AudioStream" uid="uid://cn0t67fjyx2wi" path="res://Temporary Assets/audio/SFX/Approach SFX.mp3" id="3_f8dyq"]
+[ext_resource type="AudioStream" uid="uid://c2ffmyas4ajwm" path="res://Temporary Assets/audio/SFX/InsultSpawn.wav" id="3_f8dyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
 size = Vector2(100, 100)
@@ -29,7 +29,7 @@ offset_right = 19.0
 offset_bottom = 11.0
 text = "dsad"
 
-[node name="ApproachSFX" type="AudioStreamPlayer" parent="."]
+[node name="SpawnSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("3_f8dyq")
 pitch_scale = 1.2

@@ -1,34 +1,35 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1778155175
-default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778155177::0::1::::<><><>0<>0<><>::
-README.txt::TextFile::-1::1778155055::0::1::::<><><>0<>0<><>::
+::res://::1778590723
+default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778590723::0::1::::<><><>0<>0<><>::
 ::res://Battle Content/::1778155055
-::res://Battle Content/Battle Scenes/::1778155055
-battle_scene_general.tscn::PackedScene::2524936304494790469::1778155055::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://bv35jrik8peif::::res://Temporary Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://bq1ejic4giem2::::res://Temporary Assets/audio/SFX/Metronome Beep.mp3<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://2dy4afuebpxs::::res://Temporary Assets/audio/Music/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav
+::res://Battle Content/Battle Scenes/::1778591002
+battle_scene_general.tscn::PackedScene::2524936304494790469::1778591002::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://bv35jrik8peif::::res://Temporary Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://bq1ejic4giem2::::res://Temporary Assets/audio/SFX/Metronome Beep.mp3<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://588f8ecmgsx8::::res://Temporary Assets/audio/Music/funk125bpm(full).ogg
 insult_scene.tscn::PackedScene::1818197521440365157::1778155055::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://cym80ttrd528d::::res://Battle Content/Battle Scripts/insult_scene.gd<>uid://cn0t67fjyx2wi::::res://Temporary Assets/audio/SFX/Approach SFX.mp3
-::res://Battle Content/Battle Scripts/::1778155055
-battle_scene_general.gd::GDScript::6830524730587621539::1778155055::0::1::::BattleScene<>Node<><>0<>0<><>::
-beat_manager.gd::GDScript::3567212333326783807::1778155055::0::1::::BeatManager<>Node<><>0<>0<><>::
-insult_scene.gd::GDScript::6484195481429171665::1778155055::0::1::::Insult<>Node2D<><>0<>0<><>::
-insult_spawner.gd::GDScript::2776607860638487468::1778155055::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
+::res://Battle Content/Battle Scripts/::1778590869
+battle_scene_general.gd::GDScript::6830524730587621539::1778576211::0::1::::BattleScene<>Node<><>0<>0<><>::
+beat_manager.gd::GDScript::3567212333326783807::1778590758::0::1::::BeatManager<>Node<><>0<>0<><>::
+insult_scene.gd::GDScript::6484195481429171665::1778590869::0::1::::Insult<>Node2D<><>0<>0<><>::
+insult_spawner.gd::GDScript::2776607860638487468::1778577482::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
 player_defending.gd::GDScript::4401847984363729263::1778155055::0::1::::PlayerDefending<>Node2D<><>0<>0<><>::
 ::res://Overworld Content/::1778155055
 ::res://Overworld Content/Overworld Scenes/::1778155055
 enemy.tscn::PackedScene::649478512829706808::1778155055::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://c0vcil8p8frgj::::res://Overworld Content/Overworld Scripts/enemy1.gd
 overworld_player.tscn::PackedScene::1433365703018281658::1778155055::0::1::::<><><>0<>0<><>::uid://drq86dc3bsbsr::::res://Overworld Content/Overworld Scripts/overworld_player.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg
-::res://Overworld Content/Overworld Scenes/Overworld Stages/::1778155055
-overworld.tscn::PackedScene::6168599701541874009::1778155055::0::1::::<><><>0<>0<><>::uid://uollahfe7a55::::res://Overworld Content/Overworld Scenes/overworld_player.tscn<>uid://jiu20sth8pxw::::res://Overworld Content/Overworld Scenes/enemy.tscn
+::res://Overworld Content/Overworld Scenes/Overworld Stages/::1778220952
+overworld.tscn::PackedScene::6168599701541874009::1778220952::0::1::::<><><>0<>0<><>::uid://uollahfe7a55::::res://Overworld Content/Overworld Scenes/overworld_player.tscn<>uid://jiu20sth8pxw::::res://Overworld Content/Overworld Scenes/enemy.tscn
 ::res://Overworld Content/Overworld Scripts/::1778155055
 enemy1.gd::GDScript::6571050740970283249::1778155055::0::1::::<>Interactable<><>0<>0<><>::
 interactable.gd::GDScript::7464562241657415797::1778155055::0::1::::Interactable<>Node2D<><>0<>0<><>::
 overworld_player.gd::GDScript::8387561619297051929::1778155055::0::1::::OverworldPLayer<>CharacterBody2D<><>0<>0<><>::
 ::res://Temporary Assets/::1778155055
-::res://Temporary Assets/audio/::1778155055
-::res://Temporary Assets/audio/Music/::1778155055
-pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav::AudioStreamWAV::1902800915976824164::1778155055::1778155177::1::::<><><>0<>0<>ec7a8af04c5c78245f5fdd934b5a6a41<>res://.godot/imported/pierre-said-hello-bassy-bouncy-trap-drums-loop_160bpm_G_major.wav-d44fe2ce443af10ba1b83623532902d3.sample::
-::res://Temporary Assets/audio/SFX/::1778155055
-Approach SFX.mp3::AudioStreamMP3::5738116449918885624::1778155055::1778155176::1::::<><><>0<>0<>dbfd53a8c99a8285203001e88d3a23e6<>res://.godot/imported/Approach SFX.mp3-3f0c8575bdb0c66df9cd623f429093c7.mp3str::
-Metronome Beep.mp3::AudioStreamMP3::3563375368225758083::1778155055::1778155176::1::::<><><>0<>0<>b108838ad2075958e29098f8fb5d3651<>res://.godot/imported/Metronome Beep.mp3-3c5f6d0c334467b7d305c9a206f97c55.mp3str::
-::res://Temporary Assets/visual/::1778155055
+::res://Temporary Assets/audio/::1778579447
+::res://Temporary Assets/audio/Music/::1778590554
+funk125bpm(full).ogg::AudioStreamOggVorbis::2175804104312698663::1778590452::1778590551::1::::<><><>0<>0<>53aaf75d4baf29c1ff09c9a8792b9ae0<>res://.godot/imported/funk125bpm(full).ogg-d759e33d848aa4ce25542e5d3aebb598.oggvorbisstr::
+funk125bpm(noLead).ogg::AudioStreamOggVorbis::8411637428041239616::1778590452::1778590554::1::::<><><>0<>0<>fc9e6d10759eaac4af91d490c8bd190b<>res://.godot/imported/funk125bpm(noLead).ogg-a8388adca793d47764958c60ad6c8249.oggvorbisstr::
+::res://Temporary Assets/audio/SFX/::1778591658
+InsultSpawn.wav::AudioStreamWAV::6678588310291072428::1778591658::1778591659::1::::<><><>0<>0<>77583363162b1f94a97214bda60ad26f<>res://.godot/imported/InsultSpawn.wav-25e83e758e617289974f9857d14bb726.sample::
+PlayerHurt.wav::AudioStreamWAV::3755739339071174186::1778591658::1778591659::1::::<><><>0<>0<>5139a270c93ac8bfc96b75df35ce6723<>res://.godot/imported/PlayerHurt.wav-1d14d634ffd1fbac8531ce67851c4a81.sample::
+PlayerSlash.wav::AudioStreamWAV::6451049798329919856::1778591658::1778591659::1::::<><><>0<>0<>56ded23a333d9e88381157fd449ed098<>res://.godot/imported/PlayerSlash.wav-6b92283e5aa022345a1624b732949de6.sample::
+::res://Temporary Assets/visual/::1778155176
 circle gird.jpg::CompressedTexture2D::3920027464888028397::1778155055::1778155176::1::::<><><>0<>0<>92031ef52e9ea41fa49ae875ebee612e<>res://.godot/imported/circle gird.jpg-dc66796b050b45d162143617da15245e.s3tc.ctex::
 icon.svg::CompressedTexture2D::7512738169859718102::1778155055::1778155176::1::::<><><>0<>0<>daaef6f29ae9100196b185367221221e<>res://.godot/imported/icon.svg-f5b2c2902ef4ea0f2913aadef5f33caa.s3tc.ctex::

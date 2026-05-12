@@ -1,2 +1,8 @@
 res://default_bus_layout.tres
 res://Battle Content/Battle Scenes/battle_scene_general.tscn
+res://Battle Content/Battle Scripts/insult_spawner.gd
+res://Battle Content/Battle Scripts/beat_manager.gd
+res://Battle Content/Battle Scripts/battle_scene_general.gd
+res://Battle Content/Battle Scripts/insult_scene.gd
+res://Battle Content/Battle Scenes/insult_scene.tscn
+res://Battle Content/Battle Scripts/player_defending.gd

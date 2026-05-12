@@ -20,6 +20,8 @@ enum Appeals {COMPLIMENT, CRITICIZE, RELATE, OPPOSE}
 func _ready() -> void:
 	turnState = TurnStates.PLAYERTURN
 	%BeatManager.start_counting_beat()
+	
+	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
 
 
 
@@ -42,13 +44,13 @@ func _process(delta: float) -> void:
 
 
 func start_enemy_turn() -> void:
-	%InsultSpawner.set_spawn_toggle(true)
+	print("ENEMY TURN")
+	%InsultSpawner.initialize_attack()
 	%TurnTransition.play("transition_to_enemyturn")
-	%AttackTimer.start()
+
 
 
 func start_player_turn() -> void:
-	%InsultSpawner.set_spawn_toggle(false)
 	update_text()
 	%TurnTransition.play("transition_to_playerturn")
 	%PlayerContainer.visible = true
@@ -68,6 +70,12 @@ func _on_turn_state_changed(prevState) -> void:
 
 		TurnStates.ENEMYTURN:
 			start_enemy_turn()
+
+
+## triggers after the last round of insults 
+func on_enemy_attack_ended() -> void:
+	turnState = TurnStates.PLAYERTURN
+	
 
 
 
@@ -126,10 +134,7 @@ func update_text():
 ## --- BUTTONS & TIMERS ---
 
 
-## here the player has survived long enough for an attack
-func _on_attack_timer_timeout() -> void:
-	turnState = TurnStates.PLAYERTURN
-	## CLEAN ALL REMAINING INSULTS
+
 
 
 func _on_compliment_button_pressed() -> void:
@@ -143,3 +148,10 @@ func _on_relate_button_pressed() -> void:
 
 func _on_oppose_button_pressed() -> void:
 	select_appeal(Appeals.OPPOSE)
+
+
+
+## --- GETTERS ---
+
+func get_turnstate():
+	return turnState
