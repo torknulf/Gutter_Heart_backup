@@ -398,7 +398,7 @@ grow_vertical = 2
 size_flags_vertical = 3
 color = Color(0.24125901, 0, 0.14820552, 1)
 
-[node name="CombatText" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline/TopTextBox"]
+[node name="CombatText" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline/TopTextBox" groups=["TextLabel"]]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
@@ -411,8 +411,8 @@ offset_bottom = 46.5
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 32
-text = "First round
-Compliment"
+text = "sadasjdjkasdhasdhasdhasdhjasdkasdjkas dhkjasdhkjasdhjkasjhdkashdjkdhjka"
+autowrap_mode = 2
 
 [node name="EnemyContainer" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
 layout_mode = 2

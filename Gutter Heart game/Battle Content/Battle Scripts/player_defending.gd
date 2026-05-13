@@ -21,16 +21,16 @@ func _process(delta: float) -> void:
 		
 	
 	# add cooldown timer check, in case you have missed a hit
-	if Input.is_action_just_pressed("hit_right"):
+	if Input.is_action_just_pressed("input_right"):
 		try_hit(Vector2.RIGHT)
 		%HitzonePivot.rotation = deg_to_rad(0)
-	elif Input.is_action_just_pressed("hit_left"):
+	elif Input.is_action_just_pressed("input_left"):
 		try_hit(Vector2.LEFT)
 		%HitzonePivot.rotation = deg_to_rad(180)
-	elif Input.is_action_just_pressed("hit_up"):
+	elif Input.is_action_just_pressed("input_up"):
 		try_hit(Vector2.UP)
 		%HitzonePivot.rotation = deg_to_rad(-90)
-	elif Input.is_action_just_pressed("hit_down"):
+	elif Input.is_action_just_pressed("input_down"):
 		try_hit(Vector2.DOWN)
 		%HitzonePivot.rotation = deg_to_rad(90)
 

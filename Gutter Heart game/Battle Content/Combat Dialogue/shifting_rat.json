@@ -1,0 +1,53 @@
+{
+  "enemy_name": "Shifty Rat",
+
+  "states": [
+	{
+	  "prompt": "Why're you staring at me like that? (Relate)",
+	  "correct_appeal": "2",
+
+	  "success_response": "…You get it?",
+	  "wrong_response":
+		{
+			"0": "Compliment bleh", 
+			"1": "Bleh",
+			"2": "-",
+			"3": "Why are you against me"
+		},
+
+	  "progress_gain": 1
+	},
+
+	{
+	  "prompt": "Everyone keeps avoiding me. (Compliment)",
+	  "correct_appeal": "0",
+
+	  "success_response": "You really think so?",
+	  "wrong_response": 
+		{
+			"0": "-", 
+			"1": "Bleh",
+			"2": "Nah the heck",
+			"3": "Why are you against me"
+		},
+
+	  "progress_gain": 1
+	},
+
+	{
+	  "prompt": "Maybe I’m the problem. (Oppose)",
+	  "correct_appeal": "3",
+
+	  "success_response": "...Maybe that's true. (Battle won)",
+	  "wrong_response": 
+		{
+			"0": "Compliment bleh", 
+			"1": "Bleh",
+			"2": "Nah the heck",
+			"3": "-"
+		},
+
+	  "progress_gain": 1
+	}
+  ]
+}

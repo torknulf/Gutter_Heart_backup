@@ -1,0 +1,10 @@
+{
+  "npc_name": "Tutorial Guy",
+
+
+  "dialogue": [
+	"Hey.",
+	"You look lost.",
+    "Wanna throw hands?"
+  ]
+}

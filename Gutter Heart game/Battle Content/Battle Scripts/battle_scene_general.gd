@@ -3,7 +3,7 @@ class_name BattleScene extends Node
 var playerHP: int = 10 ## unused atm
 var playerMaxHP: int = 10
 
-var enemyMaxProg: int = 3
+var enemyMaxProg: int = 3 
 var enemyCurrProg: int = 0 # if currprog reaches maxprog, battle is won!
 
 
@@ -14,7 +14,19 @@ var turnState:
 		turnState = state  
 		_on_turn_state_changed(prevState) 
 
+
+## COMPLIMENT
 enum Appeals {COMPLIMENT, CRITICIZE, RELATE, OPPOSE}
+
+
+var enemy_data : Dictionary
+
+
+
+
+func load_enemy(path):
+	var loader = EnemyDataLoader.new()
+	enemy_data = loader.load_enemy(path)
 
 
 func _ready() -> void:
@@ -22,14 +34,27 @@ func _ready() -> void:
 	%BeatManager.start_counting_beat()
 	
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
+	
+	load_enemy("res://Battle Content/Combat Dialogue/shifting_rat.json")
+	
+	DialogueManager.display_text(get_current_prompt())
+	
+	
+	
+
+	
+	
 
 
 
 func _process(delta: float) -> void:
 	
 	# To continue to enemy turn after pressing away enemy response
-	if Input.is_action_just_pressed("Left_click"):
+	if Input.is_action_just_pressed("Interact"):
 		if turnState == TurnStates.RESPONSE:
+			if enemyCurrProg == enemyMaxProg:
+				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+			
 			turnState = TurnStates.ENEMYTURN
 	
 	
@@ -51,12 +76,12 @@ func start_enemy_turn() -> void:
 
 
 func start_player_turn() -> void:
-	update_text()
+	DialogueManager.display_text(get_current_prompt())
 	%TurnTransition.play("transition_to_playerturn")
 	%PlayerContainer.visible = true
 
 
-## triggers when the state has been changed!
+## triggers when turnState has been changed!
 func _on_turn_state_changed(prevState) -> void: 
 	if !prevState or prevState == turnState:
 		return
@@ -87,7 +112,7 @@ func select_appeal(appeal):
 		return
 	
 	show_response(appeal)
-
+	
 	turnState = TurnStates.RESPONSE
 
 
@@ -95,47 +120,40 @@ func select_appeal(appeal):
 
 ## --- TEXT UPDATES & PROGRESS LOGIC ---
 
-
-func show_response(appeal): # this one needs major rework, I wanna make it CLEAN
-	if enemyCurrProg == 0 and appeal == Appeals.COMPLIMENT:
-		enemyCurrProg += 1
-		%CombatText.text = str(appeal) + " is right!"
+func show_response(appeal):
+	var state = get_current_state()
+	turnState = TurnStates.RESPONSE
 	
-	elif enemyCurrProg == 1 and appeal == Appeals.CRITICIZE:
-		enemyCurrProg += 1
-		%CombatText.text = str(appeal) + " is right!"
+	if str(appeal) == state["correct_appeal"]:
+		on_correct_appeal()
 	
-	elif enemyCurrProg == 2 and appeal == Appeals.OPPOSE:
-		enemyCurrProg += 1
-		%CombatText.text = str(appeal) + " is right!"
-	
-	
-	# here the wrong answer is picked
 	else:
-		%CombatText.text = str(appeal) + " is wrong"
-
-	if enemyCurrProg == enemyMaxProg:
-		%CombatText.text = "COMBAT WON"
+		on_wrong_appeal(appeal)
+	
 
 
+func on_correct_appeal():
+	var state = get_current_state()
+	DialogueManager.display_text(state["success_response"])
+	
+	enemyCurrProg += 1
+	
+	## Win condition check
+	if enemyCurrProg >= enemy_data["states"].size():
+		on_battle_won()
 
-func update_text():
-	if enemyCurrProg == enemyMaxProg:
-		%CombatText.text = "COMBAT WON"
-	elif enemyCurrProg == 0:
-		%CombatText.text = "First round \nCompliment"
-	elif enemyCurrProg == 1:
-		%CombatText.text = "Second round \nCriticize"
-	elif enemyCurrProg == 2:
-		%CombatText.text = "Third round \n Oppose"
+
+func on_wrong_appeal(appeal):
+	var state = get_current_state()
+	DialogueManager.display_text(state["wrong_response"][str(appeal)])
+
+
+func on_battle_won():
+	pass
 
 
 
 ## --- BUTTONS & TIMERS ---
-
-
-
-
 
 func _on_compliment_button_pressed() -> void:
 	select_appeal(Appeals.COMPLIMENT)
@@ -155,3 +173,10 @@ func _on_oppose_button_pressed() -> void:
 
 func get_turnstate():
 	return turnState
+
+func get_current_state() -> Dictionary:
+	return enemy_data["states"][enemyCurrProg]
+
+func get_current_prompt():
+	var state = get_current_state()
+	return state["prompt"]

@@ -1,17 +1,23 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1778590723
-default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778590723::0::1::::<><><>0<>0<><>::
-::res://Battle Content/::1778155055
-::res://Battle Content/Battle Scenes/::1778591002
-battle_scene_general.tscn::PackedScene::2524936304494790469::1778591002::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://bv35jrik8peif::::res://Temporary Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://bq1ejic4giem2::::res://Temporary Assets/audio/SFX/Metronome Beep.mp3<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://588f8ecmgsx8::::res://Temporary Assets/audio/Music/funk125bpm(full).ogg
-insult_scene.tscn::PackedScene::1818197521440365157::1778155055::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://cym80ttrd528d::::res://Battle Content/Battle Scripts/insult_scene.gd<>uid://cn0t67fjyx2wi::::res://Temporary Assets/audio/SFX/Approach SFX.mp3
-::res://Battle Content/Battle Scripts/::1778590869
-battle_scene_general.gd::GDScript::6830524730587621539::1778576211::0::1::::BattleScene<>Node<><>0<>0<><>::
-beat_manager.gd::GDScript::3567212333326783807::1778590758::0::1::::BeatManager<>Node<><>0<>0<><>::
-insult_scene.gd::GDScript::6484195481429171665::1778590869::0::1::::Insult<>Node2D<><>0<>0<><>::
-insult_spawner.gd::GDScript::2776607860638487468::1778577482::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
-player_defending.gd::GDScript::4401847984363729263::1778155055::0::1::::PlayerDefending<>Node2D<><>0<>0<><>::
-::res://Overworld Content/::1778155055
+::res://::1778665689
+default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778661976::0::1::::<><><>0<>0<><>::
+::res://Autoload Singletons/::1778665554
+text_manager.gd::GDScript::6987433836201649149::1778665533::0::1::::<>Node<><>0<>0<><>::
+::res://Battle Content/::1778665689
+::res://Battle Content/Battle Scenes/::1778665533
+battle_scene_general.tscn::PackedScene::2524936304494790469::1778665533::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://bv35jrik8peif::::res://Temporary Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://588f8ecmgsx8::::res://Temporary Assets/audio/Music/funk125bpm(full).ogg<>uid://btrkqi17aqrsc::::res://Temporary Assets/audio/SFX/PlayerHurt.wav<>uid://cx563250xwips::::res://Temporary Assets/audio/SFX/PlayerSlash.wav
+insult_scene.tscn::PackedScene::1818197521440365157::1778592017::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://cym80ttrd528d::::res://Battle Content/Battle Scripts/insult_scene.gd<>uid://c2ffmyas4ajwm::::res://Temporary Assets/audio/SFX/InsultSpawn.wav
+::res://Battle Content/Battle Scripts/::1778664433
+battle_scene_general.gd::GDScript::6830524730587621539::1778664433::0::1::::BattleScene<>Node<><>0<>0<><>::
+beat_manager.gd::GDScript::3567212333326783807::1778591821::0::1::::BeatManager<>Node<><>0<>0<><>::
+enemy_data_loader.gd::GDScript::8950825176491237259::1778659586::0::1::::EnemyDataLoader<>Node<><>0<>0<><>::
+insult_scene.gd::GDScript::6484195481429171665::1778591848::0::1::::Insult<>Node2D<><>0<>0<><>::
+insult_spawner.gd::GDScript::2776607860638487468::1778592436::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
+player_defending.gd::GDScript::4401847984363729263::1778591941::0::1::::PlayerDefending<>Node2D<><>0<>0<><>::
+::res://Battle Content/Combat Dialogue/::1778665192
+shifting_rat.json::JSON::-1::1778665192::0::1::::<><><>0<>0<><>::
+::res://Overworld Content/::1778665684
+::res://Overworld Content/Overworld Dialogue/::1778665684
 ::res://Overworld Content/Overworld Scenes/::1778155055
 enemy.tscn::PackedScene::649478512829706808::1778155055::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://c0vcil8p8frgj::::res://Overworld Content/Overworld Scripts/enemy1.gd
 overworld_player.tscn::PackedScene::1433365703018281658::1778155055::0::1::::<><><>0<>0<><>::uid://drq86dc3bsbsr::::res://Overworld Content/Overworld Scripts/overworld_player.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg
@@ -26,7 +32,7 @@ overworld_player.gd::GDScript::8387561619297051929::1778155055::0::1::::Overworl
 ::res://Temporary Assets/audio/Music/::1778590554
 funk125bpm(full).ogg::AudioStreamOggVorbis::2175804104312698663::1778590452::1778590551::1::::<><><>0<>0<>53aaf75d4baf29c1ff09c9a8792b9ae0<>res://.godot/imported/funk125bpm(full).ogg-d759e33d848aa4ce25542e5d3aebb598.oggvorbisstr::
 funk125bpm(noLead).ogg::AudioStreamOggVorbis::8411637428041239616::1778590452::1778590554::1::::<><><>0<>0<>fc9e6d10759eaac4af91d490c8bd190b<>res://.godot/imported/funk125bpm(noLead).ogg-a8388adca793d47764958c60ad6c8249.oggvorbisstr::
-::res://Temporary Assets/audio/SFX/::1778591658
+::res://Temporary Assets/audio/SFX/::1778591659
 InsultSpawn.wav::AudioStreamWAV::6678588310291072428::1778591658::1778591659::1::::<><><>0<>0<>77583363162b1f94a97214bda60ad26f<>res://.godot/imported/InsultSpawn.wav-25e83e758e617289974f9857d14bb726.sample::
 PlayerHurt.wav::AudioStreamWAV::3755739339071174186::1778591658::1778591659::1::::<><><>0<>0<>5139a270c93ac8bfc96b75df35ce6723<>res://.godot/imported/PlayerHurt.wav-1d14d634ffd1fbac8531ce67851c4a81.sample::
 PlayerSlash.wav::AudioStreamWAV::6451049798329919856::1778591658::1778591659::1::::<><><>0<>0<>56ded23a333d9e88381157fd449ed098<>res://.godot/imported/PlayerSlash.wav-6b92283e5aa022345a1624b732949de6.sample::
