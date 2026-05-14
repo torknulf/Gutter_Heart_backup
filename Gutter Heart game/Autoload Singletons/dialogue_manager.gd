@@ -47,7 +47,7 @@ func start_dialogue(npcData, timelineName):
 ## mostly for overworld dialogue
 func process_text_type(timeline : Dictionary):
 	if "text" in timeline.keys():
-		print("text")
+		pass #print("text")
 	
 	if "choices" in timeline.keys():
 		show_choices(timeline["choices"])
@@ -65,7 +65,7 @@ func process_text_type(timeline : Dictionary):
 
 ## to show only 1 text screen
 func display_text(text : String):
-	print("DISPLAY ",text)
+	#print("DISPLAY ",text)
 	textLabel = get_tree().get_first_node_in_group("TextLabel") # JUST TEMPORARY FOR SCENE SWITCH TO WORK
 
 	fullText = text
@@ -143,7 +143,8 @@ func end_dialogue():
 	
 	elif queueOverworld:
 		queueOverworld = false
-		get_tree().change_scene_to_file("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+		get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+		
 	
 	inDialogue.emit(false) 
 	textLabel.get_parent().get_parent().visible = false
@@ -162,7 +163,7 @@ func show_choices(choices):  # argument should be a list of choices
 		var button = Button.new()
 
 		button.text = choice_data["text"]
-		button.add_theme_font_size_override("font_size", 32) 
+		button.add_theme_font_size_override("font_size", 64) 
 
 		button.pressed.connect(
 			func():

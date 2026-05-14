@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bnp7gl4hhfb5p" path="res://Temporary Assets/visual/Overworld/Characters/Player/Player_Walking.png" id="3_j3jwe"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gjtou"]
-size = Vector2(128, 247)
+size = Vector2(164, 247)
 
 [sub_resource type="Animation" id="Animation_j3jwe"]
 length = 0.001

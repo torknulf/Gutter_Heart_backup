@@ -42,12 +42,12 @@ func try_hit(hitDir: Vector2):
 	%HitzoneVisibilityTimer.start()
 	
 	if hittableInsults[hitDir] != []:
-		print(hittableInsults[hitDir])
+		#print(hittableInsults[hitDir])
 		remove_hittable_insult(hittableInsults[hitDir][0])
 		hits += 1
 		%PlayerSlashSFX.play()
 	else:
-		print("empty ", hittableInsults[hitDir])
+		pass #print("empty ", hittableInsults[hitDir])
 
 
 

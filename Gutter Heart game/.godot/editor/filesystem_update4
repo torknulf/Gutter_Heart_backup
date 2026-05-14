@@ -11,3 +11,4 @@ res://Battle Content/Battle Scripts/battle_scene_general.gd
 res://Battle Content/Combat Dialogue/shifting_rat.json
 res://Battle Content/Battle Scenes/battle_scene_general.tscn
 res://Overworld Content/Overworld Scripts/overworld_player.gd
+res://Battle Content/Battle Scripts/player_defending.gd

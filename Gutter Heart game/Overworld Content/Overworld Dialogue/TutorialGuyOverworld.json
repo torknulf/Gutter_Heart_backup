@@ -51,14 +51,41 @@
 		"repeat": 
 		[
 			{
-				"text": "So you wanna throw hands?"
+				"text": "So you wanna throw hands?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle",
+						"effect": "combat"
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
 			}
 		],
 		
 		"after_battle":
 		[
 			{
-				"text": "Well fought."
+				"text": "Dude, we already threw hands."
+			},
+			{
+				"text": "Wanna go again?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle",
+						"effect": "combat"
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
 			}
 		]
 	}

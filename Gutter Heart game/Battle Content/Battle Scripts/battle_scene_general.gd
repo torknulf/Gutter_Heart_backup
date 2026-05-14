@@ -53,7 +53,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Interact"):
 		if turnState == TurnStates.RESPONSE:
 			if enemyCurrProg == enemyMaxProg and !DialogueManager.isTyping:
-				DialogueManager.queueOverworld = true
+				#DialogueManager.queueOverworld = true
+				GameState.npcStates["tutorial_guy"]["fought"] = true
+				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+				
 			
 			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
 				turnState = TurnStates.ENEMYTURN
@@ -70,7 +73,7 @@ func _process(delta: float) -> void:
 
 
 func start_enemy_turn() -> void:
-	print("ENEMY TURN")
+	#print("ENEMY TURN")
 	%InsultSpawner.initialize_attack()
 	%TurnTransition.play("transition_to_enemyturn")
 

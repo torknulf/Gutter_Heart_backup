@@ -32,8 +32,8 @@ func choose_timeline():
 			return "first"
 			
 		else:
-			#return "repeat"
-			return "first"
+			return "repeat"
+			
 			
 	else:
 		return "after_battle"

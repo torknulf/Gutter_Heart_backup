@@ -15,8 +15,7 @@ signal enemyAttackEnded
 
 func _ready() -> void:
 	randomize()
-	%BeatManager.newBeat.connect(spawn_from_queue)
-	%BeatManager.newBeat.connect(generate_insults)
+	%BeatManager.newBeat.connect(spawn_first_in_queue)
 	%BeatManager.newBar.connect(_on_signal_new_bar)
 	
 
@@ -29,40 +28,61 @@ func _process(delta: float) -> void:
 
 
 
-func spawn_from_queue():
-	if !isSpawning:
+func spawn_first_in_queue():
+	if !isSpawning or spawnQueue == []:
 		return
 	
 	
-	for dir in spawnQueue:
-		spawn_insult(dir)
-	spawnQueue = []
+	if spawnQueue[0] == 1:
+		spawn_insult()
+	spawnQueue.remove_at(0)
 	
 	
 
 
 
-func generate_insults():
+func choose_insult_dir():
 	if !isSpawning:
 		return
 	
-	var randInt = randi() % 10  # radnom int between 0 and 9
+	var dir 
+	var randInt = randi() % 4  # radnom int between 0 and 3
 	
-	if randInt in [0, 1]:
-		spawnQueue.append(Vector2.RIGHT)
-	elif randInt in [2, 3]:
-		spawnQueue.append(Vector2.LEFT)
-	elif randInt in [4, 5]:
-		spawnQueue.append(Vector2.UP)
-	elif randInt in [6, 7]:
-		spawnQueue.append(Vector2.DOWN)
+	match randInt:
+		0:
+			dir = Vector2.RIGHT
+		1:
+			dir = Vector2.LEFT
+		2:
+			dir = Vector2.UP
+		3:
+			dir = Vector2.DOWN
 	
-	# else: return
+	return dir
+
+
+
+func generate_insult_queue():
+	randomize()
+	
+	var insultQueue = [0, 0, 0, 0]
+	var insultAmount = randi_range(2, 4)
+	
+	for i in insultAmount:
+		insultQueue[i] = 1
+	
+	insultQueue.shuffle()
+	
+	return insultQueue
 
 
 
 
-func spawn_insult(dir):
+
+
+func spawn_insult():
+	var dir = choose_insult_dir()
+	
 	var insultInstance: Insult = insultRef.instantiate()
 	
 	# these two magic numbers are just eyed distances
@@ -74,11 +94,6 @@ func spawn_insult(dir):
 	
 	get_parent().add_child(insultInstance)
 	
-
-
-
-
-
 
 
 
@@ -96,6 +111,9 @@ func _on_signal_new_bar():
 		
 		if spawnRounds > 0:
 			isSpawning = true
+			spawnQueue = generate_insult_queue()
+			print(spawnQueue)
+
 		else:
 			isSpawning = false 
 			enemyAttackEnded.emit()
