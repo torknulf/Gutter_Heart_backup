@@ -11,17 +11,26 @@ config_version=5
 [application]
 
 config/name="Gutter Heart"
-run/main_scene="uid://bb8dlj3nj2gqf"
+run/main_scene="uid://ct5d623ju72ef"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://Temporary Assets/visual/icon.svg"
 
 [autoload]
 
 DialogueManager="*res://Autoload Singletons/dialogue_manager.gd"
+GameState="*res://game_state.gd"
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=2
+window/stretch/mode="canvas_items"
 
 [global_group]
 
 TextLabel=""
+ChoiceContainer=""
 
 [input]
 

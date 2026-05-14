@@ -9,9 +9,19 @@ var isTyping = false
 
 var lineIndex = 0 # for overworld dialogue mostly? which line nr to read
 
-var currentDialogue
 
 signal inDialogue
+
+var queuedTimeline = null
+
+var currentNPC
+var currTimelineName
+
+
+var queueBattle: bool
+var queueOverworld: bool
+
+var canAdvance: bool = true
 
 func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
@@ -23,19 +33,39 @@ func _ready() -> void:
 
 
 ## to go through an enitre dialogue sequence
-func start_dialogue(dialogue):
-	currentDialogue = dialogue
+func start_dialogue(npcData, timelineName):
+	currentNPC =  npcData
+	currTimelineName = timelineName
+	
 	lineIndex = 0
-	display_text(currentDialogue[lineIndex])
+	process_text_type(currentNPC["timelines"][currTimelineName][lineIndex])
+	
 	inDialogue.emit(true) 
 	textLabel.get_parent().get_parent().visible = true
 
 
+## mostly for overworld dialogue
+func process_text_type(timeline : Dictionary):
+	if "text" in timeline.keys():
+		print("text")
+	
+	if "choices" in timeline.keys():
+		show_choices(timeline["choices"])
+		canAdvance = false
+	
+	if "start_battle" in timeline.keys():
+		pass
+	
+	if "next_timeline" in timeline.keys():
+		queuedTimeline = timeline["next_timeline"]
+
+
+	display_text(timeline["text"])
 
 
 ## to show only 1 text screen
 func display_text(text : String):
-	
+	print("DISPLAY ",text)
 	textLabel = get_tree().get_first_node_in_group("TextLabel") # JUST TEMPORARY FOR SCENE SWITCH TO WORK
 
 	fullText = text
@@ -69,7 +99,7 @@ func skip_text():
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Interact"):
+	if event.is_action_pressed("Interact") and canAdvance:
 		advance_dialogue()
 
 
@@ -77,11 +107,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func next_line():
 	lineIndex += 1
 
-	if lineIndex >= currentDialogue.size():
-		end_dialogue()
+	if lineIndex >= currentNPC["timelines"][currTimelineName].size():
+		
+		if queuedTimeline != null:
+			start_dialogue(currentNPC, queuedTimeline)
+			queuedTimeline = null
+		else:
+			end_dialogue()
 
 	else:
-		display_text(currentDialogue[lineIndex])
+		process_text_type(currentNPC["timelines"][currTimelineName][lineIndex])
 
 
 func advance_dialogue():
@@ -99,5 +134,56 @@ func finish_current_line():
 	
 	
 func end_dialogue():
+	if queuedTimeline != null:
+		return
+	
+	elif queueBattle:
+		queueBattle = false
+		get_tree().change_scene_to_file("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+	
+	elif queueOverworld:
+		queueOverworld = false
+		get_tree().change_scene_to_file("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+	
 	inDialogue.emit(false) 
 	textLabel.get_parent().get_parent().visible = false
+	
+
+
+
+func show_choices(choices):  # argument should be a list of choices 
+	var choiceContainer = get_tree().get_first_node_in_group("ChoiceContainer")
+	choiceContainer.visible = true
+   
+	for child in choiceContainer.get_children():
+		child.queue_free()
+
+	for choice_data in choices:
+		var button = Button.new()
+
+		button.text = choice_data["text"]
+		button.add_theme_font_size_override("font_size", 32) 
+
+		button.pressed.connect(
+			func():
+				choiceContainer.visible = false
+				on_choice_selected(choice_data)
+		)
+
+		choiceContainer.add_child(button)
+
+
+func on_choice_selected(choice_data):
+	if "effect" in choice_data.keys():
+		handle_effect(choice_data["effect"])
+	
+	if "next_timeline" in choice_data.keys():
+		queuedTimeline = choice_data["next_timeline"]
+	
+	advance_dialogue()
+	canAdvance = true
+	
+	
+func handle_effect(effect):
+	if effect == "combat":
+		queueBattle = true

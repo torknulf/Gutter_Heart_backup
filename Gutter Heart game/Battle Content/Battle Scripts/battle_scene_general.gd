@@ -36,8 +36,8 @@ func _ready() -> void:
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
 	
 	load_enemy("res://Battle Content/Combat Dialogue/shifting_rat.json")
-	
 	DialogueManager.display_text(get_current_prompt())
+	DialogueManager.canAdvance = false
 	
 	
 	
@@ -52,10 +52,11 @@ func _process(delta: float) -> void:
 	# To continue to enemy turn after pressing away enemy response
 	if Input.is_action_just_pressed("Interact"):
 		if turnState == TurnStates.RESPONSE:
-			if enemyCurrProg == enemyMaxProg:
-				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+			if enemyCurrProg == enemyMaxProg and !DialogueManager.isTyping:
+				DialogueManager.queueOverworld = true
 			
-			turnState = TurnStates.ENEMYTURN
+			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
+				turnState = TurnStates.ENEMYTURN
 	
 	
 	# PROGRESS BAR

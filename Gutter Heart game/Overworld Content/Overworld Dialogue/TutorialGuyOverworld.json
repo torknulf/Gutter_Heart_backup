@@ -1,10 +1,65 @@
 {
   "npc_name": "Tutorial Guy",
 
-
-  "dialogue": [
-	"Hey.",
-	"You look lost.",
-    "Wanna throw hands?"
-  ]
+	"timelines": 
+	{
+		"first": 
+		[
+			{
+				"text": "Hey."
+			},
+			
+			{
+				"text": "You look lost."
+			},
+			
+			{
+				"text": "Wanna throw hands?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle",
+						"effect": "combat"
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
+			}
+		],
+		
+		"yes_battle": 
+		[
+			{
+				"text": "All right then, let's get going!",
+				"action": "start_battle"
+			}
+		],
+		
+		
+		"no_battle": 
+		[
+			{
+				"text": "Boring.",
+			}
+		],
+		
+		
+		
+		"repeat": 
+		[
+			{
+				"text": "So you wanna throw hands?"
+			}
+		],
+		
+		"after_battle":
+		[
+			{
+				"text": "Well fought."
+			}
+		]
+	}
 }

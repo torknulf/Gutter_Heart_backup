@@ -208,6 +208,7 @@ data = PackedByteArray("//PkZAAX+Wc+W6S8AJpo9nQXRlgAgAKXW+5znOaNGKBQCAYJMRisVggK
 script = ExtResource("1_3nfe8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.7, 1.7)
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -278,7 +279,7 @@ bus = &"Music"
 
 [node name="EnemyTurn" type="Node2D" parent="."]
 unique_name_in_owner = true
-visible = false
+modulate = Color(1, 1, 1, 0)
 
 [node name="PlayerDefending" type="Node2D" parent="EnemyTurn"]
 unique_name_in_owner = true

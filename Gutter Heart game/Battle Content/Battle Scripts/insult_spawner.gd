@@ -21,20 +21,7 @@ func _ready() -> void:
 	
 
 func _process(delta: float) -> void:
-	
-	
-	if Input.is_action_just_pressed("spawn_insult_right"):
-		if Vector2.RIGHT not in spawnQueue:
-			spawnQueue.append(Vector2.RIGHT)
-	elif Input.is_action_just_pressed("spawn_insult_left"):
-		if Vector2.LEFT not in spawnQueue:
-			spawnQueue.append(Vector2.LEFT)
-	elif Input.is_action_just_pressed("spawn_insult_up"):
-		if Vector2.UP not in spawnQueue:
-			spawnQueue.append(Vector2.UP)
-	elif Input.is_action_just_pressed("spawn_insult_down"):
-		if Vector2.DOWN not in spawnQueue:
-			spawnQueue.append(Vector2.DOWN)
+	pass
 	
 	
 
