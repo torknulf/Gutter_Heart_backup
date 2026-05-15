@@ -1,6 +1,7 @@
 extends Node
 
 var textLabel: Label
+var nameLabel: RichTextLabel
 
 var fullText = ""
 var currIndex = 0 # shows one letter at a time
@@ -25,6 +26,7 @@ var canAdvance: bool = true
 
 func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
+	nameLabel = get_tree().get_first_node_in_group("NameLabel")
 	
 
 
@@ -41,7 +43,7 @@ func start_dialogue(npcData, timelineName):
 	process_text_type(currentNPC["timelines"][currTimelineName][lineIndex])
 	
 	inDialogue.emit(true) 
-	textLabel.get_parent().get_parent().visible = true
+	textLabel.get_parent().get_parent().get_parent().visible = true
 
 
 ## mostly for overworld dialogue
@@ -59,6 +61,13 @@ func process_text_type(timeline : Dictionary):
 	if "next_timeline" in timeline.keys():
 		queuedTimeline = timeline["next_timeline"]
 
+	
+	if "name" in timeline.keys(): # this is the line-specific name
+		DialogueManager.nameLabel.text = timeline["name"]
+	
+	elif "name" in currentNPC.keys(): # this is the general name
+		DialogueManager.nameLabel.text = currentNPC["name"]
+
 
 	display_text(timeline["text"])
 
@@ -67,6 +76,8 @@ func process_text_type(timeline : Dictionary):
 func display_text(text : String):
 	#print("DISPLAY ",text)
 	textLabel = get_tree().get_first_node_in_group("TextLabel") # JUST TEMPORARY FOR SCENE SWITCH TO WORK
+	nameLabel = get_tree().get_first_node_in_group("NameLabel")
+	
 
 	fullText = text
 	textLabel.text = fullText
@@ -99,7 +110,11 @@ func skip_text():
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("Interact") and canAdvance:
+	if textLabel.get_parent().get_parent().get_parent().visible == false:
+		return # here the textbox is invisible, so no dialogue is there
+	
+	
+	if event.is_action_pressed("Interact") and canAdvance: ## AND IF IN DIALOGUE
 		advance_dialogue()
 
 
@@ -139,6 +154,7 @@ func end_dialogue():
 	
 	elif queueBattle:
 		queueBattle = false
+		textLabel.get_parent().get_parent().get_parent().visible = true
 		get_tree().change_scene_to_file("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
 	
 	elif queueOverworld:
@@ -147,7 +163,7 @@ func end_dialogue():
 		
 	
 	inDialogue.emit(false) 
-	textLabel.get_parent().get_parent().visible = false
+	textLabel.get_parent().get_parent().get_parent().visible = false
 	
 
 
@@ -188,3 +204,16 @@ func on_choice_selected(choice_data):
 func handle_effect(effect):
 	if effect == "combat":
 		queueBattle = true
+
+
+
+func update_appeal_text(altAppeals):
+	if altAppeals == null:
+		#display standard appeals
+		return 
+	
+	for i in len(altAppeals):
+		pass
+		
+		
+		

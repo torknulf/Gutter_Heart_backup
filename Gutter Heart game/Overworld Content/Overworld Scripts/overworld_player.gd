@@ -13,6 +13,9 @@ var state:
 
 var facingDir := 0.0
 
+var interactionList = []
+var canAct = [States.IDLE, States.WALKING]
+
 func _on_state_changed(prevState):
 	pass
 
@@ -26,21 +29,22 @@ func _ready() -> void:
 
 
 func lock_movement(isLocked):
+	await get_tree().process_frame
 	if isLocked:
 		state = States.LOCKED
 	else: # here the player can move again
 		state = States.IDLE
 	
-	
 
-
+func _process(delta: float) -> void:
+	pass
 
 
 func _physics_process(delta: float) -> void:
 	if state == States.LOCKED:
 		return
-	
-	#print(state)
+		
+	print(state)
 
 
 	var direction := Input.get_axis("input_left", "input_right")
@@ -60,6 +64,12 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 
 
+	if Input.is_action_just_pressed("Interact") and is_on_floor() and state in canAct:
+		
+		try_interact()
+
+
+
 
 	face_forward()
 	apply_gravity(delta)
@@ -70,13 +80,43 @@ func _physics_process(delta: float) -> void:
 
 
 func face_forward():
-	if facingDir >= 0:
+	if facingDir >= 0: # right
 		%PlayerSprite.flip_h = false
-	else:
+		%InteractionCollisionShape2D.position.x = 75
+	else: # left
 		%PlayerSprite.flip_h = true
+		%InteractionCollisionShape2D.position.x = -75
 	
 
 func apply_gravity(delta):
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+
+
+
+func try_interact():
+	if interactionList.is_empty():
+		return
+	
+	
+	if interactionList[-1] is Interactable:
+		interactionList[-1].perform_interaction()
+
+
+
+
+
+
+func _on_interaction_area_2d_area_entered(area: Area2D) -> void:
+	
+	var interactable = area.get_parent().get_parent()
+	
+	if interactable is Interactable:
+		interactionList.append(interactable)
+
+
+func _on_interaction_area_2d_area_exited(area: Area2D) -> void:
+	var interactable = area.get_parent().get_parent()
+
+	interactionList.erase(interactable)

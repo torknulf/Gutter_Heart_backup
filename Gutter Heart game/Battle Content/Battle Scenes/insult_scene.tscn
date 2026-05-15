@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://050phl7wkbov"]
 
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_krp3i"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/icon.svg" id="1_krp3i"]
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
-[ext_resource type="AudioStream" uid="uid://c2ffmyas4ajwm" path="res://Temporary Assets/audio/SFX/InsultSpawn.wav" id="3_f8dyq"]
+[ext_resource type="AudioStream" uid="uid://c2ffmyas4ajwm" path="res://Assets/audio/SFX/InsultSpawn.wav" id="3_f8dyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
 size = Vector2(100, 100)

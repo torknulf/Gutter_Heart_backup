@@ -2,5 +2,10 @@ class_name Interactable extends Node2D
 
 
 
-func start_combat():
+func _ready() -> void:
+	pass
+
+
+
+func perform_interaction(): # inherit in class below
 	pass

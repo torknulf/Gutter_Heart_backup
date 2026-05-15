@@ -1,49 +1,58 @@
 63f7b34db8d8cdea90c76aacccf841ec
-::res://::1778761845
-default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778738624::0::1::::<><><>0<>0<><>::
+::res://::1778851744
+default_bus_layout.tres::AudioBusLayout::3569882313215756677::1778851744::0::1::::<><><>0<>0<><>::
 game_state.gd::GDScript::5891391826539431445::1778742972::0::1::::<>Node<><>0<>0<><>::
-::res://Autoload Singletons/::1778754231
-dialogue_manager.gd::GDScript::6987433836201649149::1778754231::0::1::::<>Node<><>0<>0<><>::
+::res://Assets/::1778155055
+::res://Assets/audio/::1778579447
+::res://Assets/audio/Music/::1778836212
+funk125bpm(full).ogg::AudioStreamOggVorbis::2175804104312698663::1778590452::1778836212::1::::<><><>0<>0<>81d3e107cc26479964958c2797d8bd61<>res://.godot/imported/funk125bpm(full).ogg-d50c95722720565c81d7fbc347065b27.oggvorbisstr::
+funk125bpm(noLead).ogg::AudioStreamOggVorbis::8411637428041239616::1778590452::1778836212::1::::<><><>0<>0<>ce20cb8d7949a4399c566e2035e575a8<>res://.godot/imported/funk125bpm(noLead).ogg-06fa24b45b84b8979b95df20239fa1d0.oggvorbisstr::
+Weird cave.ogg::AudioStreamOggVorbis::6067999807499560631::1778762543::1778836212::1::::<><><>0<>0<>793f67ae898f1583bb23b0436749339d<>res://.godot/imported/Weird cave.ogg-0df52e30cf33b20682edd3d53fa31df4.oggvorbisstr::
+::res://Assets/audio/SFX/::1778836213
+InsultSpawn.wav::AudioStreamWAV::6678588310291072428::1778591658::1778836212::1::::<><><>0<>0<>c2c518609f65add069c48a16b9df8c07<>res://.godot/imported/InsultSpawn.wav-987badcc109a760424d07131de51214e.sample::
+PlayerHurt.wav::AudioStreamWAV::3755739339071174186::1778591658::1778836212::1::::<><><>0<>0<>90ee5534e8c88b198bf973ca890902b6<>res://.godot/imported/PlayerHurt.wav-d8f52414f5bd3327c7f2bc5b5728f788.sample::
+PlayerSlash.wav::AudioStreamWAV::6451049798329919856::1778591658::1778836212::1::::<><><>0<>0<>534b96b72a7bb8be0c71e634f86bc38b<>res://.godot/imported/PlayerSlash.wav-22107095db30e9f37f199c79cb8f93e5.sample::
+::res://Assets/visual/::1778836212
+circle gird.jpg::CompressedTexture2D::3920027464888028397::1778155055::1778836212::1::::<><><>0<>0<>ef9fbd444b20edbc8d743735a09adf3e<>res://.godot/imported/circle gird.jpg-9adb2d6213c110dc6e7b82a49df0dfd1.s3tc.ctex::
+icon.svg::CompressedTexture2D::7512738169859718102::1778155055::1778836212::1::::<><><>0<>0<>6f78cfff4d235cc0f668330bf932b458<>res://.godot/imported/icon.svg-de00a7934ae4942cf1f8834b51be0583.s3tc.ctex::
+::res://Assets/visual/Overworld/::1778751613
+::res://Assets/visual/Overworld/Characters/::1778844612
+::res://Assets/visual/Overworld/Characters/Player/::1778836212
+Player_Still.png::CompressedTexture2D::4762303802527480676::1778752002::1778836212::1::::<><><>0<>0<>7bc397aee0b196448d144ceb71993b76<>res://.godot/imported/Player_Still.png-27b630b875de3eba178b7fcb9db84902.ctex::
+Player_Walking.png::CompressedTexture2D::3331795598714155591::1778752002::1778836212::1::::<><><>0<>0<>d3a3bb83fc569efd6baeec493da3769d<>res://.godot/imported/Player_Walking.png-89ce93acbf66eb05abd5d3f5ef2724fd.ctex::
+::res://Assets/visual/Overworld/Characters/Tutorial_guy/::1778844689
+TutorialGuy.png::CompressedTexture2D::7181570366590562120::1778844689::1778844689::1::::<><><>0<>0<>1ba36df1fb08d0be5ccd941d582d52eb<>res://.godot/imported/TutorialGuy.png-e3a9bfd9a2c139a34820abb66d6313dd.ctex::
+::res://Autoload Singletons/::1778845750
+dialogue_manager.gd::GDScript::6987433836201649149::1778845750::0::1::::<>Node<><>0<>0<><>::
 ::res://Battle Content/::1778665689
-::res://Battle Content/Battle Scenes/::1778753922
-battle_scene_general.tscn::PackedScene::2524936304494790469::1778753922::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://bv35jrik8peif::::res://Temporary Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://588f8ecmgsx8::::res://Temporary Assets/audio/Music/funk125bpm(full).ogg<>uid://btrkqi17aqrsc::::res://Temporary Assets/audio/SFX/PlayerHurt.wav<>uid://cx563250xwips::::res://Temporary Assets/audio/SFX/PlayerSlash.wav
-insult_scene.tscn::PackedScene::1818197521440365157::1778680937::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://cym80ttrd528d::::res://Battle Content/Battle Scripts/insult_scene.gd<>uid://c2ffmyas4ajwm::::res://Temporary Assets/audio/SFX/InsultSpawn.wav
-::res://Battle Content/Battle Scripts/::1778754231
-battle_scene_general.gd::GDScript::6830524730587621539::1778754231::0::1::::BattleScene<>Node<><>0<>0<><>::
+::res://Battle Content/Battle Scenes/::1778845377
+battle_scene_general.tscn::PackedScene::2524936304494790469::1778845377::0::1::::<><><>0<>0<><>::uid://c4k00kql5vsox::::res://Battle Content/Battle Scripts/battle_scene_general.gd<>uid://bv35jrik8peif::::res://Assets/visual/circle gird.jpg<>uid://bq28p3v3vsvnr::::res://Battle Content/Battle Scripts/beat_manager.gd<>uid://bftalcvetkoqu::::res://Battle Content/Battle Scripts/insult_spawner.gd<>uid://b3yj176k57pn0::::res://Battle Content/Battle Scripts/player_defending.gd<>uid://050phl7wkbov::::res://Battle Content/Battle Scenes/insult_scene.tscn<>uid://588f8ecmgsx8::::res://Assets/audio/Music/funk125bpm(full).ogg<>uid://b835phyfgc83y::::res://Assets/visual/Overworld/Characters/Player/Player_Still.png<>uid://btrkqi17aqrsc::::res://Assets/audio/SFX/PlayerHurt.wav<>uid://cx563250xwips::::res://Assets/audio/SFX/PlayerSlash.wav<>uid://b3n3bv26acbyt::::res://General Scenes/text_box.tscn<>uid://dak2odni1okj5::::res://Assets/visual/Overworld/Characters/Tutorial_guy/TutorialGuy.png
+insult_scene.tscn::PackedScene::1818197521440365157::1778836211::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Assets/visual/icon.svg<>uid://cym80ttrd528d::::res://Battle Content/Battle Scripts/insult_scene.gd<>uid://c2ffmyas4ajwm::::res://Assets/audio/SFX/InsultSpawn.wav
+::res://Battle Content/Battle Scripts/::1778844170
+battle_scene_general.gd::GDScript::6830524730587621539::1778844170::0::1::::BattleScene<>Node<><>0<>0<><>::
 beat_manager.gd::GDScript::3567212333326783807::1778591821::0::1::::BeatManager<>Node<><>0<>0<><>::
 enemy_data_loader.gd::GDScript::8950825176491237259::1778659586::0::1::::EnemyDataLoader<>Node<><>0<>0<><>::
 insult_scene.gd::GDScript::6484195481429171665::1778591848::0::1::::Insult<>Node2D<><>0<>0<><>::
-insult_spawner.gd::GDScript::2776607860638487468::1778740868::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
-player_defending.gd::GDScript::4401847984363729263::1778680524::0::1::::PlayerDefending<>Node2D<><>0<>0<><>::
-::res://Battle Content/Combat Dialogue/::1778753050
-shifting_rat.json::JSON::-1::1778753050::0::1::::<><><>0<>0<><>::
+insult_spawner.gd::GDScript::2776607860638487468::1778767837::0::1::::InsultSpawner<>Node2D<><>0<>0<><>::
+player_defending.gd::GDScript::4401847984363729263::1778767837::0::1::::PlayerDefending<>Node2D<><>0<>0<><>::
+::res://Battle Content/Combat Dialogue/::1778844383
+shifting_rat.json::JSON::-1::1778844383::0::1::::<><><>0<>0<><>::
+::res://General Scenes/::1778845750
+text_box.tscn::PackedScene::4380248224060801783::1778845750::0::1::::<><><>0<>0<><>::
 ::res://Overworld Content/::1778665684
-::res://Overworld Content/Overworld Dialogue/::1778751848
-TutorialGuyOverworld.json::JSON::-1::1778751848::0::1::::<><><>0<>0<><>::
-::res://Overworld Content/Overworld Scenes/::1778761922
-enemy.tscn::PackedScene::649478512829706808::1778747432::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Temporary Assets/visual/icon.svg<>uid://c0vcil8p8frgj::::res://Overworld Content/Overworld Scripts/enemy1.gd
-overworld_player.tscn::PackedScene::1433365703018281658::1778761922::0::1::::<><><>0<>0<><>::uid://drq86dc3bsbsr::::res://Overworld Content/Overworld Scripts/overworld_player.gd<>uid://b835phyfgc83y::::res://Temporary Assets/visual/Overworld/Characters/Player/Player_Still.png<>uid://bnp7gl4hhfb5p::::res://Temporary Assets/visual/Overworld/Characters/Player/Player_Walking.png
-::res://Overworld Content/Overworld Scenes/Overworld Stages/::1778762294
-overworld.tscn::PackedScene::6168599701541874009::1778762294::0::1::::<><><>0<>0<><>::uid://uollahfe7a55::::res://Overworld Content/Overworld Scenes/overworld_player.tscn<>uid://jiu20sth8pxw::::res://Overworld Content/Overworld Scenes/enemy.tscn<>uid://y7ksyufa00j3::::res://Temporary Assets/audio/Music/Weird cave.wav
-::res://Overworld Content/Overworld Scripts/::1778761420
-enemy1.gd::GDScript::6571050740970283249::1778750793::0::1::::<>Interactable<><>0<>0<><>::
-interactable.gd::GDScript::7464562241657415797::1778155055::0::1::::Interactable<>Node2D<><>0<>0<><>::
-overworld_player.gd::GDScript::8387561619297051929::1778761420::0::1::::OverworldPLayer<>CharacterBody2D<><>0<>0<><>::
-::res://Temporary Assets/::1778155055
-::res://Temporary Assets/audio/::1778579447
-::res://Temporary Assets/audio/Music/::1778762543
-funk125bpm(full).ogg::AudioStreamOggVorbis::2175804104312698663::1778590452::1778590551::1::::<><><>0<>0<>53aaf75d4baf29c1ff09c9a8792b9ae0<>res://.godot/imported/funk125bpm(full).ogg-d759e33d848aa4ce25542e5d3aebb598.oggvorbisstr::
-funk125bpm(noLead).ogg::AudioStreamOggVorbis::8411637428041239616::1778590452::1778590554::1::::<><><>0<>0<>fc9e6d10759eaac4af91d490c8bd190b<>res://.godot/imported/funk125bpm(noLead).ogg-a8388adca793d47764958c60ad6c8249.oggvorbisstr::
-Weird cave.ogg::AudioStreamOggVorbis::6067999807499560631::1778762543::1778762543::1::::<><><>0<>0<>098affe02d1d7ab2098662c4bb4f55a9<>res://.godot/imported/Weird cave.ogg-b1e4aa42024f73e0ba2a0b95fd56ea1c.oggvorbisstr::
-::res://Temporary Assets/audio/SFX/::1778591659
-InsultSpawn.wav::AudioStreamWAV::6678588310291072428::1778591658::1778591659::1::::<><><>0<>0<>77583363162b1f94a97214bda60ad26f<>res://.godot/imported/InsultSpawn.wav-25e83e758e617289974f9857d14bb726.sample::
-PlayerHurt.wav::AudioStreamWAV::3755739339071174186::1778591658::1778591659::1::::<><><>0<>0<>5139a270c93ac8bfc96b75df35ce6723<>res://.godot/imported/PlayerHurt.wav-1d14d634ffd1fbac8531ce67851c4a81.sample::
-PlayerSlash.wav::AudioStreamWAV::6451049798329919856::1778591658::1778591659::1::::<><><>0<>0<>56ded23a333d9e88381157fd449ed098<>res://.godot/imported/PlayerSlash.wav-6b92283e5aa022345a1624b732949de6.sample::
-::res://Temporary Assets/visual/::1778751607
-circle gird.jpg::CompressedTexture2D::3920027464888028397::1778155055::1778155176::1::::<><><>0<>0<>92031ef52e9ea41fa49ae875ebee612e<>res://.godot/imported/circle gird.jpg-dc66796b050b45d162143617da15245e.s3tc.ctex::
-icon.svg::CompressedTexture2D::7512738169859718102::1778155055::1778155176::1::::<><><>0<>0<>daaef6f29ae9100196b185367221221e<>res://.godot/imported/icon.svg-f5b2c2902ef4ea0f2913aadef5f33caa.s3tc.ctex::
-::res://Temporary Assets/visual/Overworld/::1778751613
-::res://Temporary Assets/visual/Overworld/Characters/::1778751619
-::res://Temporary Assets/visual/Overworld/Characters/Player/::1778752003
-Player_Still.png::CompressedTexture2D::4762303802527480676::1778752002::1778752002::1::::<><><>0<>0<>5861e1deb733fbae68a0c14a068672c9<>res://.godot/imported/Player_Still.png-e04fdef7196040782a65606c7e2f983a.ctex::
-Player_Walking.png::CompressedTexture2D::3331795598714155591::1778752002::1778752003::1::::<><><>0<>0<>da6664ade0470d570f4bc062624ac84c<>res://.godot/imported/Player_Walking.png-539cd3f84e926918b966285f60859a46.ctex::
+::res://Overworld Content/Overworld Dialogue/::1778844493
+TutorialGuyOverworld.json::JSON::-1::1778844493::0::1::::<><><>0<>0<><>::
+::res://Overworld Content/Overworld Scenes/::1778852022
+overworld_player.tscn::PackedScene::1433365703018281658::1778852022::0::1::::<><><>0<>0<><>::uid://drq86dc3bsbsr::::res://Overworld Content/Overworld Scripts/overworld_player.gd<>uid://b835phyfgc83y::::res://Assets/visual/Overworld/Characters/Player/Player_Still.png<>uid://bnp7gl4hhfb5p::::res://Assets/visual/Overworld/Characters/Player/Player_Walking.png
+overworld_tutorial_guy.tscn::PackedScene::649478512829706808::1778851809::0::1::::<><><>0<>0<><>::uid://x4xednda8q8u::::res://Overworld Content/Overworld Scripts/base_npc.gd<>uid://dak2odni1okj5::::res://Assets/visual/Overworld/Characters/Tutorial_guy/TutorialGuy.png
+push_button.tscn::PackedScene::4072788297451828234::1778853037::0::1::::<><><>0<>0<><>::uid://dfbhx2idbmkkk::::res://Assets/visual/icon.svg<>uid://3x4c5b5clpux::::res://Overworld Content/Overworld Scripts/push_button.gd
+locked_door.tscn::PackedScene::5811962227748669554::1778853211::0::1::::<><><>0<>0<><>::uid://ce4rkrtjryq0e::::res://Overworld Content/Overworld Scripts/locked_door.gd<>uid://dfbhx2idbmkkk::::res://Assets/visual/icon.svg
+::res://Overworld Content/Overworld Scenes/Gizmos/::0
+::res://Overworld Content/Overworld Scenes/Overworld Stages/::1778852437
+overworld.tscn::PackedScene::6168599701541874009::1778853236::0::1::::<><><>0<>0<><>::uid://uollahfe7a55::::res://Overworld Content/Overworld Scenes/overworld_player.tscn<>uid://jiu20sth8pxw::::res://Overworld Content/Overworld Scenes/overworld_tutorial_guy.tscn<>uid://b3n3bv26acbyt::::res://General Scenes/text_box.tscn<>uid://cspncniotqcnf::::res://Assets/audio/Music/Weird cave.ogg<>uid://bya5h02345u63::::res://Overworld Content/Overworld Scenes/push_button.tscn
+::res://Overworld Content/Overworld Scripts/::1778852689
+base_npc.gd::GDScript::1675614170341857374::1778851809::0::1::::<>Interactable<><>0<>0<><>::
+interactable.gd::GDScript::7464562241657415797::1778848362::0::1::::Interactable<>Node2D<><>0<>0<><>::
+overworld_player.gd::GDScript::8387561619297051929::1778852689::0::1::::OverworldPLayer<>CharacterBody2D<><>0<>0<><>::
+push_button.gd::GDScript::2014534253197813363::1778853037::0::1::::<>Interactable<><>0<>0<><>::
+locked_door.gd::GDScript::5114514666302979526::1778853157::0::1::::<>Node<><>0<>0<><>::
