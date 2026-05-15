@@ -29,7 +29,9 @@ func _ready() -> void:
 
 
 func lock_movement(isLocked):
-	await get_tree().process_frame
+	if get_tree() != null:
+		await get_tree().process_frame
+		
 	if isLocked:
 		state = States.LOCKED
 	else: # here the player can move again

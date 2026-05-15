@@ -48,6 +48,8 @@ func start_dialogue(npcData, timelineName):
 
 ## mostly for overworld dialogue
 func process_text_type(timeline : Dictionary):
+	_ready()
+	
 	if "text" in timeline.keys():
 		pass #print("text")
 	
@@ -74,9 +76,8 @@ func process_text_type(timeline : Dictionary):
 
 ## to show only 1 text screen
 func display_text(text : String):
-	#print("DISPLAY ",text)
-	textLabel = get_tree().get_first_node_in_group("TextLabel") # JUST TEMPORARY FOR SCENE SWITCH TO WORK
-	nameLabel = get_tree().get_first_node_in_group("NameLabel")
+	_ready() # JUST TEMPORARY FOR SCENE SWITCH TO WORK
+	
 	
 
 	fullText = text
@@ -110,6 +111,9 @@ func skip_text():
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
+	
+	textLabel = get_tree().get_first_node_in_group("TextLabel")
+	
 	if textLabel.get_parent().get_parent().get_parent().visible == false:
 		return # here the textbox is invisible, so no dialogue is there
 	

@@ -9,3 +9,12 @@ res://Overworld Content/Overworld Scripts/locked_door.gd
 res://Overworld Content/Overworld Scripts/push_button.gd
 res://Overworld Content/Overworld Scenes/locked_door.tscn
 res://Overworld Content/Overworld Scenes/Gizmos/locked_door.tscn
+res://Autoload Singletons/dialogue_manager.gd
+res://Battle Content/Battle Scenes/insult_scene.tscn
+res://Battle Content/Battle Scripts/battle_scene_general.gd
+res://Battle Content/Combat Dialogue/shifting_rat.json
+res://Overworld Content/Overworld Dialogue/TutorialGuyOverworld.json
+res://Overworld Content/Overworld Scripts/interactable.gd
+res://Battle Content/Battle Scenes/battle_scene_general.tscn
+res://General Scenes/text_box.tscn
+res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.gd

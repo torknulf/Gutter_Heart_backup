@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b3n3bv26acbyt"]
 
-[node name="TextBox" type="Control"]
-visible = false
+[node name="TextBox" type="Control" groups=["TextBox"]]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5

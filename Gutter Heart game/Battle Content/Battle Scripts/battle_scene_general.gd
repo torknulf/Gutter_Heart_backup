@@ -61,6 +61,7 @@ func _process(delta: float) -> void:
 				DialogueManager.nameLabel.visible = true
 				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
 				
+				DialogueManager._ready()
 			
 			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
 				turnState = TurnStates.ENEMYTURN
