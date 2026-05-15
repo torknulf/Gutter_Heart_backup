@@ -39,8 +39,11 @@ func _ready() -> void:
 	DialogueManager.display_text(get_current_prompt())
 	DialogueManager.canAdvance = false
 	
+	update_player_alternatives()
 	
 	
+	
+	DialogueManager.nameLabel.visible = false
 
 	
 	
@@ -55,8 +58,10 @@ func _process(delta: float) -> void:
 			if enemyCurrProg == enemyMaxProg and !DialogueManager.isTyping:
 				#DialogueManager.queueOverworld = true
 				GameState.npcStates["tutorial_guy"]["fought"] = true
+				DialogueManager.nameLabel.visible = true
 				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
 				
+				DialogueManager._ready()
 			
 			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
 				turnState = TurnStates.ENEMYTURN
@@ -80,6 +85,9 @@ func start_enemy_turn() -> void:
 
 
 func start_player_turn() -> void:
+	
+	update_player_alternatives()
+	
 	DialogueManager.display_text(get_current_prompt())
 	%TurnTransition.play("transition_to_playerturn")
 	%PlayerContainer.visible = true
@@ -143,7 +151,7 @@ func on_correct_appeal():
 	enemyCurrProg += 1
 	
 	## Win condition check
-	if enemyCurrProg >= enemy_data["states"].size():
+	if enemyCurrProg >= enemy_data["combat_states"].size():
 		on_battle_won()
 
 
@@ -154,6 +162,24 @@ func on_wrong_appeal(appeal):
 
 func on_battle_won():
 	pass
+
+
+
+func update_player_alternatives():
+	var state = get_current_state()
+	var alts = ["Compliment", "Criticize", "Relate", "Oppose"]
+
+	## Add alternative appeals as player alternatives if they are specified
+	if "alt_appeals" in state.keys():
+		alts = []
+		for i in state["alt_appeals"]:
+			alts.append(state["alt_appeals"][i])
+	
+	var index = 0
+	for button : Button in %PlayerAlternatives.get_children():
+		button.text = alts[index]
+		index += 1
+
 
 
 
@@ -178,8 +204,10 @@ func _on_oppose_button_pressed() -> void:
 func get_turnstate():
 	return turnState
 
+
 func get_current_state() -> Dictionary:
-	return enemy_data["states"][enemyCurrProg]
+	return enemy_data["combat_states"][enemyCurrProg]
+
 
 func get_current_prompt():
 	var state = get_current_state()

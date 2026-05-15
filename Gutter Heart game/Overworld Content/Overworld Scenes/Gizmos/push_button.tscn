@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bya5h02345u63"]
+
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/icon.svg" id="1_040l6"]
+[ext_resource type="Script" uid="uid://3x4c5b5clpux" path="res://Overworld Content/Overworld Scripts/push_button.gd" id="1_irw7w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_040l6"]
+size = Vector2(120, 120)
+
+[node name="PushButton" type="Node2D"]
+script = ExtResource("1_irw7w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_040l6")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_040l6")
