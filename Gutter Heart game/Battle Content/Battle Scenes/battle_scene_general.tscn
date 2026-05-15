@@ -1,15 +1,17 @@
-[gd_scene load_steps=22 format=4 uid="uid://bb8dlj3nj2gqf"]
+[gd_scene load_steps=24 format=4 uid="uid://bb8dlj3nj2gqf"]
 
 [ext_resource type="Script" uid="uid://c4k00kql5vsox" path="res://Battle Content/Battle Scripts/battle_scene_general.gd" id="1_3nfe8"]
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Temporary Assets/visual/icon.svg" id="1_o5so7"]
-[ext_resource type="Texture2D" uid="uid://bv35jrik8peif" path="res://Temporary Assets/visual/circle gird.jpg" id="1_ron4p"]
+[ext_resource type="Texture2D" uid="uid://bv35jrik8peif" path="res://Assets/visual/circle gird.jpg" id="1_ron4p"]
 [ext_resource type="Script" uid="uid://bq28p3v3vsvnr" path="res://Battle Content/Battle Scripts/beat_manager.gd" id="2_6koaw"]
 [ext_resource type="Script" uid="uid://bftalcvetkoqu" path="res://Battle Content/Battle Scripts/insult_spawner.gd" id="3_6koaw"]
 [ext_resource type="Script" uid="uid://b3yj176k57pn0" path="res://Battle Content/Battle Scripts/player_defending.gd" id="3_28jwv"]
 [ext_resource type="PackedScene" uid="uid://050phl7wkbov" path="res://Battle Content/Battle Scenes/insult_scene.tscn" id="4_6koaw"]
-[ext_resource type="AudioStream" uid="uid://588f8ecmgsx8" path="res://Temporary Assets/audio/Music/funk125bpm(full).ogg" id="4_ej53o"]
-[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Temporary Assets/audio/SFX/PlayerHurt.wav" id="6_y2ob7"]
-[ext_resource type="AudioStream" uid="uid://cx563250xwips" path="res://Temporary Assets/audio/SFX/PlayerSlash.wav" id="7_w3c6v"]
+[ext_resource type="AudioStream" uid="uid://588f8ecmgsx8" path="res://Assets/audio/Music/funk125bpm(full).ogg" id="4_ej53o"]
+[ext_resource type="Texture2D" uid="uid://b835phyfgc83y" path="res://Assets/visual/Overworld/Characters/Player/Player_Still.png" id="5_lfgun"]
+[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Assets/audio/SFX/PlayerHurt.wav" id="6_y2ob7"]
+[ext_resource type="AudioStream" uid="uid://cx563250xwips" path="res://Assets/audio/SFX/PlayerSlash.wav" id="7_w3c6v"]
+[ext_resource type="PackedScene" uid="uid://b3n3bv26acbyt" path="res://General Scenes/text_box.tscn" id="11_w3c6v"]
+[ext_resource type="Texture2D" uid="uid://dak2odni1okj5" path="res://Assets/visual/Overworld/Characters/Tutorial_guy/TutorialGuy.png" id="12_lfgun"]
 
 [sub_resource type="Gradient" id="Gradient_ej53o"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.33398688, 0.2659766, 1)
@@ -64,7 +66,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 20),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-640, -1152), Vector2(-640, -384)]
+"values": [Vector2(-960, -1620), Vector2(-960, -540)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -76,7 +78,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 20),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-640, -384), Vector2(-640, 384)]
+"values": [Vector2(-960, -540), Vector2(-960, 540)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w3c6v"]
@@ -208,7 +210,6 @@ data = PackedByteArray("//PkZAAX+Wc+W6S8AJpo9nQXRlgAgAKXW+5znOaNGKBQCAYJMRisVggK
 script = ExtResource("1_3nfe8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.7, 1.7)
 
 [node name="Visuals" type="Node2D" parent="."]
 
@@ -216,8 +217,8 @@ zoom = Vector2(1.7, 1.7)
 z_index = -4
 offset_left = -640.0
 offset_top = -384.0
-offset_right = 640.0
-offset_bottom = 384.00024
+offset_right = 1280.0
+offset_bottom = 695.99976
 texture = SubResource("NoiseTexture2D_w3c6v")
 expand_mode = 1
 
@@ -225,8 +226,8 @@ expand_mode = 1
 z_index = -4
 offset_left = -640.0
 offset_top = -1152.0
-offset_right = 640.0
-offset_bottom = -384.0
+offset_right = 1280.0
+offset_bottom = -72.000244
 texture = SubResource("NoiseTexture2D_w3c6v")
 expand_mode = 1
 
@@ -286,8 +287,10 @@ unique_name_in_owner = true
 script = ExtResource("3_28jwv")
 
 [node name="PlayerSprite" type="Sprite2D" parent="EnemyTurn/PlayerDefending"]
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_o5so7")
+position = Vector2(6, -2.9999998)
+scale = Vector2(0.6655405, 0.1701958)
+texture = ExtResource("5_lfgun")
+hframes = 3
 
 [node name="HitsLabel" type="Label" parent="EnemyTurn/PlayerDefending"]
 unique_name_in_owner = true
@@ -349,10 +352,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -538.0
-offset_top = -289.0
-offset_right = 538.0
-offset_bottom = 289.0
+offset_left = -881.0
+offset_top = -486.0
+offset_right = 881.0
+offset_bottom = 486.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -365,77 +368,39 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -416.0
-offset_top = -272.0
-offset_right = 416.0
-offset_bottom = 272.0
+offset_top = -244.0
+offset_bottom = 244.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 244
+theme_override_constants/separation = 322
 
-[node name="TopTextBox" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
+[node name="TextBox" parent="PlayerTurn/PlayerUI/VBoxContainer" instance=ExtResource("11_w3c6v")]
 layout_mode = 2
-size_flags_vertical = 8
-
-[node name="TopTextBoxOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox"]
-layout_mode = 1
-offset_left = -8.0
-offset_top = -24.0
-offset_right = 840.0
-offset_bottom = 136.0
-color = Color(0.7666196, 0.76661956, 0.76661956, 1)
-
-[node name="TopTextBox" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-color = Color(0.24125901, 0, 0.14820552, 1)
-
-[node name="CombatText" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/TopTextBox/TopTextBoxOutline/TopTextBox" groups=["TextLabel"]]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 10.0
-offset_top = -46.5
-offset_right = 762.0
-offset_bottom = 46.5
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "sadasjdjkasdhasdhasdhasdhjasdkasdjkas dhkjasdhkjasdhjkasjhdkashdjkdhjka"
-autowrap_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 1
 
 [node name="EnemyContainer" type="Control" parent="PlayerTurn/PlayerUI/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
 
 [node name="EnemyPortrait" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer"]
-modulate = Color(1, 0.47058824, 0, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -28.0
-offset_right = 64.0
-offset_bottom = 100.0
+offset_left = -131.0
+offset_top = -150.0
+offset_right = 142.0
+offset_bottom = 197.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("1_o5so7")
+texture = ExtResource("12_lfgun")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="ProgOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer"]
 layout_mode = 1
@@ -445,9 +410,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -80.0
-offset_top = -76.0
+offset_top = -152.0
 offset_right = 80.0
-offset_bottom = -44.0
+offset_bottom = -120.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.69135684, 0.6913568, 0.69135684, 1)
@@ -494,10 +459,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -416.0
-offset_top = -88.0
-offset_right = 416.0
-offset_bottom = 88.0
+offset_left = -630.0
+offset_top = -126.0
+offset_right = 630.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
@@ -517,6 +482,7 @@ grow_vertical = 2
 color = Color(0.24313726, 0, 0.14901961, 1)
 
 [node name="PlayerAlternatives" type="GridContainer" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -537,26 +503,26 @@ columns = 2
 [node name="ComplimentButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "Compliment"
+theme_override_font_sizes/font_size = 64
+text = "/Compliment"
 
 [node name="CriticizeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "Criticize"
+theme_override_font_sizes/font_size = 64
+text = "/Criticize"
 
 [node name="RelateButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "Relate"
+theme_override_font_sizes/font_size = 64
+text = "/Relate"
 
 [node name="OpposeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 32
-text = "Oppose
+theme_override_font_sizes/font_size = 64
+text = "/Oppose
 "
 
 [connection signal="timeout" from="EnemyTurn/PlayerDefending/HitzonePivot/HitzoneVisibilityTimer" to="EnemyTurn/PlayerDefending" method="_on_hitzone_visibility_timer_timeout"]

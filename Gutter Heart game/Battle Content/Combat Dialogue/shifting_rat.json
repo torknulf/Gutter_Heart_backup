@@ -1,7 +1,9 @@
 {
-  "enemy_name": "Shifty Rat",
+  "name": "Shifty Rat",
 
-  "states": [
+	"timelines": [],
+
+	"combat_states": [
 	{
 	  "prompt": "Why're you staring at me like that? (Relate)",
 	  "correct_appeal": "2",
@@ -17,10 +19,19 @@
 
 	  "progress_gain": 1
 	},
-
+	
 	{
-	  "prompt": "Everyone keeps avoiding me. (Compliment)",
+	  "prompt": "Everyone keeps avoiding me. (Cool)",
 	  "correct_appeal": "0",
+
+	  "alt_appeals":
+		{
+			"0": "You're cool", 
+			"1": "That's whack",
+			"2": "Same, man",
+			"3": "Not at all"
+		},
+
 
 	  "success_response": "You really think so?",
 	  "wrong_response": 

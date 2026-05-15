@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://btrkqi17aqrsc"
-path="res://.godot/imported/PlayerHurt.wav-1d14d634ffd1fbac8531ce67851c4a81.sample"
+path="res://.godot/imported/PlayerHurt.wav-d8f52414f5bd3327c7f2bc5b5728f788.sample"
 
 [deps]
 
-source_file="res://Temporary Assets/audio/SFX/PlayerHurt.wav"
-dest_files=["res://.godot/imported/PlayerHurt.wav-1d14d634ffd1fbac8531ce67851c4a81.sample"]
+source_file="res://Assets/audio/SFX/PlayerHurt.wav"
+dest_files=["res://.godot/imported/PlayerHurt.wav-d8f52414f5bd3327c7f2bc5b5728f788.sample"]
 
 [params]
 
