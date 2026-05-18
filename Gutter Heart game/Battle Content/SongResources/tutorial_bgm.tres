@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SongData" load_steps=3 format=3 uid="uid://dw884gfi1djh2"]
+
+[ext_resource type="AudioStream" uid="uid://588f8ecmgsx8" path="res://Assets/audio/Music/funk125bpm(full).ogg" id="1_y25t0"]
+[ext_resource type="Script" uid="uid://b2tpelwvv2fj7" path="res://Battle Content/Battle Scripts/song_data.gd" id="2_rbxgp"]
+
+[resource]
+script = ExtResource("2_rbxgp")
+songName = "TutorialBGM"
+music = ExtResource("1_y25t0")
+bpm = 250.0
+beatOffset = -0.02
+volume = -19.0
+metadata/_custom_type_script = "uid://b2tpelwvv2fj7"

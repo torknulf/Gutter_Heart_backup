@@ -35,7 +35,7 @@ func _ready() -> void:
 	
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
 	
-	load_enemy("res://Battle Content/Combat Dialogue/shifting_rat.json")
+	load_enemy("res://Battle Content/Combat Dialogue/TutorialGuyCombat.json")
 	DialogueManager.display_text(get_current_prompt())
 	DialogueManager.canAdvance = false
 	
@@ -46,7 +46,8 @@ func _ready() -> void:
 	DialogueManager.nameLabel.visible = false
 
 	
-	
+	%MetronomeSFX.volume_db = -80
+	%MetronomeSFXFirst.volume_db = -80
 
 
 
@@ -66,7 +67,14 @@ func _process(delta: float) -> void:
 			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
 				turnState = TurnStates.ENEMYTURN
 	
-	
+	elif Input.is_action_just_pressed("ToggleMute"):
+		if %MetronomeSFX.volume_db != 0:
+			%MetronomeSFX.volume_db = 0
+			%MetronomeSFXFirst.volume_db = 0
+		else:
+			%MetronomeSFX.volume_db = -80
+			%MetronomeSFXFirst.volume_db = -80
+
 	# PROGRESS BAR
 	%ProgFilling.size.x = 48 * enemyCurrProg
 	

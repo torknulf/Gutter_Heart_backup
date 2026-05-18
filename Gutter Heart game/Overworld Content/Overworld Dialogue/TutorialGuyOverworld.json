@@ -19,8 +19,7 @@
 				[
 					{
 						"text": "Yes", 
-						"next_timeline": "yes_battle",
-						"effect": "combat"
+						"next_timeline": "yes_battle"
 					}, 
 					{
 						"text": "No", 
@@ -34,7 +33,7 @@
 		[
 			{
 				"text": "All right then, let's get going!",
-				"action": "start_battle"
+				"effect": "start_battle"
 			}
 		],
 		
@@ -57,7 +56,6 @@
 					{
 						"text": "Yes", 
 						"next_timeline": "yes_battle",
-						"effect": "combat"
 					}, 
 					{
 						"text": "No", 
@@ -79,7 +77,6 @@
 					{
 						"text": "Yes", 
 						"next_timeline": "yes_battle",
-						"effect": "combat"
 					}, 
 					{
 						"text": "No", 

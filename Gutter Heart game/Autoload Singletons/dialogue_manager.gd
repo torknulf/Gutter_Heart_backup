@@ -56,9 +56,7 @@ func process_text_type(timeline : Dictionary):
 	if "choices" in timeline.keys():
 		show_choices(timeline["choices"])
 		canAdvance = false
-	
-	if "start_battle" in timeline.keys():
-		pass
+
 	
 	if "next_timeline" in timeline.keys():
 		queuedTimeline = timeline["next_timeline"]
@@ -69,7 +67,11 @@ func process_text_type(timeline : Dictionary):
 	
 	elif "name" in currentNPC.keys(): # this is the general name
 		DialogueManager.nameLabel.text = currentNPC["name"]
+	
 
+	if "effect" in timeline.keys():
+		handle_effect(timeline["effect"])
+	
 
 	display_text(timeline["text"])
 
@@ -195,9 +197,7 @@ func show_choices(choices):  # argument should be a list of choices
 
 
 func on_choice_selected(choice_data):
-	if "effect" in choice_data.keys():
-		handle_effect(choice_data["effect"])
-	
+
 	if "next_timeline" in choice_data.keys():
 		queuedTimeline = choice_data["next_timeline"]
 	
@@ -206,7 +206,7 @@ func on_choice_selected(choice_data):
 	
 	
 func handle_effect(effect):
-	if effect == "combat":
+	if effect == "start_battle":
 		queueBattle = true
 
 

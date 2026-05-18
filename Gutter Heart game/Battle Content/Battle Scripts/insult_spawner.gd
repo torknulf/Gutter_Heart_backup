@@ -65,8 +65,9 @@ func choose_insult_dir():
 func generate_insult_queue():
 	randomize()
 	
-	var insultQueue = [0, 0, 0, 0]
-	var insultAmount = randi_range(2, 4)
+	var insultQueue = []
+	insultQueue.resize(%BeatManager.currSong.beatsPerMeasure)
+	var insultAmount = randi_range(2, %BeatManager.currSong.beatsPerMeasure) # should be length of list
 	
 	for i in insultAmount:
 		insultQueue[i] = 1
@@ -98,9 +99,13 @@ func spawn_insult():
 
 
 # happens whenever a new bar occurs. Mainly toggles on/off spawning between rhythm game attacking/defending rounds
-func _on_signal_new_bar():
+func _on_signal_new_bar(barStart: bool):
 	if $"../..".turnState != $"../..".TurnStates.ENEMYTURN:
 		return
+	#print("BEAT", isSpawning)
+	
+	if !barStart and !isSpawning:
+		return # to avoid start of attack mid-bar
 	
 	
 	if isSpawning:
@@ -112,7 +117,7 @@ func _on_signal_new_bar():
 		if spawnRounds > 0:
 			isSpawning = true
 			spawnQueue = generate_insult_queue()
-			print(spawnQueue)
+			#print(spawnQueue)
 
 		else:
 			isSpawning = false 
