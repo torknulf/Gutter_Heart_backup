@@ -1,14 +1,15 @@
 class_name BeatManager extends Node
 
-@export var bpm: float = 120.0
 var songTime: float = 0.0
 
-@export var songOffset: float
+@export var currSong: SongData # resource!
 
 var isActive: bool = false
 
 signal newBeat
 signal newBar
+
+var barStart
 
 
 
@@ -37,7 +38,8 @@ func update_time_vars(delta: float) -> void:
 		newBeat.emit()
 	
 	if oldBar != get_bar():
-		newBar.emit()
+		barStart = flip_barstart()
+		newBar.emit(barStart)
 		%MetronomeSFXFirst.play()
 
 
@@ -47,35 +49,41 @@ func update_time_vars(delta: float) -> void:
 func start_counting_beat():
 	isActive = true
 	%MetronomeSFX.play()
-	songTime = songOffset
+	songTime = currSong.beatOffset
 
 
 func stop_counting_beat():
 	isActive = false
-	songTime = songOffset
+	songTime = currSong.beatOffset
 
+
+func flip_barstart():
+	if barStart:
+		return false
+	else:
+		return true
 
 
 ## --- GET FUNCTIONS ---
 
 func get_song_time():
-	return songTime + songOffset
+	return songTime + currSong.beatOffset
 
 
 ## returns the number of the current beat
 func get_beat():
-	return floor((songTime + songOffset) / get_bps())
+	return floor((songTime + currSong.beatOffset) / get_bps())
 
 ## returns the number of the current musical bar
 func get_bar():
-	return floor(get_beat() / 4) #3 ONLY FOR 4/4 NOW
+	return floor(get_beat() / currSong.beatsPerMeasure) 
 
 
 ## beats per second, 120 bpm = 0.5 bps
 func get_bps():
-	return (60.0 / bpm)
+	return (60.0 / currSong.bpm)
 
 
 ## Beats per minute
 func get_bpm():
-	return bpm
+	return currSong.bpm
