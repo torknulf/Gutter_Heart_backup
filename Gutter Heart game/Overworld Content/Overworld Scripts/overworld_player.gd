@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	if state == States.LOCKED:
 		return
 		
-	print(state)
+	#print(state)
 
 
 	var direction := Input.get_axis("input_left", "input_right")
