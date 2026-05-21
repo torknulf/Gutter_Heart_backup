@@ -5,12 +5,12 @@
 [ext_resource type="Script" uid="uid://bq28p3v3vsvnr" path="res://Battle Content/Battle Scripts/beat_manager.gd" id="2_6koaw"]
 [ext_resource type="Script" uid="uid://bftalcvetkoqu" path="res://Battle Content/Battle Scripts/insult_spawner.gd" id="3_6koaw"]
 [ext_resource type="Script" uid="uid://b3yj176k57pn0" path="res://Battle Content/Battle Scripts/player_defending.gd" id="3_28jwv"]
-[ext_resource type="Resource" uid="uid://dw884gfi1djh2" path="res://Battle Content/SongResources/tutorial_bgm.tres" id="3_tmt65"]
+[ext_resource type="Resource" uid="uid://c5xlt314uigta" path="res://Battle Content/SongResources/new_tutorial_bgm.tres" id="3_tmt65"]
 [ext_resource type="PackedScene" uid="uid://050phl7wkbov" path="res://Battle Content/Battle Scenes/insult_scene.tscn" id="4_6koaw"]
 [ext_resource type="AudioStream" uid="uid://588f8ecmgsx8" path="res://Assets/audio/Music/funk125bpm(full).ogg" id="4_ej53o"]
 [ext_resource type="Texture2D" uid="uid://b835phyfgc83y" path="res://Assets/visual/Overworld/Characters/Player/Player_Still.png" id="5_lfgun"]
-[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Assets/audio/SFX/PlayerHurt.wav" id="6_y2ob7"]
-[ext_resource type="AudioStream" uid="uid://cx563250xwips" path="res://Assets/audio/SFX/PlayerSlash.wav" id="7_w3c6v"]
+[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Assets/audio/SFX/temp/PlayerHurt.wav" id="6_y2ob7"]
+[ext_resource type="AudioStream" uid="uid://cx563250xwips" path="res://Assets/audio/SFX/temp/PlayerSlash.wav" id="7_w3c6v"]
 [ext_resource type="PackedScene" uid="uid://b3n3bv26acbyt" path="res://General Scenes/text_box.tscn" id="11_w3c6v"]
 [ext_resource type="Texture2D" uid="uid://dak2odni1okj5" path="res://Assets/visual/Overworld/Characters/Tutorial_guy/TutorialGuy.png" id="12_lfgun"]
 
@@ -271,9 +271,9 @@ pitch_scale = 1.7
 bus = &"SFX"
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="BeatManager"]
+unique_name_in_owner = true
 stream = ExtResource("4_ej53o")
 volume_db = -19.083
-autoplay = true
 bus = &"Music"
 
 [node name="EnemyTurn" type="Node2D" parent="."]

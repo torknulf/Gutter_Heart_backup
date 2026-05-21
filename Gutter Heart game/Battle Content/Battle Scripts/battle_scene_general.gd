@@ -131,6 +131,8 @@ func select_appeal(appeal):
 	if turnState != TurnStates.PLAYERTURN:
 		return
 	
+	DialogueManager.playChoiceSFX.emit()
+	
 	show_response(appeal)
 	
 	turnState = TurnStates.RESPONSE

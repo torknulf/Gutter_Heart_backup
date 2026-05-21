@@ -1,5 +1,6 @@
 class_name Insult extends Node2D
 
+@export var spawnSFXAudio: Array[AudioStream]
 
 var spawnTime # the time when the insult spawns
 var hitTime # the time when the insult hits the player
@@ -54,9 +55,28 @@ func play_approach_SFX():
 	
 	if currBeat >= beatAmount:
 		return
+	
+	%SpawnSFX.volume_db = 3
+	%SpawnSFX.stream = select_spawn_SFX()
 	%SpawnSFX.play()
-	%SpawnSFX.pitch_scale -= 0.1
+	print("AH")
+
 	currBeat += 1
+
+
+func select_spawn_SFX():
+	var sfxIndex: int = 0
+	
+	match approachDir:
+		Vector2.DOWN: sfxIndex = 0
+		
+		Vector2.LEFT: sfxIndex = 1
+		
+		Vector2.RIGHT: sfxIndex = 2
+		
+		Vector2.UP: sfxIndex = 3
+
+	return spawnSFXAudio[sfxIndex]
 
 
 ## happens when an insult reaches a player

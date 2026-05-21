@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c2ffmyas4ajwm"
-path="res://.godot/imported/InsultSpawn.wav-987badcc109a760424d07131de51214e.sample"
+path="res://.godot/imported/InsultSpawn.wav-f718654b25f0e161250654ea45c5c6db.sample"
 
 [deps]
 
-source_file="res://Assets/audio/SFX/InsultSpawn.wav"
-dest_files=["res://.godot/imported/InsultSpawn.wav-987badcc109a760424d07131de51214e.sample"]
+source_file="res://Assets/audio/SFX/temp/InsultSpawn.wav"
+dest_files=["res://.godot/imported/InsultSpawn.wav-f718654b25f0e161250654ea45c5c6db.sample"]
 
 [params]
 

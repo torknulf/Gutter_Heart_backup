@@ -3,6 +3,11 @@ extends Node
 var textLabel: Label
 var nameLabel: RichTextLabel
 
+signal playTextSFX
+signal playChoiceSFX
+signal playNextTextSFX
+
+
 var fullText = ""
 var currIndex = 0 # shows one letter at a time
 
@@ -23,6 +28,8 @@ var queueBattle: bool
 var queueOverworld: bool
 
 var canAdvance: bool = true
+
+
 
 func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
@@ -94,13 +101,26 @@ func display_text(text : String):
 
 
 func start_typing():
+	
 	while currIndex < fullText.length() and isTyping:
 		currIndex += 1
 		textLabel.visible_characters = currIndex
+		
+		play_text_SFX(currIndex)
+		
 		await get_tree().create_timer(0.03).timeout
 	
 	textLabel.visible_characters = fullText.length()
 	isTyping = false
+
+
+
+func play_text_SFX(index):
+	var letterSkip:= 3
+	
+	if index % letterSkip == 0: #skips as many letters as letterSkip is
+		playTextSFX.emit()
+
 
 
 func skip_text():
@@ -126,6 +146,8 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func next_line():
+	playNextTextSFX.emit()
+	
 	lineIndex += 1
 
 	if lineIndex >= currentNPC["timelines"][currTimelineName].size():
@@ -191,6 +213,7 @@ func show_choices(choices):  # argument should be a list of choices
 			func():
 				choiceContainer.visible = false
 				on_choice_selected(choice_data)
+				playChoiceSFX.emit()
 		)
 
 		choiceContainer.add_child(button)

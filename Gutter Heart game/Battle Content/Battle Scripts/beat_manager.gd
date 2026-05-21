@@ -15,6 +15,9 @@ var barStart
 
 ## --- PROCESSES ---
 
+func _ready() -> void:
+	%BGMusic.stream = currSong.music
+	%BGMusic.play()
 
 func _process(delta: float) -> void:
 	if !isActive:

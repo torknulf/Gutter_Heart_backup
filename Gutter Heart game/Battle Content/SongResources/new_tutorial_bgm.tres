@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SongData" load_steps=3 format=3 uid="uid://c5xlt314uigta"]
+
+[ext_resource type="AudioStream" uid="uid://drr2cs43xjpfv" path="res://Assets/audio/Music/TutorialGuyCombat.ogg" id="1_ii02e"]
+[ext_resource type="Script" uid="uid://b2tpelwvv2fj7" path="res://Battle Content/Battle Scripts/song_data.gd" id="1_xwthk"]
+
+[resource]
+script = ExtResource("1_xwthk")
+music = ExtResource("1_ii02e")
+bpm = 320.0
+beatOffset = -0.08
+metadata/_custom_type_script = "uid://b2tpelwvv2fj7"
