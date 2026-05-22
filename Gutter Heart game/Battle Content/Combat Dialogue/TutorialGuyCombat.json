@@ -1,62 +1,95 @@
 {
-	"name": "Tutorial Guy",
+	"name": "???",
 
 	"combat_states": [
 	{
-	  "prompt": "Why're you staring at me like that? (Relate)",
+	  "prompt": "Ones like you aren't meant to be in this world.",
 	  "correct_appeal": "2",
 
-	  "success_response": "…You get it?",
+	  "success_response": "You're trying to go home? That's a good one.",
 	  "wrong_response":
 		{
-			"0": "Compliment bleh", 
-			"1": "Bleh",
+			"0": "You think flattery will get you anywhere?", 
+			"1": "How dare you...",
 			"2": "-",
-			"3": "Why are you against me"
+			"3": "You brat. Are you trying to make me angry?",
+		},
+
+	  "progress_gain": 1
+	},
+	
+		{
+	  "prompt": "All the memories here are dying. And the ones who aren't... are bad ones. We will soon follow.",
+	  "correct_appeal": "0",
+
+	  "alt_appeals":
+		{
+			"0": "But you're alive! And you don't look like a bad guy.", 
+			"1": "Giving up will only kill you sooner.",
+			"2": "Yeah... only bad memories remain now, I suppose.",
+			"3": "No we won't!"
+		},
+
+
+	  "success_response": "Haha...",
+	  "wrong_response": 
+		{
+			"0": "-", 
+			"1": "Does it make a difference?",
+			"2": "...",
+			"3": "Are you stupid?"
 		},
 
 	  "progress_gain": 1
 	},
 	
 	{
-	  "prompt": "Everyone keeps avoiding me. (Cool)",
-	  "correct_appeal": "0",
+	  "prompt": "Your journey is hopeless. You know that, right?",
+	  "correct_appeal": "2",
 
 	  "alt_appeals":
 		{
-			"0": "You're cool", 
-			"1": "That's whack",
-			"2": "Same, man",
-			"3": "Not at all"
+			"0": "Smart thing to say, there.", 
+			"1": "Your bleak mindset won't help me or you.",
+			"2": "Yes, it certainly feels hopeless. But it's never hopeless with a friend by your side.",
+			"3": "You're wrong! You have to be..."
 		},
 
 
-	  "success_response": "You really think so?",
+	  "success_response": "... Is that so?",
 	  "wrong_response": 
 		{
-			"0": "-", 
-			"1": "Bleh",
-			"2": "Nah the heck",
-			"3": "Why are you against me"
+			"0": "Bootlicker.", 
+			"1": "It's the best advice you'll get in this world.",
+			"2": "-",
+			"3": "You can never be wrong to assume the worst. Tends to turn out that way."
 		},
 
 	  "progress_gain": 1
 	},
-
 	{
-	  "prompt": "Maybe I’m the problem. (Oppose)",
-	  "correct_appeal": "3",
+	  "prompt": "You're a soulless man, and I'm the fading spirit of a forgotten memory. How would we prevail?",
+	  "correct_appeal": "1",
 
-	  "success_response": "...Maybe that's true. (Battle won)",
+	  "alt_appeals":
+		{
+			"0": "Noo- you're not fading, you look super opaque!", 
+			"1": "You're not forgotten. You're my friend, remember?",
+			"2": "Yeah it's not looking too great, huh?",
+			"3": "With tenacity and willpower! We can't lose if we fight for a just cause!"
+		},
+
+
+	  "success_response": "You know me still...?",
 	  "wrong_response": 
 		{
-			"0": "Compliment bleh", 
-			"1": "Bleh",
-			"2": "Nah the heck",
-			"3": "-"
+			"0": "Are you dumb? I don't mean- ugh, no matter.", 
+			"1": "-",
+			"2": "You're starting to learn.",
+			"3": "You're just being naive."
 		},
 
 	  "progress_gain": 1
-	}
+	},
   ]
 }
