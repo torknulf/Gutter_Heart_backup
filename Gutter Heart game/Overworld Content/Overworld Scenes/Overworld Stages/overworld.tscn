@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://uollahfe7a55" path="res://Overworld Content/Overworld Scenes/overworld_player.tscn" id="1_ehkdd"]
 [ext_resource type="Script" uid="uid://du7ps0g4lnujc" path="res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.gd" id="1_erkj1"]
-[ext_resource type="PackedScene" path="res://Overworld Content/Overworld Scenes/overworld_tutorial_guy.tscn" id="2_ofqiw"]
+[ext_resource type="PackedScene" uid="uid://jiu20sth8pxw" path="res://Overworld Content/Overworld Scenes/overworld_tutorial_guy.tscn" id="2_ofqiw"]
 [ext_resource type="PackedScene" uid="uid://b3n3bv26acbyt" path="res://General Scenes/text_box.tscn" id="3_4qj6f"]
 [ext_resource type="AudioStream" uid="uid://cspncniotqcnf" path="res://Assets/audio/Music/Weird cave.ogg" id="3_ofqiw"]
 [ext_resource type="PackedScene" uid="uid://bya5h02345u63" path="res://Overworld Content/Overworld Scenes/Gizmos/push_button.tscn" id="5_nrw4j"]

@@ -1,88 +1,56 @@
 {
-  "name": "Tutorial Guy",
+  "name": "???",
 
 	"timelines": 
 	{
 		"first": 
 		[
 			{
-				"text": "Hey."
+				"text": "Well look who it is!"
 			},
 			
 			{
-				"text": "You look lost."
+				"text": "A lost soul, fallen through the veil. Cast into the world of manifested thought..."
 			},
 			
 			{
-				"text": "Wanna throw hands?",
-				"choices": 
-				[
-					{
-						"text": "Yes", 
-						"next_timeline": "yes_battle"
-					}, 
-					{
-						"text": "No", 
-						"next_timeline": "no_battle"
-					}
-				]
-			}
-		],
-		
-		"yes_battle": 
-		[
+				"text": "And you look about as lost as they come."
+			},
+			
 			{
-				"text": "All right then, let's get going!",
+				"text": "Worry not, lost one. You'll find your way home when the time is right."
+			},
+			
+			{
+				"text": "Though your path will surely be long, and lined with adversity."
+			},
+			
+			{
+				"text": "You will need to defend yourself against the many spirits who will stand in your way."
+			},
+			
+			{
+				"text": "Though not with force."
+			},
+			
+			{
+				"text": "Violence does very little to defeat one's spirit."
+			},
+			
+			{
+				"text": "Here, words hold great power."
+			},
+			
+			{
+				"text": "To subdue your foes, you'll need to ARGUE.",
 				"effect": "start_battle"
-			}
-		],
-		
-		
-		"no_battle": 
-		[
-			{
-				"text": "Boring.",
-			}
-		],
-		
-		
-		
-		"repeat": 
-		[
-			{
-				"text": "So you wanna throw hands?",
-				"choices": 
-				[
-					{
-						"text": "Yes", 
-						"next_timeline": "yes_battle",
-					}, 
-					{
-						"text": "No", 
-						"next_timeline": "no_battle"
-					}
-				]
 			}
 		],
 		
 		"after_battle":
 		[
 			{
-				"text": "Dude, we already threw hands."
-			},
-			{
-				"text": "Wanna go again?",
-				"choices": 
-				[
-					{
-						"text": "Yes", 
-						"next_timeline": "yes_battle",
-					}, 
-					{
-						"text": "No", 
-						"next_timeline": "no_battle"
-					}
-				]
+				"text": "Go on now, lost one. Find your way home."
 			}
 		]
 	}
