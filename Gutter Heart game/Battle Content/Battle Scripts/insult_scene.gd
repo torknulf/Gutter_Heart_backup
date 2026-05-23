@@ -59,7 +59,6 @@ func play_approach_SFX():
 	%SpawnSFX.volume_db = 3
 	%SpawnSFX.stream = select_spawn_SFX()
 	%SpawnSFX.play()
-	print("AH")
 
 	currBeat += 1
 

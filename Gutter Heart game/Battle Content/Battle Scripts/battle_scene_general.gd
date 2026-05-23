@@ -7,7 +7,7 @@ var enemyMaxProg: int = 3
 var enemyCurrProg: int = 0 # if currprog reaches maxprog, battle is won!
 
 
-enum TurnStates {PLAYERTURN, RESPONSE, ENEMYTURN}
+enum TurnStates {PREPROMPT, PLAYERTURN, RESPONSE, ENEMYTURN}
 var turnState:
 	set(state):
 		var prevState = turnState
@@ -22,6 +22,8 @@ enum Appeals {COMPLIMENT, CRITICIZE, RELATE, OPPOSE}
 var enemy_data : Dictionary
 
 
+var wasLastWrong: bool = false
+var doneReadingArray: bool = false
 
 
 func load_enemy(path):
@@ -30,14 +32,18 @@ func load_enemy(path):
 
 
 func _ready() -> void:
-	turnState = TurnStates.PLAYERTURN
+	turnState = TurnStates.PREPROMPT
 	%BeatManager.start_counting_beat()
 	
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
 	
 	load_enemy("res://Battle Content/Combat Dialogue/TutorialGuyCombat.json")
-	DialogueManager.display_text(get_current_prompt())
-	DialogueManager.canAdvance = false
+	enemyMaxProg = enemy_data["combat_states"].size()
+	
+	
+	start_player_turn()
+	#DialogueManager.display_text(get_current_prompt())
+
 	
 	update_player_alternatives()
 	
@@ -52,7 +58,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	
+	#print(turnState)
 	# To continue to enemy turn after pressing away enemy response
 	if Input.is_action_just_pressed("Interact"):
 		if turnState == TurnStates.RESPONSE:
@@ -64,8 +70,8 @@ func _process(delta: float) -> void:
 				
 				DialogueManager._ready()
 			
-			elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
-				turnState = TurnStates.ENEMYTURN
+			#elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
+			#	turnState = TurnStates.ENEMYTURN
 	
 	elif Input.is_action_just_pressed("ToggleMute"):
 		if %MetronomeSFX.volume_db != 0:
@@ -96,22 +102,42 @@ func start_player_turn() -> void:
 	
 	update_player_alternatives()
 	
-	DialogueManager.display_text(get_current_prompt())
-	%TurnTransition.play("transition_to_playerturn")
-	%PlayerContainer.visible = true
+	if %PlayerTurn.visible == false:
+		%TurnTransition.play("transition_to_playerturn")
+	
+	
+	var state = get_current_state() 
+	if "pre_prompt" in state.keys() and turnState == TurnStates.PREPROMPT and !wasLastWrong:
+		read_through_text_array(guarantee_array(state["pre_prompt"]))
+	
+	else:
+		turnState = TurnStates.PLAYERTURN
+		
+		
+
 
 
 ## triggers when turnState has been changed!
 func _on_turn_state_changed(prevState) -> void: 
-	if !prevState or prevState == turnState:
+	print(turnState, prevState)
+	
+	if prevState == null or prevState == turnState:
 		return
+
+
 	
 	match turnState:
-		TurnStates.PLAYERTURN:
+		TurnStates.PREPROMPT:
 			start_player_turn()
+			#%PlayerContainer.visible = false
+			
+		TurnStates.PLAYERTURN:
+			DialogueManager.display_text(get_current_prompt())
+			#%PlayerContainer.visible = true
 
 		TurnStates.RESPONSE:
-			%PlayerContainer.visible = false
+			pass
+			#%PlayerContainer.visible = false
 
 		TurnStates.ENEMYTURN:
 			start_enemy_turn()
@@ -119,7 +145,7 @@ func _on_turn_state_changed(prevState) -> void:
 
 ## triggers after the last round of insults 
 func on_enemy_attack_ended() -> void:
-	turnState = TurnStates.PLAYERTURN
+	turnState = TurnStates.PREPROMPT
 	
 
 
@@ -135,12 +161,31 @@ func select_appeal(appeal):
 	
 	show_response(appeal)
 	
-	turnState = TurnStates.RESPONSE
-
-
 
 
 ## --- TEXT UPDATES & PROGRESS LOGIC ---
+
+func read_through_text_array(array: Array):	
+	
+	print(turnState, " READ ARRAY")
+	
+	for line in array:
+		DialogueManager.display_text(line)
+		#if array.size() <= 1: 
+		#	break
+		await DialogueManager.advancePressed
+	
+	
+	print(turnState, " DONE READIN")
+	
+	# for pre_prompt
+	if turnState == TurnStates.PREPROMPT:
+		turnState = TurnStates.PLAYERTURN
+		
+	# for after an answer
+	elif turnState == TurnStates.RESPONSE:
+		turnState = TurnStates.ENEMYTURN
+	
 
 func show_response(appeal):
 	var state = get_current_state()
@@ -156,7 +201,9 @@ func show_response(appeal):
 
 func on_correct_appeal():
 	var state = get_current_state()
-	DialogueManager.display_text(state["success_response"])
+	wasLastWrong = false
+	
+	read_through_text_array(guarantee_array(state["success_response"]))
 	
 	enemyCurrProg += 1
 	
@@ -167,7 +214,11 @@ func on_correct_appeal():
 
 func on_wrong_appeal(appeal):
 	var state = get_current_state()
-	DialogueManager.display_text(state["wrong_response"][str(appeal)])
+	wasLastWrong = true
+	
+	read_through_text_array(guarantee_array(state["wrong_response"][str(appeal)]))
+
+
 
 
 func on_battle_won():
@@ -220,5 +271,21 @@ func get_current_state() -> Dictionary:
 
 
 func get_current_prompt():
+	#DialogueManager.canAdvance = false
+	
+	print("GET CURRENT PROMPT")
+	
 	var state = get_current_state()
+	if wasLastWrong and "prompt_repeat" in state.keys():
+		return state["prompt_repeat"]
+	
 	return state["prompt"]
+
+
+
+## --- FUNCTIONALITY ---
+
+func guarantee_array(text):
+	if text is Array:
+		return text
+	return [text]

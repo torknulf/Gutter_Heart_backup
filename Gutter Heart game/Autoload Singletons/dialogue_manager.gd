@@ -7,6 +7,7 @@ signal playTextSFX
 signal playChoiceSFX
 signal playNextTextSFX
 
+signal advancePressed
 
 var fullText = ""
 var currIndex = 0 # shows one letter at a time
@@ -83,8 +84,9 @@ func process_text_type(timeline : Dictionary):
 	display_text(timeline["text"])
 
 
+
 ## to show only 1 text screen
-func display_text(text : String):
+func display_text(text):
 	_ready() # JUST TEMPORARY FOR SCENE SWITCH TO WORK
 	
 	
@@ -147,6 +149,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func next_line():
 	playNextTextSFX.emit()
+	
+	if currentNPC == null: #  specifically for combat "pre_prompt"
+		advancePressed.emit()
+		return
 	
 	lineIndex += 1
 

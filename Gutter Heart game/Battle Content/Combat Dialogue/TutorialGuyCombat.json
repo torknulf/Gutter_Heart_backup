@@ -3,22 +3,27 @@
 
 	"combat_states": [
 	{
+		
+	  "pre_prompt": ["You scum.", "Lemme tell you..."],
 	  "prompt": "Ones like you aren't meant to be in this world.",
+	
+	  "prompt_repeat": "I told you to leave this world.",
+	
 	  "correct_appeal": "2",
 
-	  "success_response": "You're trying to go home? That's a good one.",
+	  "success_response": ["You're trying to go home? That's a good one.", "Clown."],
 	  "wrong_response":
 		{
-			"0": "You think flattery will get you anywhere?", 
+			"0": ["You think flattery will get you anywhere?", "You cretin."], 
 			"1": "How dare you...",
 			"2": "-",
 			"3": "You brat. Are you trying to make me angry?",
-		},
+		}
 
-	  "progress_gain": 1
 	},
 	
 		{
+	  "pre_prompt": "You see...",
 	  "prompt": "All the memories here are dying. And the ones who aren't... are bad ones. We will soon follow.",
 	  "correct_appeal": "0",
 
@@ -38,12 +43,12 @@
 			"1": "Does it make a difference?",
 			"2": "...",
 			"3": "Are you stupid?"
-		},
+		}
 
-	  "progress_gain": 1
 	},
 	
 	{
+
 	  "prompt": "Your journey is hopeless. You know that, right?",
 	  "correct_appeal": "2",
 
@@ -63,13 +68,14 @@
 			"1": "It's the best advice you'll get in this world.",
 			"2": "-",
 			"3": "You can never be wrong to assume the worst. Tends to turn out that way."
-		},
+		}
 
-	  "progress_gain": 1
+
 	},
 	{
 	  "prompt": "You're a soulless man, and I'm the fading spirit of a forgotten memory. How would we prevail?",
 	  "correct_appeal": "1",
+
 
 	  "alt_appeals":
 		{
@@ -87,9 +93,7 @@
 			"1": "-",
 			"2": "You're starting to learn.",
 			"3": "You're just being naive."
-		},
-
-	  "progress_gain": 1
-	},
+		}
+	}
   ]
 }

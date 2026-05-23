@@ -1,0 +1,89 @@
+{
+  "name": "Tutorial Guy",
+
+	"timelines": 
+	{
+		"first": 
+		[
+			{
+				"text": "Hey."
+			},
+			
+			{
+				"text": "You look lost."
+			},
+			
+			{
+				"text": "Wanna throw hands?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle"
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
+			}
+		],
+		
+		"yes_battle": 
+		[
+			{
+				"text": "All right then, let's get going!",
+				"effect": "start_battle"
+			}
+		],
+		
+		
+		"no_battle": 
+		[
+			{
+				"text": "Boring.",
+			}
+		],
+		
+		
+		
+		"repeat": 
+		[
+			{
+				"text": "So you wanna throw hands?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle",
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
+			}
+		],
+		
+		"after_battle":
+		[
+			{
+				"text": "Dude, we already threw hands."
+			},
+			{
+				"text": "Wanna go again?",
+				"choices": 
+				[
+					{
+						"text": "Yes", 
+						"next_timeline": "yes_battle",
+					}, 
+					{
+						"text": "No", 
+						"next_timeline": "no_battle"
+					}
+				]
+			}
+		]
+	}
+}

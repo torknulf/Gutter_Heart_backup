@@ -1,0 +1,62 @@
+{
+	"name": "Tutorial Guy",
+
+	"combat_states": [
+	{
+	  "prompt": "Why're you staring at me like that? (Relate)",
+	  "correct_appeal": "2",
+
+	  "success_response": "…You get it?",
+	  "wrong_response":
+		{
+			"0": "Compliment bleh", 
+			"1": "Bleh",
+			"2": "-",
+			"3": "Why are you against me"
+		},
+
+	  "progress_gain": 1
+	},
+	
+	{
+	  "prompt": "Everyone keeps avoiding me. (Cool)",
+	  "correct_appeal": "0",
+
+	  "alt_appeals":
+		{
+			"0": "You're cool", 
+			"1": "That's whack",
+			"2": "Same, man",
+			"3": "Not at all"
+		},
+
+
+	  "success_response": "You really think so?",
+	  "wrong_response": 
+		{
+			"0": "-", 
+			"1": "Bleh",
+			"2": "Nah the heck",
+			"3": "Why are you against me"
+		},
+
+	  "progress_gain": 1
+	},
+
+	{
+	  "prompt": "Maybe I’m the problem. (Oppose)",
+	  "correct_appeal": "3",
+
+	  "success_response": "...Maybe that's true. (Battle won)",
+	  "wrong_response": 
+		{
+			"0": "Compliment bleh", 
+			"1": "Bleh",
+			"2": "Nah the heck",
+			"3": "-"
+		},
+
+	  "progress_gain": 1
+	}
+  ]
+}
