@@ -1,5 +1,7 @@
 extends Node
 
+var inCombat: bool = false
+
 
 var npcStates = {
 	"tutorial_guy": {

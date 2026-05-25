@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="TransitionElement" load_steps=2 format=3 uid="uid://3euyxcbynmb2"]
+
+[ext_resource type="Script" uid="uid://b50a0sf1oli5e" path="res://General Scenes/Transition_Elements/transition_element.gd" id="1_6coay"]
+
+[resource]
+script = ExtResource("1_6coay")
+path1 = "res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn"
+path2 = "res://Battle Content/Battle Scenes/battle_scene_general.tscn"
+metadata/_custom_type_script = "uid://b50a0sf1oli5e"

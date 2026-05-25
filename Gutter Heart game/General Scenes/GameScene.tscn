@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://yse6lfooiu72"]
+
+[ext_resource type="Script" uid="uid://bmooh3fcjnhb1" path="res://General Scenes/game_scene.gd" id="1_mxat3"]
+[ext_resource type="PackedScene" uid="uid://ct5d623ju72ef" path="res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn" id="2_fvkpy"]
+
+[sub_resource type="Animation" id="Animation_fvkpy"]
+resource_name = "fade_in"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportContainer/Viewport/SceneTransitionPlayer/Fade:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3g14p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportContainer/Viewport/SceneTransitionPlayer/Fade:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bd2sb"]
+resource_name = "fade_out"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportContainer/Viewport/SceneTransitionPlayer/Fade:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0r0qh"]
+_data = {
+&"RESET": SubResource("Animation_3g14p"),
+&"fade_in": SubResource("Animation_fvkpy"),
+&"fade_out": SubResource("Animation_bd2sb")
+}
+
+[node name="GameScene" type="Node" groups=["GameScene"]]
+script = ExtResource("1_mxat3")
+
+[node name="ViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Viewport" type="SubViewport" parent="ViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="current_scene" type="Node2D" parent="ViewportContainer/Viewport"]
+
+[node name="Overworld" parent="ViewportContainer/Viewport/current_scene" instance=ExtResource("2_fvkpy")]
+
+[node name="SceneTransitionPlayer" type="AnimationPlayer" parent="ViewportContainer/Viewport"]
+unique_name_in_owner = true
+root_node = NodePath("../../..")
+libraries = {
+&"": SubResource("AnimationLibrary_0r0qh")
+}
+
+[node name="Fade" type="ColorRect" parent="ViewportContainer/Viewport/SceneTransitionPlayer"]
+z_index = 10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1325.0
+offset_top = -1154.0
+offset_right = 1325.0
+offset_bottom = 1154.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="animation_finished" from="ViewportContainer/Viewport/SceneTransitionPlayer" to="." method="_on_scene_transition_player_animation_finished"]

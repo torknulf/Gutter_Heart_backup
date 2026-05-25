@@ -38,12 +38,10 @@ func lock_movement(isLocked):
 		state = States.IDLE
 	
 
-func _process(delta: float) -> void:
-	pass
 
 
 func _physics_process(delta: float) -> void:
-	if state == States.LOCKED:
+	if state == States.LOCKED or SceneManager.is_input_disabled():
 		return
 		
 	#print(state)

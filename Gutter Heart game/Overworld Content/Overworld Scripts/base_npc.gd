@@ -23,8 +23,7 @@ func load_npc(path):
 	
 func perform_interaction():
 	var currentTimeline = choose_timeline()
-	if !currentTimeline: # failsafe in case the key is incorrect
-		return
+
 	
 	DialogueManager.start_dialogue(npc_data, currentTimeline)
 	GameState.npcStates["tutorial_guy"]["talk_count"] += 1
@@ -33,15 +32,17 @@ func perform_interaction():
 
 ## Logic for which dialogue timeline is chosen
 func choose_timeline():
-	
-	if !GameState.npcStates["tutorial_guy"]["fought"]:
-		if GameState.npcStates["tutorial_guy"]["talk_count"] < 1:
+
+	if !GameState.npcStates["tutorial_guy"]["fought"] or "after_battle" not in npc_data["timelines"].keys():
+		if GameState.npcStates["tutorial_guy"]["talk_count"] < 1 or "repeat" not in npc_data["timelines"].keys():
 			
 			return "first"
 			
 		else:
 			return "repeat"
+		
 			
 			
 	else:
 		return "after_battle"
+		

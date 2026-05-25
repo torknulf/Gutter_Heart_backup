@@ -1,13 +1,16 @@
 {
 	"name": "???",
+	"general_observation": "Do I know this guy?",
+
 
 	"combat_states": [
 	{
 		
 	  "pre_prompt": ["You scum.", "Lemme tell you..."],
 	  "prompt": "Ones like you aren't meant to be in this world.",
-	
 	  "prompt_repeat": "I told you to leave this world.",
+
+	  "observation": "Dude looks sad ig.",
 	
 	  "correct_appeal": "2",
 

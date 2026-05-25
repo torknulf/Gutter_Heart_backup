@@ -7,7 +7,7 @@ var enemyMaxProg: int = 3
 var enemyCurrProg: int = 0 # if currprog reaches maxprog, battle is won!
 
 
-enum TurnStates {PREPROMPT, PLAYERTURN, RESPONSE, ENEMYTURN}
+enum TurnStates {PREPROMPT, PLAYERTURN, OBSERVATION, RESPONSE, ENEMYTURN}
 var turnState:
 	set(state):
 		var prevState = turnState
@@ -32,28 +32,30 @@ func load_enemy(path):
 
 
 func _ready() -> void:
-	turnState = TurnStates.PREPROMPT
+	GameState.inCombat = true
+	DialogueManager._ready()
+	DialogueManager.nameLabel.visible = false
 	%BeatManager.start_counting_beat()
-	
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
-	
 	load_enemy("res://Battle Content/Combat Dialogue/TutorialGuyCombat.json")
 	enemyMaxProg = enemy_data["combat_states"].size()
-	
-	
-	start_player_turn()
-	#DialogueManager.display_text(get_current_prompt())
-
-	
-	update_player_alternatives()
-	
-	
-	
-	DialogueManager.nameLabel.visible = false
-
-	
 	%MetronomeSFX.volume_db = -80
 	%MetronomeSFXFirst.volume_db = -80
+
+
+	var gameScene = get_tree().get_first_node_in_group("GameScene")
+	#await gameScene.hasFadedOut
+	
+	turnState = TurnStates.PREPROMPT
+	
+	start_player_turn()
+
+	update_player_alternatives()
+	
+
+
+	
+
 
 
 
@@ -66,13 +68,18 @@ func _process(delta: float) -> void:
 				#DialogueManager.queueOverworld = true
 				GameState.npcStates["tutorial_guy"]["fought"] = true
 				DialogueManager.nameLabel.visible = true
-				get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+				SceneManager.load_scene("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
 				
 				DialogueManager._ready()
 			
 			#elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
 			#	turnState = TurnStates.ENEMYTURN
-	
+		
+		elif turnState == TurnStates.OBSERVATION:
+			if !DialogueManager.isTyping:
+				print("back to playerturn")
+				turnState = TurnStates.PLAYERTURN
+		
 	elif Input.is_action_just_pressed("ToggleMute"):
 		if %MetronomeSFX.volume_db != 0:
 			%MetronomeSFX.volume_db = 0
@@ -132,8 +139,17 @@ func _on_turn_state_changed(prevState) -> void:
 			#%PlayerContainer.visible = false
 			
 		TurnStates.PLAYERTURN:
-			DialogueManager.display_text(get_current_prompt())
-			#%PlayerContainer.visible = true
+			if prevState != TurnStates.OBSERVATION:
+				DialogueManager.display_text(get_current_prompt())
+				
+			%PlayerAlternatives.visible = true
+			%ObservationTextLabel.visible = false
+
+		TurnStates.OBSERVATION:
+			%PlayerAlternatives.visible = false
+			%ObservationTextLabel.visible = true
+			var state = get_current_state()
+			DialogueManager.display_observation_text(state, enemy_data)
 
 		TurnStates.RESPONSE:
 			pass
@@ -165,7 +181,7 @@ func select_appeal(appeal):
 
 ## --- TEXT UPDATES & PROGRESS LOGIC ---
 
-func read_through_text_array(array: Array):	
+func read_through_text_array(array: Array):
 	
 	print(turnState, " READ ARRAY")
 	
@@ -257,6 +273,12 @@ func _on_relate_button_pressed() -> void:
 
 func _on_oppose_button_pressed() -> void:
 	select_appeal(Appeals.OPPOSE)
+
+
+
+func _on_observe_button_pressed() -> void:
+	if turnState == TurnStates.PLAYERTURN and !DialogueManager.isTyping:
+		turnState = TurnStates.OBSERVATION
 
 
 

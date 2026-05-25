@@ -18,7 +18,7 @@ script = ExtResource("1_erkj1")
 
 [node name="OverworldPlayer" parent="." instance=ExtResource("1_ehkdd")]
 z_index = 1
-position = Vector2(-556, 39)
+position = Vector2(82, 240)
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -3

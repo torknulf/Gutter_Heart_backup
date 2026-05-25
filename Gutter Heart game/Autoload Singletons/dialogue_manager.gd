@@ -2,6 +2,7 @@ extends Node
 
 var textLabel: Label
 var nameLabel: RichTextLabel
+var observeLabel: Label
 
 signal playTextSFX
 signal playChoiceSFX
@@ -35,9 +36,7 @@ var canAdvance: bool = true
 func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
 	nameLabel = get_tree().get_first_node_in_group("NameLabel")
-	
-
-
+	observeLabel = get_tree().get_first_node_in_group("ObserveLabel") 
 
 
 
@@ -86,33 +85,37 @@ func process_text_type(timeline : Dictionary):
 
 
 ## to show only 1 text screen
-func display_text(text):
+func display_text(text, label = textLabel):
 	_ready() # JUST TEMPORARY FOR SCENE SWITCH TO WORK
 	
+	print("TEXT: ", text, label)
 	
+	if label == null:
+		print("WOW")
+		return
 
 	fullText = text
-	textLabel.text = fullText
-	textLabel.visible_characters = 0
+	label.text = fullText
+	label.visible_characters = 0
 
 	currIndex = 0
 	isTyping = true
 
-	start_typing()
+	start_typing(label)
 
 
 
-func start_typing():
+func start_typing(label):
 	
 	while currIndex < fullText.length() and isTyping:
 		currIndex += 1
-		textLabel.visible_characters = currIndex
+		label.visible_characters = currIndex
 		
 		play_text_SFX(currIndex)
 		
 		await get_tree().create_timer(0.03).timeout
 	
-	textLabel.visible_characters = fullText.length()
+	label.visible_characters = fullText.length()
 	isTyping = false
 
 
@@ -136,9 +139,12 @@ func skip_text():
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	
-	textLabel = get_tree().get_first_node_in_group("TextLabel")
+	var textBox = get_tree().get_first_node_in_group("TextBox")
 	
-	if textLabel.get_parent().get_parent().get_parent().visible == false:
+	if textBox == null:
+		return
+	
+	elif textBox.visible == false:
 		return # here the textbox is invisible, so no dialogue is there
 	
 	
@@ -150,7 +156,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func next_line():
 	playNextTextSFX.emit()
 	
-	if currentNPC == null: #  specifically for combat "pre_prompt"
+	if GameState.inCombat == true: #  specifically for combat "pre_prompt"
 		advancePressed.emit()
 		return
 	
@@ -189,11 +195,12 @@ func end_dialogue():
 	elif queueBattle:
 		queueBattle = false
 		textLabel.get_parent().get_parent().get_parent().visible = true
-		get_tree().change_scene_to_file("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
-	
+		SceneManager.load_scene("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+
+
 	elif queueOverworld:
 		queueOverworld = false
-		get_tree().change_scene_to_file("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+		SceneManager.load_scene("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
 		
 	
 	inDialogue.emit(false) 
@@ -249,4 +256,19 @@ func update_appeal_text(altAppeals):
 		pass
 		
 		
+
+
+## enemyData is the whole dictionary, enemyState is just the current state
+func display_observation_text(enemyState, enemyData):
+	var observation
+	
+	if "observation" in enemyState.keys():
+		observation = enemyState["observation"]
+	
+	elif "general_observation" in enemyData.keys():
+		observation = enemyData["general_observation"]
+	
+	else: # in case no observation is defined
+		observation = "(No observation)"
 		
+	display_text(observation, observeLabel)
