@@ -1,6 +1,6 @@
 extends Node
 
-var textLabel: Label
+var textLabel
 var nameLabel: RichTextLabel
 var observeLabel: Label
 
@@ -88,10 +88,8 @@ func process_text_type(timeline : Dictionary):
 func display_text(text, label = textLabel):
 	_ready() # JUST TEMPORARY FOR SCENE SWITCH TO WORK
 	
-	print("TEXT: ", text, label)
 	
 	if label == null:
-		print("WOW")
 		return
 
 	fullText = text

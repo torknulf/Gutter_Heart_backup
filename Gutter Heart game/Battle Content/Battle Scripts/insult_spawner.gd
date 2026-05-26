@@ -2,11 +2,11 @@ class_name InsultSpawner extends Node2D
 
 @export var insultRef: PackedScene
 
+@export var usePremadeInsultPatterns: bool = true
+
 var spawnRounds: int = 0
 
 var isSpawning: bool = false
-
-#var spawnDirs = ["UP", "DOWN", "LEFT", "RIGHT"]
 
 var spawnQueue = []
 
@@ -64,15 +64,35 @@ func choose_insult_dir():
 
 func generate_insult_queue():
 	randomize()
-	
 	var insultQueue = []
-	insultQueue.resize(%BeatManager.currSong.beatsPerMeasure)
-	var insultAmount = randi_range(2, %BeatManager.currSong.beatsPerMeasure) # should be length of list
+
+
+	if usePremadeInsultPatterns:
+		var patterns: Array
+		match %BeatManager.currSong.beatsPerMeasure:
+			3: patterns = [[1, 1, 1], [1, 0, 1], [1, 1, 0]]
+			
+			4: patterns = [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 1, 0, 1]]#, [1, 1, 0, 1], [1, 0, 1, 0], [1, 0, 1, 1]]
+			
+			5: pass
+			
+			6: pass
+		
+		var index = randi_range(0, patterns.size()-1)
+		insultQueue = patterns[index]
+		
+		
+		
 	
-	for i in insultAmount:
-		insultQueue[i] = 1
+	else:
+		insultQueue.resize(%BeatManager.currSong.beatsPerMeasure)
+		var insultAmount = randi_range(2, %BeatManager.currSong.beatsPerMeasure) # should be length of list
+		
+		for i in insultAmount:
+			insultQueue[i] = 1
+
+		insultQueue.shuffle()
 	
-	insultQueue.shuffle()
 	
 	return insultQueue
 
@@ -104,7 +124,7 @@ func _on_signal_new_bar(barStart: bool):
 		return
 	#print("BEAT", isSpawning)
 	
-	if !barStart and !isSpawning:
+	if !barStart and !isSpawning or spawnQueue != []:
 		return # to avoid start of attack mid-bar
 	
 	
@@ -117,10 +137,11 @@ func _on_signal_new_bar(barStart: bool):
 		if spawnRounds > 0:
 			isSpawning = true
 			spawnQueue = generate_insult_queue()
-			#print(spawnQueue)
+			spawn_first_in_queue()
 
 		else:
 			isSpawning = false 
+			spawnQueue = []
 			enemyAttackEnded.emit()
 			## END TURN
 	

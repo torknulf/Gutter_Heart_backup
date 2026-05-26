@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://s5eqg017dpqq"]
+
+[ext_resource type="AudioStream" uid="uid://t2fcbj654nrn" path="res://Assets/audio/SFX/UI/TutorialGuyVoice.wav" id="1_hjqyl"]
+[ext_resource type="Script" path="res://General Scenes/text_box.gd" id="1_rgcgb"]
+[ext_resource type="AudioStream" uid="uid://c8pgljd5kc86q" path="res://Assets/audio/SFX/UI/NextText.wav" id="2_rgcgb"]
+[ext_resource type="AudioStream" uid="uid://cxo65l2yxrwem" path="res://Assets/audio/SFX/UI/MenuSelect.wav" id="3_xphr2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rwh3t"]
+border_width_left = 12
+border_width_top = 8
+border_width_right = 12
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="TextBubble" type="Control" groups=["TextBox"]]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_rgcgb")
+
+[node name="TextLabel" type="RichTextLabel" parent="." groups=["TextLabel"]]
+clip_contents = false
+custom_minimum_size = Vector2(500, 50)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 32
+text = "Empty"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="TextLabel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -21.0
+offset_top = 12.0
+offset_right = 21.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TextLabel"]
+modulate = Color(18.892157, 18.892157, 18.892157, 1)
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = -40
+theme_override_constants/margin_top = -20
+theme_override_constants/margin_right = -40
+theme_override_constants/margin_bottom = -20
+
+[node name="PanelContainer" type="PanelContainer" parent="TextLabel/MarginContainer"]
+show_behind_parent = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_rwh3t")
+
+[node name="TextSFX" type="AudioStreamPlayer" parent="." groups=["TextSound"]]
+unique_name_in_owner = true
+stream = ExtResource("1_hjqyl")
+volume_db = 5.5
+bus = &"SFX"
+
+[node name="NextTextSFX" type="AudioStreamPlayer" parent="." groups=["NextText"]]
+unique_name_in_owner = true
+stream = ExtResource("2_rgcgb")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="ChoiceSFX" type="AudioStreamPlayer" parent="." groups=["ChoiceSound"]]
+unique_name_in_owner = true
+stream = ExtResource("3_xphr2")
+volume_db = 12.0
+bus = &"SFX"

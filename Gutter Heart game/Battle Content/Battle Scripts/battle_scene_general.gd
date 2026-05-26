@@ -1,4 +1,4 @@
-class_name BattleScene extends Node
+class_name BattleScene extends RunnableScene
 
 var playerHP: int = 10 ## unused atm
 var playerMaxHP: int = 10
@@ -32,16 +32,23 @@ func load_enemy(path):
 
 
 func _ready() -> void:
+	super._ready()
+	if not is_inside_game():
+		return
+	print("PARENT: ", get_parent())
+	
 	GameState.inCombat = true
 	DialogueManager._ready()
-	DialogueManager.nameLabel.visible = false
+	if DialogueManager.nameLabel != null:
+		DialogueManager.nameLabel.visible = false
 	%BeatManager.start_counting_beat()
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
 	load_enemy("res://Battle Content/Combat Dialogue/TutorialGuyCombat.json")
 	enemyMaxProg = enemy_data["combat_states"].size()
 	%MetronomeSFX.volume_db = -80
 	%MetronomeSFXFirst.volume_db = -80
-
+	%PlayerAlternatives.visible = false
+	%TextBubble.visible = true
 
 	var gameScene = get_tree().get_first_node_in_group("GameScene")
 	#await gameScene.hasFadedOut
@@ -63,19 +70,7 @@ func _process(delta: float) -> void:
 	#print(turnState)
 	# To continue to enemy turn after pressing away enemy response
 	if Input.is_action_just_pressed("Interact"):
-		if turnState == TurnStates.RESPONSE:
-			if enemyCurrProg == enemyMaxProg and !DialogueManager.isTyping:
-				#DialogueManager.queueOverworld = true
-				GameState.npcStates["tutorial_guy"]["fought"] = true
-				DialogueManager.nameLabel.visible = true
-				SceneManager.load_scene("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
-				
-				DialogueManager._ready()
-			
-			#elif enemyCurrProg != enemyMaxProg and !DialogueManager.isTyping:
-			#	turnState = TurnStates.ENEMYTURN
-		
-		elif turnState == TurnStates.OBSERVATION:
+		if turnState == TurnStates.OBSERVATION:
 			if !DialogueManager.isTyping:
 				print("back to playerturn")
 				turnState = TurnStates.PLAYERTURN
@@ -88,8 +83,8 @@ func _process(delta: float) -> void:
 			%MetronomeSFX.volume_db = -80
 			%MetronomeSFXFirst.volume_db = -80
 
-	# PROGRESS BAR
-	%ProgFilling.size.x = 48 * enemyCurrProg
+	# PROGRESS BAR (144 is the width of the container)
+	%ProgFilling.size.x = (144 / enemyMaxProg) * enemyCurrProg 
 	
 
 
@@ -116,8 +111,12 @@ func start_player_turn() -> void:
 	var state = get_current_state() 
 	if "pre_prompt" in state.keys() and turnState == TurnStates.PREPROMPT and !wasLastWrong:
 		read_through_text_array(guarantee_array(state["pre_prompt"]))
+		%PlayerAlternatives.visible = false
+		%ObserveButton.disabled = true
 	
 	else:
+		%PlayerAlternatives.visible = true
+		%ObserveButton.disabled = false
 		turnState = TurnStates.PLAYERTURN
 		
 		
@@ -136,24 +135,29 @@ func _on_turn_state_changed(prevState) -> void:
 	match turnState:
 		TurnStates.PREPROMPT:
 			start_player_turn()
-			#%PlayerContainer.visible = false
+			print("HIDE APPEALS ", prevState)
+				
 			
 		TurnStates.PLAYERTURN:
 			if prevState != TurnStates.OBSERVATION:
 				DialogueManager.display_text(get_current_prompt())
 				
+			print("MAKE APPEALS VISIBLE")
 			%PlayerAlternatives.visible = true
+			%ObserveButton.disabled = false
 			%ObservationTextLabel.visible = false
 
 		TurnStates.OBSERVATION:
 			%PlayerAlternatives.visible = false
+			%ObserveButton.disabled = true
 			%ObservationTextLabel.visible = true
 			var state = get_current_state()
 			DialogueManager.display_observation_text(state, enemy_data)
 
 		TurnStates.RESPONSE:
 			pass
-			#%PlayerContainer.visible = false
+			%PlayerAlternatives.visible = false
+			%ObserveButton.disabled = true
 
 		TurnStates.ENEMYTURN:
 			start_enemy_turn()
@@ -186,14 +190,21 @@ func read_through_text_array(array: Array):
 	print(turnState, " READ ARRAY")
 	
 	for line in array:
+		text_bubble_randpos()
 		DialogueManager.display_text(line)
 		#if array.size() <= 1: 
 		#	break
 		await DialogueManager.advancePressed
+		
 	
 	
-	print(turnState, " DONE READIN")
 	
+	## Win condition check
+	if enemyCurrProg >= enemy_data["combat_states"].size() and turnState == TurnStates.RESPONSE:
+		on_battle_won()
+	
+
+
 	# for pre_prompt
 	if turnState == TurnStates.PREPROMPT:
 		turnState = TurnStates.PLAYERTURN
@@ -223,9 +234,7 @@ func on_correct_appeal():
 	
 	enemyCurrProg += 1
 	
-	## Win condition check
-	if enemyCurrProg >= enemy_data["combat_states"].size():
-		on_battle_won()
+
 
 
 func on_wrong_appeal(appeal):
@@ -238,7 +247,14 @@ func on_wrong_appeal(appeal):
 
 
 func on_battle_won():
-	pass
+	if enemyCurrProg == enemyMaxProg:
+		#DialogueManager.queueOverworld = true
+		GameState.npcStates["tutorial_guy"]["fought"] = true
+		if DialogueManager.nameLabel:
+			DialogueManager.nameLabel.visible = true
+		SceneManager.load_scene("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
+		
+		DialogueManager._ready()
 
 
 
@@ -311,3 +327,23 @@ func guarantee_array(text):
 	if text is Array:
 		return text
 	return [text]
+
+
+## returns randomly selected predetermined position for textbubble
+## SHOULD ALSO FLIP THE TAIL DEPENDING ON SIDE
+func text_bubble_randpos(): 
+	randomize()
+	
+	if %TextBubble == null:
+		return
+	## Add DialogueManager.get_bubble_pos() for JSON key to define pos
+	var positions: Array = [
+		Vector2(1377, 109), Vector2(1450, 269), Vector2(1422, 438), # Right side
+		Vector2(316, 106), Vector2(434, 247), Vector2(366, 360) # Left side
+		]
+	
+	var index = randi_range(0, positions.size()-1)
+	%TextBubble.position = positions[index]
+	
+	
+	

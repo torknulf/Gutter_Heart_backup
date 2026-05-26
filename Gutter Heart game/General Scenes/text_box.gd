@@ -8,11 +8,6 @@ func _ready() -> void:
 	DialogueManager.playNextTextSFX.connect(_on_play_next_text_SFX)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
 ## --- SIGNAL TRIGGERED FUNCTIONS ---
 
 func _on_play_choice_SFX():
