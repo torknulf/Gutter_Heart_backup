@@ -1,21 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://050phl7wkbov"]
+[gd_scene load_steps=9 format=3 uid="uid://050phl7wkbov"]
 
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/icon.svg" id="1_krp3i"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/Misc/icon.svg" id="1_krp3i"]
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
 [ext_resource type="AudioStream" uid="uid://btjte1tviff5a" path="res://Assets/audio/SFX/Combat/InsultSpawnDOWN.wav" id="3_m0yxv"]
 [ext_resource type="AudioStream" uid="uid://b3mo1o3xuysgf" path="res://Assets/audio/SFX/Combat/InsultSpawnLEFT.wav" id="4_ej2se"]
 [ext_resource type="AudioStream" uid="uid://cy63kjmpiyx2f" path="res://Assets/audio/SFX/Combat/InsultSpawnRIGHT.wav" id="5_capee"]
 [ext_resource type="AudioStream" uid="uid://cotmn54juruay" path="res://Assets/audio/SFX/Combat/InsultSpawnUP.wav" id="6_e5scw"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k17x7"]
+light_mode = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
 size = Vector2(100, 100)
 
 [node name="InsultScene" type="Node2D"]
+material = SubResource("CanvasItemMaterial_k17x7")
 script = ExtResource("1_rf25y")
 spawnSFXAudio = Array[AudioStream]([ExtResource("3_m0yxv"), ExtResource("4_ej2se"), ExtResource("5_capee"), ExtResource("6_e5scw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(2.400581, 5.226921e-05, 6.788209e-06, 1)
+use_parent_material = true
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("1_krp3i")
 
@@ -27,6 +32,7 @@ shape = SubResource("RectangleShape2D_krp3i")
 
 [node name="TimingLabel" type="Label" parent="."]
 unique_name_in_owner = true
+use_parent_material = true
 offset_left = -19.0
 offset_top = -12.0
 offset_right = 19.0

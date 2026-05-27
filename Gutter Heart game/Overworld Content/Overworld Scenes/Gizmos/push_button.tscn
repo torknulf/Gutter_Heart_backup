@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bya5h02345u63"]
 
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/icon.svg" id="1_040l6"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/Misc/icon.svg" id="1_040l6"]
 [ext_resource type="Script" uid="uid://3x4c5b5clpux" path="res://Overworld Content/Overworld Scripts/push_button.gd" id="1_irw7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_040l6"]

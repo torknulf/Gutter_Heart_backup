@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://co2mf0cwla6w1"]
 
 [ext_resource type="Script" uid="uid://ce4rkrtjryq0e" path="res://Overworld Content/Overworld Scripts/locked_door.gd" id="1_buosc"]
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/icon.svg" id="2_vnmke"]
+[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/Misc/icon.svg" id="2_vnmke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vnmke"]
 size = Vector2(314.18182, 924)

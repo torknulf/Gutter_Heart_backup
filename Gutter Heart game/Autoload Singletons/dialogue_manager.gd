@@ -10,6 +10,8 @@ signal playNextTextSFX
 
 signal advancePressed
 
+signal doneWriting
+
 var fullText = ""
 var currIndex = 0 # shows one letter at a time
 
@@ -115,6 +117,7 @@ func start_typing(label):
 	
 	label.visible_characters = fullText.length()
 	isTyping = false
+	doneWriting.emit()
 
 
 

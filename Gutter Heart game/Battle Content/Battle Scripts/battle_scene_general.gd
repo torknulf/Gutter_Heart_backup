@@ -96,7 +96,7 @@ func _process(delta: float) -> void:
 func start_enemy_turn() -> void:
 	#print("ENEMY TURN")
 	%InsultSpawner.initialize_attack()
-	%TurnTransition.play("transition_to_enemyturn")
+	%TurnTransition.play("spotlight_transition_to_enemyturn")
 
 
 
@@ -105,8 +105,10 @@ func start_player_turn() -> void:
 	update_player_alternatives()
 	
 	if %PlayerTurn.visible == false:
-		%TurnTransition.play("transition_to_playerturn")
-	
+		%TurnTransition.play("spotlight_transition_to_playerturn")
+		await %TurnTransition.animation_finished
+		%TextBubble.visible = true
+		
 	
 	var state = get_current_state() 
 	if "pre_prompt" in state.keys() and turnState == TurnStates.PREPROMPT and !wasLastWrong:
@@ -115,11 +117,12 @@ func start_player_turn() -> void:
 		%ObserveButton.disabled = true
 	
 	else:
+		turnState = TurnStates.PLAYERTURN
+		print("Start await")
+		await DialogueManager.doneWriting
+		print("Done await")
 		%PlayerAlternatives.visible = true
 		%ObserveButton.disabled = false
-		turnState = TurnStates.PLAYERTURN
-		
-		
 
 
 
@@ -142,6 +145,10 @@ func _on_turn_state_changed(prevState) -> void:
 			if prevState != TurnStates.OBSERVATION:
 				DialogueManager.display_text(get_current_prompt())
 				
+			if %PlayerAlternatives.visible == false:
+				print("Start 2nd await")
+				await DialogueManager.doneWriting
+				
 			print("MAKE APPEALS VISIBLE")
 			%PlayerAlternatives.visible = true
 			%ObserveButton.disabled = false
@@ -161,6 +168,7 @@ func _on_turn_state_changed(prevState) -> void:
 
 		TurnStates.ENEMYTURN:
 			start_enemy_turn()
+			%TextBubble.visible = false
 
 
 ## triggers after the last round of insults 
@@ -188,6 +196,7 @@ func select_appeal(appeal):
 func read_through_text_array(array: Array):
 	
 	print(turnState, " READ ARRAY")
+
 	
 	for line in array:
 		text_bubble_randpos()
@@ -347,3 +356,10 @@ func text_bubble_randpos():
 	
 	
 	
+func play_spotlight_SFX(turnOn: bool = false):
+	if turnOn:
+		%SpotlightSFX.pitch_scale = 0.6
+	else:
+		%SpotlightSFX.pitch_scale = 0.7
+	
+	%SpotlightSFX.play()

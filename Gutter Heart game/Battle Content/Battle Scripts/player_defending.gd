@@ -38,14 +38,18 @@ func _process(delta: float) -> void:
 
 
 func try_hit(hitDir: Vector2):
+	if %EnemyTurn.visible == false:
+		return
+	
 	%Hitzone.visible = true
+	%WrenchSwingSFX.play()
 	%HitzoneVisibilityTimer.start()
 	
 	if hittableInsults[hitDir] != []:
 		#print(hittableInsults[hitDir])
 		remove_hittable_insult(hittableInsults[hitDir][0])
 		hits += 1
-		%PlayerSlashSFX.play()
+		%InsultHitSFX.play()
 	else:
 		pass #print("empty ", hittableInsults[hitDir])
 
