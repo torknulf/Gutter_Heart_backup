@@ -1,0 +1,142 @@
+[gd_scene load_steps=21 format=3 uid="uid://by45rf1cr02ho"]
+
+[ext_resource type="Script" uid="uid://b3yj176k57pn0" path="res://Battle Content/Battle Scripts/player_defending.gd" id="1_dne1t"]
+[ext_resource type="AudioStream" uid="uid://b63lqdxftq3k5" path="res://Assets/audio/SFX/Combat/PerfectHitDOWN.wav" id="2_aegwx"]
+[ext_resource type="Texture2D" uid="uid://b835phyfgc83y" path="res://Assets/visual/Overworld/Characters/Player/Player_Still.png" id="2_jwqf6"]
+[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Assets/audio/SFX/temp/PlayerHurt.wav" id="3_4o7kn"]
+[ext_resource type="AudioStream" uid="uid://bivj3crw8wrkq" path="res://Assets/audio/SFX/Combat/PerfectHitLEFT.wav" id="3_ec8oo"]
+[ext_resource type="AudioStream" uid="uid://ci7htjnqa73q7" path="res://Assets/audio/SFX/Combat/WrenchSwingSFX.wav" id="4_2cgov"]
+[ext_resource type="AudioStream" uid="uid://63txsjsujmpt" path="res://Assets/audio/SFX/Combat/PerfectHitRIGHT.wav" id="4_db0i8"]
+[ext_resource type="AudioStream" uid="uid://bqpx4l2opr05b" path="res://Assets/audio/SFX/Combat/PerfectHitUP.wav" id="5_d3vte"]
+[ext_resource type="AudioStream" uid="uid://bwx2ge1y5h3pn" path="res://Assets/audio/SFX/Combat/OkHitDOWN.wav" id="6_3ngq6"]
+[ext_resource type="AudioStream" uid="uid://dc6i1g4nscy27" path="res://Assets/audio/SFX/Combat/OkHitLEFT.wav" id="7_ewcf3"]
+[ext_resource type="AudioStream" uid="uid://dxl1rybm5sn8p" path="res://Assets/audio/SFX/Combat/OkHitRIGHT.wav" id="8_1npyv"]
+[ext_resource type="AudioStream" uid="uid://bl4qlrelqx7gn" path="res://Assets/audio/SFX/Combat/OkHitUP.wav" id="9_hvire"]
+[ext_resource type="AudioStream" uid="uid://c3n1ojn37vfci" path="res://Assets/audio/SFX/temp/TempHealSFX.mp3" id="13_ec8oo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_20hbv"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i3v7s"]
+light_mode = 1
+
+[sub_resource type="Animation" id="Animation_nq208"]
+resource_name = "Wrench_Swing"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_20hbv"]
+_data = {
+&"Wrench_Swing": SubResource("Animation_nq208")
+}
+
+[sub_resource type="Animation" id="Animation_i3v7s"]
+resource_name = "Player_Hurt"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.25, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(0.4817897, 0.4817894, 0.48178947, 1), Color(1, 1, 1, 0), Color(0.48235294, 0.48235294, 0.48235294, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bsghg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p0ot6"]
+_data = {
+&"Player_Hurt": SubResource("Animation_i3v7s"),
+&"RESET": SubResource("Animation_bsghg")
+}
+
+[node name="PlayerDefending" type="Node2D"]
+script = ExtResource("1_dne1t")
+perfectSFXAudio = Array[AudioStream]([ExtResource("2_aegwx"), ExtResource("3_ec8oo"), ExtResource("4_db0i8"), ExtResource("5_d3vte")])
+okSFXAudio = Array[AudioStream]([ExtResource("6_3ngq6"), ExtResource("7_ewcf3"), ExtResource("8_1npyv"), ExtResource("9_hvire")])
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_20hbv")
+position = Vector2(6, -2.9999998)
+scale = Vector2(0.6655405, 0.1701958)
+texture = ExtResource("2_jwqf6")
+hframes = 3
+
+[node name="ResolveLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 635.0
+offset_top = 434.0
+offset_right = 813.0
+offset_bottom = 501.0
+theme_override_font_sizes/font_size = 48
+text = "Resolve"
+
+[node name="HitzonePivot" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Hitzone" type="ColorRect" parent="HitzonePivot"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("CanvasItemMaterial_i3v7s")
+offset_left = 29.0
+offset_top = -48.0
+offset_right = 61.0
+offset_bottom = 48.0
+color = Color(0, 1, 0, 0.69411767)
+
+[node name="HitzoneVisibilityTimer" type="Timer" parent="HitzonePivot"]
+unique_name_in_owner = true
+wait_time = 0.1
+one_shot = true
+
+[node name="PlayerHurtSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_4o7kn")
+bus = &"SFX"
+
+[node name="WrenchSwingSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_2cgov")
+volume_db = 20.0
+bus = &"SFX"
+
+[node name="InsultHitSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+volume_db = 15.0
+bus = &"SFX"
+
+[node name="HealSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("13_ec8oo")
+volume_db = 5.0
+bus = &"SFX"
+
+[node name="PlayerAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_20hbv")
+}
+
+[node name="HurtAnimation" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_p0ot6")
+}
+
+[connection signal="timeout" from="HitzonePivot/HitzoneVisibilityTimer" to="." method="_on_hitzone_visibility_timer_timeout"]
+[connection signal="animation_finished" from="HurtAnimation" to="." method="_on_hurt_animation_animation_finished"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3n3bv26acbyt"]
 
 [ext_resource type="AudioStream" uid="uid://t2fcbj654nrn" path="res://Assets/audio/SFX/UI/TutorialGuyVoice.wav" id="1_gjpo7"]
-[ext_resource type="Script" path="res://General Scenes/text_box.gd" id="1_kac63"]
+[ext_resource type="Script" uid="uid://b62xo0v2vka0i" path="res://General Scenes/text_box.gd" id="1_kac63"]
 [ext_resource type="AudioStream" uid="uid://c8pgljd5kc86q" path="res://Assets/audio/SFX/UI/NextText.wav" id="2_1abev"]
 [ext_resource type="AudioStream" uid="uid://cxo65l2yxrwem" path="res://Assets/audio/SFX/UI/MenuSelect.wav" id="4_pskn1"]
 

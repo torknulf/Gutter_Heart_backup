@@ -4,7 +4,7 @@ class_name OverworldPLayer extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-enum States {IDLE, WALKING, FALLING, LOCKED}
+enum States {IDLE, WALKING, FALLING, CLIMBING, LOCKED}
 var state:
 	set(newState):
 		var prevState = state
@@ -16,8 +16,15 @@ var facingDir := 0.0
 var interactionList = []
 var canAct = [States.IDLE, States.WALKING]
 
+var canClimb: bool = false
+
+
+
 func _on_state_changed(prevState):
-	pass
+	if state != prevState:
+		print("State: ",state)
+	
+	
 
 
 func _ready() -> void:
@@ -48,12 +55,25 @@ func _physics_process(delta: float) -> void:
 
 
 	var direction := Input.get_axis("input_left", "input_right")
+	var verDirection := Input.get_axis("input_up", "input_down")
 
-	if direction:
+	if direction and state != States.CLIMBING:
 		state = States.WALKING
 		velocity.x = direction * SPEED
 		facingDir = velocity.x
+	
+	elif state == States.CLIMBING:
+		velocity.x = 0
 		
+		if verDirection:
+			velocity.y = verDirection * SPEED
+			facingDir = velocity.x
+		else:
+			velocity = Vector2.ZERO
+		
+		if is_on_floor():
+			state = States.IDLE
+	
 	else:
 		state = States.IDLE
 		velocity.x = move_toward(velocity.x, 0, SPEED)
@@ -65,8 +85,17 @@ func _physics_process(delta: float) -> void:
 
 
 	if Input.is_action_just_pressed("Interact") and is_on_floor() and state in canAct:
-		
 		try_interact()
+
+
+	if state in canAct and canClimb and is_on_floor() and (Input.is_action_just_pressed("input_up") or Input.is_action_just_pressed("input_down")):
+		position.y -= 10
+		state = States.CLIMBING
+		set_collision_mask_value(4, false)
+
+
+
+
 
 
 
@@ -89,9 +118,14 @@ func face_forward():
 	
 
 func apply_gravity(delta):
+	var gravity
+	if state == States.CLIMBING:
+		gravity = Vector2.ZERO
+	else:
+		gravity = get_gravity()
 	
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity += gravity * delta
 
 
 
@@ -120,3 +154,18 @@ func _on_interaction_area_2d_area_exited(area: Area2D) -> void:
 	var interactable = area.get_parent().get_parent()
 
 	interactionList.erase(interactable)
+
+
+
+
+func enter_climb_area():
+	canClimb = true
+	
+
+func exit_climb_area():
+	set_collision_mask_value(4, true)
+	
+	canClimb = false
+	velocity.y = 0
+	state = States.IDLE
+	

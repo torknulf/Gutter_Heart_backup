@@ -1,83 +1,102 @@
-[gd_scene load_steps=10 format=3 uid="uid://ct5d623ju72ef"]
+[gd_scene load_steps=14 format=3 uid="uid://ct5d623ju72ef"]
 
 [ext_resource type="PackedScene" uid="uid://uollahfe7a55" path="res://Overworld Content/Overworld Scenes/overworld_player.tscn" id="1_ehkdd"]
 [ext_resource type="Script" uid="uid://du7ps0g4lnujc" path="res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.gd" id="1_erkj1"]
 [ext_resource type="PackedScene" uid="uid://jiu20sth8pxw" path="res://Overworld Content/Overworld Scenes/overworld_tutorial_guy.tscn" id="2_ofqiw"]
-[ext_resource type="PackedScene" uid="uid://b3n3bv26acbyt" path="res://General Scenes/text_box.tscn" id="3_4qj6f"]
+[ext_resource type="Texture2D" uid="uid://bdveqm5auap1g" path="res://Assets/visual/Overworld/Maps/Map01.png" id="3_5o6vr"]
 [ext_resource type="AudioStream" uid="uid://cspncniotqcnf" path="res://Assets/audio/Music/Weird cave.ogg" id="3_ofqiw"]
+[ext_resource type="PackedScene" uid="uid://df46ius7bra8x" path="res://Overworld Content/Overworld Scenes/overworld_camera_2d.tscn" id="4_erkj1"]
 [ext_resource type="PackedScene" uid="uid://bya5h02345u63" path="res://Overworld Content/Overworld Scenes/Gizmos/push_button.tscn" id="5_nrw4j"]
 [ext_resource type="PackedScene" uid="uid://co2mf0cwla6w1" path="res://Overworld Content/Overworld Scenes/Gizmos/locked_door.tscn" id="6_6oq61"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6xxg4"]
+[ext_resource type="PackedScene" uid="uid://be24d3p6pyhrn" path="res://Overworld Content/Overworld Scenes/Gizmos/climb_area.tscn" id="6_vk8pa"]
+[ext_resource type="PackedScene" uid="uid://cj75wxo223y1x" path="res://Overworld Content/Overworld Scenes/overworld_gnome_rat.tscn" id="9_rafos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t6xu8"]
-size = Vector2(832, 40)
+size = Vector2(1383, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rafos"]
+size = Vector2(1775, 480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk8pa"]
+size = Vector2(1633.5, 40)
 
 [node name="Overworld" type="Node2D"]
 script = ExtResource("1_erkj1")
 
 [node name="OverworldPlayer" parent="." instance=ExtResource("1_ehkdd")]
 z_index = 1
-position = Vector2(82, 240)
+position = Vector2(20, 222)
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -3
-offset_left = -983.0
-offset_top = -571.0
-offset_right = 983.0
-offset_bottom = 571.0
+offset_left = -6596.0
+offset_top = -1843.0
+offset_right = 3782.0
+offset_bottom = 3832.0
 mouse_filter = 2
-texture = SubResource("NoiseTexture2D_6xxg4")
+texture = ExtResource("3_5o6vr")
 
 [node name="OverworldTutorialGuy" parent="." instance=ExtResource("2_ofqiw")]
-position = Vector2(458, 268)
+position = Vector2(640, 268)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" parent="." instance=ExtResource("4_erkj1")]
 
-[node name="PlayerUI" type="Control" parent="Camera2D"]
-z_index = 3
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -903.0
-offset_top = -496.0
-offset_right = 903.0
-offset_bottom = 496.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-mouse_filter = 2
+[node name="Objects" type="Node2D" parent="."]
+position = Vector2(640, 268)
 
-[node name="TextBox" parent="Camera2D/PlayerUI" instance=ExtResource("3_4qj6f")]
-layout_mode = 1
+[node name="ClimbArea" parent="Objects" instance=ExtResource("6_vk8pa")]
+position = Vector2(1988, -783)
+collision_mask = 1
 
-[node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(-233, 267)
+[node name="CollisionShape2D" parent="Objects/ClimbArea" index="0"]
+position = Vector2(-12, 160.25)
 
-[node name="ColorRect" type="ColorRect" parent="Ground"]
+[node name="Ground" type="StaticBody2D" parent="Objects"]
+position = Vector2(-873, -1)
+
+[node name="ColorRect" type="ColorRect" parent="Objects/Ground"]
+visible = false
 offset_right = 832.0
 offset_bottom = 40.0
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
-position = Vector2(416, 20)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Ground"]
+position = Vector2(510, 20)
 shape = SubResource("RectangleShape2D_t6xu8")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
-[node name="Ground2" type="StaticBody2D" parent="."]
-position = Vector2(-974, 213)
+[node name="Ground2" type="StaticBody2D" parent="Objects"]
+position = Vector2(1083, -128)
 
-[node name="ColorRect" type="ColorRect" parent="Ground2"]
+[node name="ColorRect" type="ColorRect" parent="Objects/Ground2"]
+visible = false
 offset_right = 832.0
 offset_bottom = 40.0
 mouse_filter = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground2"]
-position = Vector2(416, 20)
-shape = SubResource("RectangleShape2D_t6xu8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/Ground2"]
+position = Vector2(165, 191)
+rotation = -0.22437043
+scale = Vector2(1.0939159, 1.0961136)
+shape = SubResource("RectangleShape2D_rafos")
+debug_color = Color(0, 0.6, 0.69803923, 1)
+
+[node name="ClimbGround" type="StaticBody2D" parent="Objects"]
+position = Vector2(639, -965)
+collision_layer = 8
+collision_mask = 0
+
+[node name="ColorRect" type="ColorRect" parent="Objects/ClimbGround"]
+visible = false
+offset_right = 832.0
+offset_bottom = 40.0
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Objects/ClimbGround"]
+position = Vector2(635.25, 20)
+shape = SubResource("RectangleShape2D_vk8pa")
 debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="BGM" type="AudioStreamPlayer" parent="."]
@@ -90,4 +109,12 @@ position = Vector2(-318, -97)
 connectedLock = NodePath("../LockedDoor")
 
 [node name="LockedDoor" parent="." instance=ExtResource("6_6oq61")]
-position = Vector2(-861, 213)
+position = Vector2(-441, 310)
+
+[node name="OverworldGnomeRat" parent="." instance=ExtResource("9_rafos")]
+position = Vector2(1648, -526)
+
+[connection signal="body_entered" from="Objects/ClimbArea" to="Objects/ClimbArea" method="_on_body_entered"]
+[connection signal="body_exited" from="Objects/ClimbArea" to="Objects/ClimbArea" method="_on_body_exited"]
+
+[editable path="Objects/ClimbArea"]

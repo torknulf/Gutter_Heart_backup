@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://be24d3p6pyhrn"]
+
+[ext_resource type="Script" uid="uid://7t00wnj16auu" path="res://Overworld Content/Overworld Scenes/Gizmos/climb_area.gd" id="1_ek78d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5o6vr"]
+size = Vector2(226, 862)
+
+[node name="ClimbArea" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_ek78d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12, -79)
+shape = SubResource("RectangleShape2D_5o6vr")

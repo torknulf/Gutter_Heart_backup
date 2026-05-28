@@ -1,18 +1,27 @@
 class_name PlayerDefending extends Node2D
 
+@export var perfectSFXAudio: Array[AudioStream]
+@export var okSFXAudio: Array[AudioStream]
 
 var hittableInsults = {Vector2.RIGHT: [], Vector2.LEFT: [], Vector2.UP: [], Vector2.DOWN: []}
 
-var hits: int = 0
-var hurts: int = 0
+# ok hits fill 5, perfect hits fill 15, damage takes 50 off
+var resolve: int = 0
+var maxResolve: int = 100
+
+var maxHP: int = 5
+var hp: int = 5
+
+signal updateHP
+
+var isInvincible: bool = false
 
 func _ready() -> void:
-	pass # Replace with function body.
+	hp = maxHP
 
 
-func _process(delta: float) -> void:
-	%HitsLabel.text = "Hits: " + str(hits)
-	%HurtsLabel.text = "Hurts: " + str(hurts)
+func _physics_process(delta: float) -> void:
+	%ResolveLabel.text = "Resolve: " + str(resolve) + "/100"
 	
 	
 	
@@ -46,19 +55,23 @@ func try_hit(hitDir: Vector2):
 	%HitzoneVisibilityTimer.start()
 	
 	if hittableInsults[hitDir] != []:
-		#print(hittableInsults[hitDir])
-		remove_hittable_insult(hittableInsults[hitDir][0])
-		hits += 1
+		var insult = hittableInsults[hitDir][0]
+
+		update_resolve(insult.perfTiming)
+		remove_hittable_insult(insult)
+		%InsultHitSFX.stream = select_hit_SFX(insult)
 		%InsultHitSFX.play()
-	else:
-		pass #print("empty ", hittableInsults[hitDir])
-
-
-
 
 
 func take_damage(insult: Insult):
-	hurts += 1
+	var lostResolve = 50
+	if resolve - lostResolve <= 0:
+		resolve = 0
+	else:
+		resolve -= lostResolve
+	
+	lose_hp()
+	
 	%PlayerHurtSFX.play()
 	remove_hittable_insult(insult)
 
@@ -76,3 +89,75 @@ func remove_hittable_insult(insult: Insult):
 
 func _on_hitzone_visibility_timer_timeout() -> void:
 	%Hitzone.visible = false
+
+
+func update_resolve(isHitPerfect):
+	var amount
+	if isHitPerfect:
+		amount = 15
+	else:
+		amount = 5
+	
+	if resolve + amount >= maxResolve:
+		if hp == maxHP:
+			resolve = maxResolve
+			return
+		resolve = 0
+		gain_hp()
+		return
+	
+	resolve += amount
+
+
+
+func lose_hp(amount: int = 1):
+	if isInvincible:
+		return
+	
+	if hp - amount <= 0:
+		hp = 0
+	else:
+		hp -= 1
+	
+	updateHP.emit(hp)
+	isInvincible = true
+	%HurtAnimation.play("Player_Hurt")
+
+
+func gain_hp(amount: int = 1):
+	if hp + amount >= maxHP:
+		hp = maxHP
+	else:
+		hp += 1
+	%HealSFX.play()
+	updateHP.emit(hp)
+
+
+
+
+
+func _on_hurt_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Player_Hurt":
+		isInvincible = false
+
+
+
+func select_hit_SFX(insult: Insult):
+	var sfxIndex: int = 0
+	
+	match insult.approachDir:
+		Vector2.DOWN: sfxIndex = 0
+		
+		Vector2.LEFT: sfxIndex = 1
+		
+		Vector2.RIGHT: sfxIndex = 2
+		
+		Vector2.UP: sfxIndex = 3
+	
+	if insult.perfTiming:
+		%InsultHitSFX.volume_db = 19
+		return perfectSFXAudio[sfxIndex]
+	%InsultHitSFX.volume_db = 10
+	return okSFXAudio[sfxIndex]
+	
+	

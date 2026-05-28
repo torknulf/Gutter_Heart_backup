@@ -19,6 +19,8 @@ var playerDefendingRef : PlayerDefending
 
 var isAddedToPlayer = false
 
+var perfTiming: bool = false
+
 
 func _ready() -> void:
 	
@@ -31,7 +33,7 @@ func _ready() -> void:
 	play_approach_SFX()
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var currentTime = beatManagerRef.get_song_time()
 	
 	
@@ -46,6 +48,12 @@ func _process(delta: float) -> void:
 	if progress >= 1.1:
 		playerDefendingRef.take_damage(self)
 
+#perfect timing logic
+	elif progress >= 1.05:
+		perfTiming = false
+	elif progress >= 0.95:
+		perfTiming = true
+
 	elif progress >= 0.9 and !isAddedToPlayer:
 		playerDefendingRef.add_hittable_insult(self) ## HERE CAN BE DESTROYED by player
 		isAddedToPlayer = true 
@@ -56,7 +64,7 @@ func play_approach_SFX():
 	if currBeat >= beatAmount:
 		return
 	
-	%SpawnSFX.volume_db = 3
+	%SpawnSFX.volume_db = 0
 	%SpawnSFX.stream = select_spawn_SFX()
 	%SpawnSFX.play()
 

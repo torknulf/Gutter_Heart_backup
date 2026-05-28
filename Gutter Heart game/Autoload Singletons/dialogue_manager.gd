@@ -137,8 +137,7 @@ func skip_text():
 		isTyping = false
 
 
-
-func _unhandled_key_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	
 	var textBox = get_tree().get_first_node_in_group("TextBox")
 	
@@ -155,12 +154,13 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 
 func next_line():
-	playNextTextSFX.emit()
-	
-	if GameState.inCombat == true: #  specifically for combat "pre_prompt"
+
+	if GameState.inCombat == true: #  specifically for combat 
 		advancePressed.emit()
 		return
-	
+		
+	#print("THIS SHOULD NOT HAPPEN IN COMBAT AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+	playNextTextSFX.emit() # this is out of combat
 	lineIndex += 1
 
 	if lineIndex >= currentNPC["timelines"][currTimelineName].size():
@@ -172,6 +172,8 @@ func next_line():
 			end_dialogue()
 
 	else:
+		
+		print("NEEEEEEEEEEEEEXT ", lineIndex)
 		process_text_type(currentNPC["timelines"][currTimelineName][lineIndex])
 
 

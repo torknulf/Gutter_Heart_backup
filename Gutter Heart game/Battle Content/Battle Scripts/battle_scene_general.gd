@@ -59,6 +59,7 @@ func _ready() -> void:
 
 	update_player_alternatives()
 	
+	%PlayerDefending.updateHP.connect(update_player_hp)
 
 
 	
@@ -144,7 +145,10 @@ func _on_turn_state_changed(prevState) -> void:
 		TurnStates.PLAYERTURN:
 			if prevState != TurnStates.OBSERVATION:
 				DialogueManager.display_text(get_current_prompt())
-				
+			
+			else:
+				%PlayerAlternatives.visible = true
+			
 			if %PlayerAlternatives.visible == false:
 				print("Start 2nd await")
 				await DialogueManager.doneWriting
@@ -204,6 +208,7 @@ func read_through_text_array(array: Array):
 		#if array.size() <= 1: 
 		#	break
 		await DialogueManager.advancePressed
+		DialogueManager.playNextTextSFX.emit()
 		
 	
 	
@@ -363,3 +368,8 @@ func play_spotlight_SFX(turnOn: bool = false):
 		%SpotlightSFX.pitch_scale = 0.7
 	
 	%SpotlightSFX.play()
+
+
+
+func update_player_hp(newHP):
+	%HPLabel.text = "HP = " + str(newHP) + "/5"

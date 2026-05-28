@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj75wxo223y1x"]
+
+[ext_resource type="Script" uid="uid://x4xednda8q8u" path="res://Overworld Content/Overworld Scripts/base_npc.gd" id="1_qfjbf"]
+[ext_resource type="Texture2D" uid="uid://c2wg6on3kjr42" path="res://Assets/visual/Overworld/Characters/Gnome_Rat/GnomeRat_1.png" id="2_qfjbf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjbf"]
+size = Vector2(737, 629)
+
+[node name="OverworldGnomeRat" type="Node2D"]
+script = ExtResource("1_qfjbf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -323)
+texture = ExtResource("2_qfjbf")
+
+[node name="InteractionArea2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/InteractionArea2D"]
+position = Vector2(-7.5, 5.5)
+shape = SubResource("RectangleShape2D_qfjbf")
