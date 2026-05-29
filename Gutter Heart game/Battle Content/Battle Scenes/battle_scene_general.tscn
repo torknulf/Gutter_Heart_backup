@@ -1,21 +1,58 @@
-[gd_scene load_steps=37 format=4 uid="uid://bb8dlj3nj2gqf"]
+[gd_scene load_steps=57 format=4 uid="uid://bb8dlj3nj2gqf"]
 
 [ext_resource type="Script" uid="uid://c4k00kql5vsox" path="res://Battle Content/Battle Scripts/battle_scene_general.gd" id="1_3nfe8"]
 [ext_resource type="Script" uid="uid://bq28p3v3vsvnr" path="res://Battle Content/Battle Scripts/beat_manager.gd" id="2_6koaw"]
+[ext_resource type="Texture2D" uid="uid://ck7mpt6tw2oas" path="res://Assets/visual/Combat/Combat_UI/Resolve_Box.png" id="2_i3v7s"]
 [ext_resource type="Texture2D" uid="uid://igjjgkcdw8cb" path="res://Assets/visual/Lighting/HalfCircleSpotlight.png" id="2_jfwgj"]
 [ext_resource type="AudioStream" uid="uid://dcl2f3ktp06mp" path="res://Assets/audio/SFX/temp/SpotlightSFX.mp3" id="2_nq208"]
 [ext_resource type="Script" uid="uid://bftalcvetkoqu" path="res://Battle Content/Battle Scripts/insult_spawner.gd" id="3_6koaw"]
 [ext_resource type="Texture2D" uid="uid://qfhfvk4t7mdp" path="res://Assets/visual/Lighting/TriangleSpotlight.png" id="3_oqjw7"]
 [ext_resource type="Resource" uid="uid://c5xlt314uigta" path="res://Battle Content/SongResources/new_tutorial_bgm.tres" id="3_tmt65"]
 [ext_resource type="PackedScene" uid="uid://050phl7wkbov" path="res://Battle Content/Battle Scenes/insult_scene.tscn" id="4_6koaw"]
-[ext_resource type="AudioStream" uid="uid://588f8ecmgsx8" path="res://Assets/audio/Music/funk125bpm(full).ogg" id="4_ej53o"]
 [ext_resource type="Texture2D" uid="uid://c5kx2eppp5ayp" path="res://Assets/visual/Lighting/PerfectCircleSpotlight.png" id="5_oqjw7"]
+[ext_resource type="Texture2D" uid="uid://drr7ow2va6isw" path="res://Assets/visual/Combat/Stage/WoodPlatform.png" id="7_p88ah"]
 [ext_resource type="PackedScene" uid="uid://by45rf1cr02ho" path="res://Battle Content/Battle Scenes/player_defending.tscn" id="7_tmt65"]
 [ext_resource type="Texture2D" uid="uid://dak2odni1okj5" path="res://Assets/visual/Overworld/Characters/Tutorial_guy/TutorialGuy.png" id="12_lfgun"]
 [ext_resource type="PackedScene" uid="uid://s5eqg017dpqq" path="res://Battle Content/Battle Scenes/text_bubble.tscn" id="12_p88ah"]
+[ext_resource type="Texture2D" uid="uid://cat3qt6abbk1r" path="res://Assets/visual/Combat/Combat_UI/Heart.png" id="13_20hbv"]
+[ext_resource type="Texture2D" uid="uid://c14gftakvyiai" path="res://Assets/visual/Combat/Combat_UI/Big_Box.png" id="15_nq208"]
+[ext_resource type="Texture2D" uid="uid://coe4btk3hjyh3" path="res://Assets/visual/Combat/Combat_UI/Small_Box.png" id="16_20hbv"]
+[ext_resource type="Theme" uid="uid://cj0d0yovpm4at" path="res://Battle Content/Battle Scenes/AppealBoxTheme.tres" id="17_i3v7s"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bsghg"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tckok"]
+atlas = ExtResource("2_i3v7s")
+region = Rect2(0, 0, 355, 138)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4avl5"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_i3v7s"]
+colors = PackedColorArray(0.20511743, 0.20511743, 0.20511743, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uvnjf"]
+noise_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_60bpw"]
+width = 312
+height = 49
+noise = SubResource("FastNoiseLite_uvnjf")
+color_ramp = SubResource("Gradient_i3v7s")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_20hbv"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i3v7s"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p0ot6"]
+atlas = ExtResource("13_20hbv")
+region = Rect2(0, 0, 66, 60)
 
 [sub_resource type="Gradient" id="Gradient_ej53o"]
-colors = PackedColorArray(0, 0, 0, 1, 0, 0.33398688, 0.2659766, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1.0348111e-06, 0.35437873, 0.2828033, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y2ob7"]
 noise_type = 3
@@ -145,6 +182,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerStats/PlayerResolve:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1385, 517)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerStats/PlayerHPContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(1409, 456)]
+}
 
 [sub_resource type="Animation" id="Animation_oqjw7"]
 resource_name = "spotlight_transition_to_enemyturn"
@@ -202,6 +263,30 @@ tracks/3/keys = {
 "method": &"play_spotlight_SFX"
 }]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%PlayerResolve:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(1385, 517), Vector2(1005, 910)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%PlayerHPContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(1409, 456), Vector2(508, 923)]
+}
 
 [sub_resource type="Animation" id="Animation_jfwgj"]
 resource_name = "spotlight_transition_to_playerturn"
@@ -258,6 +343,30 @@ tracks/3/keys = {
 "args": [true],
 "method": &"play_spotlight_SFX"
 }]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerStats/PlayerResolve:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(1005, 910), Vector2(1385, 517)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerStats/PlayerHPContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2(508, 923), Vector2(1409, 456)]
 }
 
 [sub_resource type="Animation" id="Animation_tmt65"]
@@ -402,21 +511,263 @@ light_mode = 1
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_tmt65"]
 light_mode = 1
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bsghg"]
+atlas = ExtResource("15_nq208")
+region = Rect2(0, 0, 1920, 425)
+
+[sub_resource type="Animation" id="Animation_p0ot6"]
+resource_name = "Idle"
+length = 0.75
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 425), Rect2(0, 425, 1920, 425), Rect2(0, 850, 1920, 425)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PlayerAlternatives/ComplimentTextureRect:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 913, 169), Rect2(0, 169, 913, 169), Rect2(0, 338, 913, 169)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../Visuals/PlayerStats/PlayerHPContainer/PlayerHP:texture:region")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 66, 60), Rect2(66, 0, 66, 60), Rect2(132, 0, 66, 60)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%PlayerTurn/../Visuals/PlayerStats/PlayerResolve:texture:region")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 355, 138), Rect2(0, 138, 355, 138), Rect2(0, 276, 355, 138)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../../../../Visuals/PlayerStats/PlayerResolve/ResolveBar:texture:noise:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0), Vector3(500.2, -330.1, 0), Vector3(20, 291.26, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tckok"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 1920, 425)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%PlayerAlternatives/ComplimentTextureRect:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 913, 169)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../../../../Visuals/PlayerStats/PlayerHPContainer/PlayerHP:texture:region")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 66, 60)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%PlayerTurn/../Visuals/PlayerStats/PlayerResolve:texture:region")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 355, 138)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../../../../Visuals/PlayerStats/PlayerResolve/ResolveBar:texture:noise:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4avl5"]
+_data = {
+&"Idle": SubResource("Animation_p0ot6"),
+&"RESET": SubResource("Animation_tckok")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_uvnjf"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60bpw"]
+atlas = ExtResource("16_20hbv")
+region = Rect2(0, 0, 913, 169)
+
 [node name="BattleScene" type="Node2D"]
 script = ExtResource("1_3nfe8")
+currEnemy = "TutorialGuy"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Visuals" type="Node2D" parent="."]
 
-[node name="HPLabel" type="Label" parent="Visuals"]
+[node name="PlayerStats" type="Control" parent="Visuals"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -881.0
+offset_top = -486.0
+offset_right = -841.0
+offset_bottom = -446.0
+mouse_filter = 2
+
+[node name="PlayerResolve" type="TextureRect" parent="Visuals/PlayerStats"]
 unique_name_in_owner = true
-offset_left = 635.0
-offset_top = 369.0
-offset_right = 827.0
-offset_bottom = 470.0
+material = SubResource("CanvasItemMaterial_bsghg")
+layout_mode = 0
+offset_left = 1385.0
+offset_top = 517.0
+offset_right = 1740.0
+offset_bottom = 655.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_tckok")
+
+[node name="ResolveBar" type="TextureRect" parent="Visuals/PlayerStats/PlayerResolve"]
+unique_name_in_owner = true
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_4avl5")
+layout_mode = 0
+offset_left = 24.0
+offset_top = 17.0
+offset_right = 336.0
+offset_bottom = 66.0
+mouse_filter = 2
+texture = SubResource("NoiseTexture2D_60bpw")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="HPLabel" type="Label" parent="Visuals/PlayerStats"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("CanvasItemMaterial_20hbv")
+layout_mode = 0
+offset_left = 1213.0
+offset_top = 563.0
+offset_right = 1405.0
+offset_bottom = 664.0
 theme_override_font_sizes/font_size = 48
 text = "HP = 5/5"
+
+[node name="PlayerHPContainer" type="Control" parent="Visuals/PlayerStats"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 1409.0
+offset_top = 456.0
+offset_right = 1458.0
+offset_bottom = 516.0
+mouse_filter = 2
+
+[node name="PlayerHP" type="TextureRect" parent="Visuals/PlayerStats/PlayerHPContainer"]
+material = SubResource("CanvasItemMaterial_i3v7s")
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_p0ot6")
+stretch_mode = 1
+
+[node name="PlayerHP2" type="TextureRect" parent="Visuals/PlayerStats/PlayerHPContainer"]
+material = SubResource("CanvasItemMaterial_i3v7s")
+layout_mode = 0
+offset_left = 66.0
+offset_right = 132.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_p0ot6")
+stretch_mode = 1
+
+[node name="PlayerHP3" type="TextureRect" parent="Visuals/PlayerStats/PlayerHPContainer"]
+material = SubResource("CanvasItemMaterial_i3v7s")
+layout_mode = 0
+offset_left = 132.0
+offset_right = 198.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_p0ot6")
+stretch_mode = 1
+
+[node name="PlayerHP4" type="TextureRect" parent="Visuals/PlayerStats/PlayerHPContainer"]
+material = SubResource("CanvasItemMaterial_i3v7s")
+layout_mode = 0
+offset_left = 198.0
+offset_right = 264.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_p0ot6")
+stretch_mode = 1
+
+[node name="PlayerHP5" type="TextureRect" parent="Visuals/PlayerStats/PlayerHPContainer"]
+material = SubResource("CanvasItemMaterial_i3v7s")
+layout_mode = 0
+offset_left = 264.0
+offset_right = 330.0
+offset_bottom = 60.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_p0ot6")
+stretch_mode = 1
 
 [node name="Background1" type="TextureRect" parent="Visuals"]
 z_index = -4
@@ -467,7 +818,7 @@ libraries = {
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="Visuals"]
-color = Color(0.7581918, 0.7581918, 0.7581917, 1)
+color = Color(0.11119697, 0.11119681, 0.11119684, 1)
 
 [node name="BeatManager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -497,20 +848,25 @@ bus = &"SFX"
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="BeatManager"]
 unique_name_in_owner = true
-stream = ExtResource("4_ej53o")
-volume_db = -19.083
+volume_db = -19.0
 bus = &"Music"
 
 [node name="EnemyTurn" type="Node2D" parent="."]
 unique_name_in_owner = true
 visible = false
 
-[node name="Spotlights" type="Node2D" parent="EnemyTurn"]
+[node name="Stage" type="Node2D" parent="EnemyTurn"]
 
-[node name="HalfCircleSpotlight" type="PointLight2D" parent="EnemyTurn/Spotlights"]
+[node name="CircleSpotlight" type="PointLight2D" parent="EnemyTurn/Stage"]
 rotation = 3.1415927
-scale = Vector2(1.485, 1.485)
+scale = Vector2(1.69, 1.69)
 texture = ExtResource("5_oqjw7")
+
+[node name="StageSprite2D" type="Sprite2D" parent="EnemyTurn/Stage"]
+z_index = -3
+position = Vector2(-7.1525574e-07, -105.99999)
+scale = Vector2(0.5395835, 2.395486)
+texture = ExtResource("7_p88ah")
 
 [node name="PlayerDefending" parent="EnemyTurn" instance=ExtResource("7_tmt65")]
 unique_name_in_owner = true
@@ -523,18 +879,24 @@ insultRef = ExtResource("4_6koaw")
 [node name="PlayerTurn" type="Node2D" parent="."]
 unique_name_in_owner = true
 
-[node name="Spotlights" type="Node2D" parent="PlayerTurn"]
+[node name="Stage" type="Node2D" parent="PlayerTurn"]
 
-[node name="HalfCircleSpotlight" type="PointLight2D" parent="PlayerTurn/Spotlights"]
+[node name="HalfCircleSpotlight" type="PointLight2D" parent="PlayerTurn/Stage"]
 position = Vector2(0.10430316, 165.27753)
 rotation = 3.1415927
 scale = Vector2(0.2597438, 0.03684206)
 texture = ExtResource("2_jfwgj")
 
-[node name="ConeSpotlight" type="PointLight2D" parent="PlayerTurn/Spotlights"]
+[node name="ConeSpotlight" type="PointLight2D" parent="PlayerTurn/Stage"]
 position = Vector2(0, -356.75)
 scale = Vector2(1, 3.3862877)
 texture = ExtResource("3_oqjw7")
+
+[node name="StageSprite2D2" type="Sprite2D" parent="PlayerTurn/Stage"]
+z_index = -3
+position = Vector2(1.9999981, -38)
+scale = Vector2(1.8887154, 3.4513907)
+texture = ExtResource("7_p88ah")
 
 [node name="PlayerUI" type="Control" parent="PlayerTurn"]
 layout_mode = 3
@@ -552,11 +914,13 @@ size_flags_vertical = 3
 
 [node name="TextBubble" parent="PlayerTurn/PlayerUI" instance=ExtResource("12_p88ah")]
 unique_name_in_owner = true
+z_index = 2
 layout_mode = 0
 offset_left = 366.0
 offset_top = 360.0
 offset_right = 366.0
 offset_bottom = 360.0
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerTurn/PlayerUI"]
 layout_mode = 1
@@ -575,6 +939,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="EnemyPortrait" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer"]
+unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_nq208")
 layout_mode = 1
 anchors_preset = 8
@@ -658,7 +1023,7 @@ unique_name_in_owner = true
 material = SubResource("CanvasItemMaterial_tmt65")
 layout_mode = 2
 
-[node name="PlayerUIBoxOutline" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer"]
+[node name="PlayerUIBoxOutline" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer"]
 use_parent_material = true
 layout_mode = 1
 anchors_preset = 8
@@ -673,23 +1038,31 @@ offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
-color = Color(0.7647059, 0.7647059, 0.7647059, 1)
+texture = SubResource("AtlasTexture_bsghg")
 
-[node name="PlayerUIBox" type="ColorRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline"]
+[node name="TextboxAnimationPlayer" type="AnimationPlayer" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline"]
+libraries = {
+&"": SubResource("AnimationLibrary_4avl5")
+}
+autoplay = "Idle"
+
+[node name="ObservationTextLabel" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline" groups=["ObserveLabel", "TextLabel"]]
+unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 7.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -101.5
+offset_right = 1216.0
+offset_bottom = 100.5
 grow_vertical = 2
-color = Color(0.24313726, 0, 0.14901961, 1)
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 64
+autowrap_mode = 2
 
-[node name="PlayerAlternatives" type="GridContainer" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox"]
+[node name="PlayerAlternatives" type="GridContainer" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline"]
 unique_name_in_owner = true
 use_parent_material = true
 layout_mode = 1
@@ -698,64 +1071,95 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -264.5
-offset_top = -67.5
-offset_right = 264.5
-offset_bottom = 68.5
+offset_left = -446.0
+offset_top = -111.0
+offset_right = 446.0
+offset_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-theme_override_constants/h_separation = 200
-theme_override_constants/v_separation = 30
+theme_override_constants/v_separation = -7
 columns = 2
 
-[node name="ComplimentButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
-use_parent_material = true
+[node name="ComplimentTextureRect" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives"]
+material = SubResource("CanvasItemMaterial_uvnjf")
 layout_mode = 2
+texture = SubResource("AtlasTexture_60bpw")
+
+[node name="ComplimentButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/ComplimentTextureRect"]
+material = SubResource("CanvasItemMaterial_uvnjf")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("17_i3v7s")
 theme_override_font_sizes/font_size = 64
 text = "/Compliment"
 
-[node name="CriticizeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
-use_parent_material = true
+[node name="CriticizeTextureRect" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives"]
+material = SubResource("CanvasItemMaterial_uvnjf")
 layout_mode = 2
+texture = SubResource("AtlasTexture_60bpw")
+
+[node name="CriticizeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/CriticizeTextureRect"]
+material = SubResource("CanvasItemMaterial_uvnjf")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("17_i3v7s")
 theme_override_font_sizes/font_size = 64
 text = "/Criticize"
 
-[node name="RelateButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
-use_parent_material = true
+[node name="RelateTextureRect" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives"]
+material = SubResource("CanvasItemMaterial_uvnjf")
 layout_mode = 2
+texture = SubResource("AtlasTexture_60bpw")
+
+[node name="RelateButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/RelateTextureRect"]
+material = SubResource("CanvasItemMaterial_uvnjf")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("17_i3v7s")
 theme_override_font_sizes/font_size = 64
 text = "/Relate"
 
-[node name="OpposeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives"]
-use_parent_material = true
+[node name="OpposeTextureRect" type="TextureRect" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives"]
+material = SubResource("CanvasItemMaterial_uvnjf")
 layout_mode = 2
+texture = SubResource("AtlasTexture_60bpw")
+
+[node name="OpposeButton" type="Button" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/OpposeTextureRect"]
+material = SubResource("CanvasItemMaterial_uvnjf")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
+theme = ExtResource("17_i3v7s")
 theme_override_font_sizes/font_size = 64
 text = "/Oppose
 "
 
-[node name="ObservationTextLabel" type="Label" parent="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox" groups=["ObserveLabel", "TextLabel"]]
-unique_name_in_owner = true
-use_parent_material = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = -101.0
-offset_right = 1208.0
-offset_bottom = 101.0
-grow_vertical = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 64
-autowrap_mode = 2
-
 [connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer/EnemyPortrait/ObserveButton" to="." method="_on_observe_button_pressed"]
-[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/ComplimentButton" to="." method="_on_compliment_button_pressed"]
-[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/CriticizeButton" to="." method="_on_criticize_button_pressed"]
-[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/RelateButton" to="." method="_on_relate_button_pressed"]
-[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerUIBox/PlayerAlternatives/OpposeButton" to="." method="_on_oppose_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/ComplimentTextureRect/ComplimentButton" to="." method="_on_compliment_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/CriticizeTextureRect/CriticizeButton" to="." method="_on_criticize_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/RelateTextureRect/RelateButton" to="." method="_on_relate_button_pressed"]
+[connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/OpposeTextureRect/OpposeButton" to="." method="_on_oppose_button_pressed"]

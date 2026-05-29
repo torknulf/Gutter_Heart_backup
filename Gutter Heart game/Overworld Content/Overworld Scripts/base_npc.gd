@@ -1,11 +1,11 @@
 extends Interactable
 
 var npc_data
-
+@export var dialogueData: String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_npc("res://Overworld Content/Overworld Dialogue/TutorialGuyOverworld.json")
+	load_npc(dialogueData)
 	#DialogueManager.inDialogue.connect(start_battle)
 
 

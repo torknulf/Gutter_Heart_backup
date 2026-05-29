@@ -13,6 +13,7 @@ var maxHP: int = 5
 var hp: int = 5
 
 signal updateHP
+signal updateResolve
 
 var isInvincible: bool = false
 
@@ -29,24 +30,28 @@ func _physics_process(delta: float) -> void:
 		return
 		
 	
+
 	# add cooldown timer check, in case you have missed a hit
 	if Input.is_action_just_pressed("input_right"):
 		try_hit(Vector2.RIGHT)
-		%HitzonePivot.rotation = deg_to_rad(0)
+		%PlayerSprite.rotation = deg_to_rad(-90)
 	elif Input.is_action_just_pressed("input_left"):
 		try_hit(Vector2.LEFT)
-		%HitzonePivot.rotation = deg_to_rad(180)
+		%PlayerSprite.rotation = deg_to_rad(90)
 	elif Input.is_action_just_pressed("input_up"):
 		try_hit(Vector2.UP)
-		%HitzonePivot.rotation = deg_to_rad(-90)
+		%PlayerSprite.rotation = deg_to_rad(180)
 	elif Input.is_action_just_pressed("input_down"):
 		try_hit(Vector2.DOWN)
-		%HitzonePivot.rotation = deg_to_rad(90)
+		%PlayerSprite.rotation = deg_to_rad(0)
 
 
 
 
 func try_hit(hitDir: Vector2):
+	%PlayerAnimation.stop()
+	%PlayerAnimation.play("Wrench_Swing")
+
 	if %EnemyTurn.visible == false:
 		return
 	
@@ -69,7 +74,7 @@ func take_damage(insult: Insult):
 		resolve = 0
 	else:
 		resolve -= lostResolve
-	
+	updateResolve.emit(resolve)
 	lose_hp()
 	
 	%PlayerHurtSFX.play()
@@ -101,12 +106,16 @@ func update_resolve(isHitPerfect):
 	if resolve + amount >= maxResolve:
 		if hp == maxHP:
 			resolve = maxResolve
+			updateResolve.emit(resolve)
 			return
 		resolve = 0
+		updateResolve.emit(resolve)
 		gain_hp()
 		return
 	
 	resolve += amount
+	
+	updateResolve.emit(resolve)
 
 
 
@@ -157,7 +166,12 @@ func select_hit_SFX(insult: Insult):
 	if insult.perfTiming:
 		%InsultHitSFX.volume_db = 19
 		return perfectSFXAudio[sfxIndex]
-	%InsultHitSFX.volume_db = 10
+	%InsultHitSFX.volume_db = 13
 	return okSFXAudio[sfxIndex]
 	
 	
+
+
+func _on_player_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Wrench_Swing":
+		%PlayerAnimation.play("Idle")

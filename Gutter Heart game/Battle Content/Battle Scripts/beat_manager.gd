@@ -9,15 +9,19 @@ var isActive: bool = false
 signal newBeat
 signal newBar
 
-var barStart
+var barStart = true 
 
 
 
 ## --- PROCESSES ---
 
 func _ready() -> void:
+	await get_tree().process_frame
 	%BGMusic.stream = currSong.music
+	%BGMusic.volume_db = currSong.volume
 	%BGMusic.play()
+	flip_barstart()
+	
 
 func _process(delta: float) -> void:
 	if !isActive:
@@ -66,6 +70,9 @@ func flip_barstart():
 	else:
 		return true
 
+
+
+	
 
 ## --- GET FUNCTIONS ---
 

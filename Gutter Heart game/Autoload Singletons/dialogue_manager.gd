@@ -52,7 +52,7 @@ func start_dialogue(npcData, timelineName):
 	process_text_type(currentNPC["timelines"][currTimelineName][lineIndex])
 	
 	inDialogue.emit(true) 
-	textLabel.get_parent().get_parent().get_parent().visible = true
+	textLabel.get_parent().get_parent().visible = true
 
 
 ## mostly for overworld dialogue
@@ -197,8 +197,8 @@ func end_dialogue():
 	
 	elif queueBattle:
 		queueBattle = false
-		textLabel.get_parent().get_parent().get_parent().visible = true
-		SceneManager.load_scene("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+		textLabel.get_parent().get_parent().visible = true
+		SceneManager.load_combat_scene(currentNPC["combat_ID"])
 
 
 	elif queueOverworld:
@@ -207,7 +207,7 @@ func end_dialogue():
 		
 	
 	inDialogue.emit(false) 
-	textLabel.get_parent().get_parent().get_parent().visible = false
+	textLabel.get_parent().get_parent().visible = false
 	
 
 

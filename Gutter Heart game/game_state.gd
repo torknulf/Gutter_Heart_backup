@@ -1,7 +1,7 @@
 extends Node
 
 var inCombat: bool = false
-
+var queuedCombat
 
 var npcStates = {
 	"tutorial_guy": {
@@ -9,5 +9,4 @@ var npcStates = {
 		"talk_count": 0
 		
 	}
-	
 }

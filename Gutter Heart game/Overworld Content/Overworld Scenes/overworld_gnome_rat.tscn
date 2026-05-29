@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://cj75wxo223y1x"]
 
 [ext_resource type="Script" uid="uid://x4xednda8q8u" path="res://Overworld Content/Overworld Scripts/base_npc.gd" id="1_qfjbf"]
-[ext_resource type="Texture2D" uid="uid://c2wg6on3kjr42" path="res://Assets/visual/Overworld/Characters/Gnome_Rat/GnomeRat_1.png" id="2_qfjbf"]
+[ext_resource type="Texture2D" uid="uid://c2wg6on3kjr42" path="res://Assets/visual/Combat/Enemies/GnomeRat/GnomeRat_1.png" id="2_qfjbf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qfjbf"]
 size = Vector2(737, 629)
 
 [node name="OverworldGnomeRat" type="Node2D"]
 script = ExtResource("1_qfjbf")
+dialogueData = "res://Overworld Content/Overworld Dialogue/RatGnomeOverworld.json"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -323)

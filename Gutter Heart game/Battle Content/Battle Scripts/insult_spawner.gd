@@ -76,7 +76,7 @@ func generate_insult_queue():
 			
 			5: pass
 			
-			6: pass
+			6: patterns = [[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 1, 1], [1, 0, 1, 0, 1, 1, 1]]
 		
 		var index = randi_range(0, patterns.size()-1)
 		insultQueue = patterns[index]
@@ -106,9 +106,12 @@ func spawn_insult():
 	
 	var insultInstance: Insult = insultRef.instantiate()
 	
+	var hitPos = 150
+	var startPos = 450
+	
 	# these two magic numbers are just eyed distances
-	insultInstance.startPos = 250 * dir
-	insultInstance.hitPos = 80 * dir
+	insultInstance.startPos = startPos * dir
+	insultInstance.hitPos = hitPos * dir
 	insultInstance.approachDir = dir
 	insultInstance.beatManagerRef = %BeatManager
 	insultInstance.playerDefendingRef = %PlayerDefending

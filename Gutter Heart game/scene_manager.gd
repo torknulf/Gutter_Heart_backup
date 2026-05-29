@@ -11,6 +11,15 @@ var newSpawnPos : Vector2 = Vector2.ZERO
 var currentlyTransitioning: bool = false
 
 
+func load_combat_scene(combatID):
+	GameState.queuedCombat = combatID # idk why I put this here and not in the dialogue manager tbh
+
+	load_scene("res://Battle Content/Battle Scenes/battle_scene_general.tscn")
+	
+	
+	
+	
+
 func load_scene(newScenePath: String, spawnPos: Vector2 = Vector2.ZERO):
 	sceneToLoad = newScenePath
 	

@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://050phl7wkbov"]
+[gd_scene load_steps=12 format=3 uid="uid://050phl7wkbov"]
 
-[ext_resource type="Texture2D" uid="uid://dfbhx2idbmkkk" path="res://Assets/visual/Misc/icon.svg" id="1_krp3i"]
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
 [ext_resource type="AudioStream" uid="uid://btjte1tviff5a" path="res://Assets/audio/SFX/Combat/InsultSpawnDOWN.wav" id="3_m0yxv"]
 [ext_resource type="AudioStream" uid="uid://b3mo1o3xuysgf" path="res://Assets/audio/SFX/Combat/InsultSpawnLEFT.wav" id="4_ej2se"]
 [ext_resource type="AudioStream" uid="uid://cy63kjmpiyx2f" path="res://Assets/audio/SFX/Combat/InsultSpawnRIGHT.wav" id="5_capee"]
 [ext_resource type="AudioStream" uid="uid://cotmn54juruay" path="res://Assets/audio/SFX/Combat/InsultSpawnUP.wav" id="6_e5scw"]
+[ext_resource type="Texture2D" uid="uid://buty215j3qk02" path="res://Assets/visual/Combat/Insults/Insults.png" id="6_k17x7"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k17x7"]
 light_mode = 1
@@ -13,16 +13,54 @@ light_mode = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
 size = Vector2(100, 100)
 
+[sub_resource type="Animation" id="Animation_k17x7"]
+resource_name = "fly"
+length = 1.25
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_m0yxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ej2se"]
+_data = {
+&"RESET": SubResource("Animation_m0yxv"),
+&"fly": SubResource("Animation_k17x7")
+}
+
 [node name="InsultScene" type="Node2D"]
 material = SubResource("CanvasItemMaterial_k17x7")
 script = ExtResource("1_rf25y")
 spawnSFXAudio = Array[AudioStream]([ExtResource("3_m0yxv"), ExtResource("4_ej2se"), ExtResource("5_capee"), ExtResource("6_e5scw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(2.400581, 5.226921e-05, 6.788209e-06, 1)
 use_parent_material = true
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_krp3i")
+texture = ExtResource("6_k17x7")
+hframes = 5
 
 [node name="Area2D" type="Area2D" parent="."]
 scale = Vector2(0.3, 0.3)
@@ -34,11 +72,18 @@ shape = SubResource("RectangleShape2D_krp3i")
 unique_name_in_owner = true
 use_parent_material = true
 offset_left = -19.0
-offset_top = -12.0
-offset_right = 19.0
-offset_bottom = 11.0
-text = "dsad"
+offset_top = -50.0
+offset_right = 27.0
+offset_bottom = -27.0
+text = "[time]"
+horizontal_alignment = 1
 
 [node name="SpawnSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
+
+[node name="AnimationTree" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ej2se")
+}
+autoplay = "fly"

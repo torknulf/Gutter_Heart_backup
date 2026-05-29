@@ -1,9 +1,82 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3n3bv26acbyt"]
+[gd_scene load_steps=12 format=3 uid="uid://b3n3bv26acbyt"]
 
 [ext_resource type="AudioStream" uid="uid://t2fcbj654nrn" path="res://Assets/audio/SFX/UI/TutorialGuyVoice.wav" id="1_gjpo7"]
 [ext_resource type="Script" uid="uid://b62xo0v2vka0i" path="res://General Scenes/text_box.gd" id="1_kac63"]
 [ext_resource type="AudioStream" uid="uid://c8pgljd5kc86q" path="res://Assets/audio/SFX/UI/NextText.wav" id="2_1abev"]
+[ext_resource type="Texture2D" uid="uid://coe4btk3hjyh3" path="res://Assets/visual/Combat/Combat_UI/Small_Box.png" id="2_p5t0c"]
+[ext_resource type="Texture2D" uid="uid://c14gftakvyiai" path="res://Assets/visual/Combat/Combat_UI/Big_Box.png" id="3_413hy"]
 [ext_resource type="AudioStream" uid="uid://cxo65l2yxrwem" path="res://Assets/audio/SFX/UI/MenuSelect.wav" id="4_pskn1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e5kl6"]
+atlas = ExtResource("2_p5t0c")
+region = Rect2(0, 0, 913, 169)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_adr7c"]
+atlas = ExtResource("3_413hy")
+region = Rect2(0, 0, 1920, 425)
+
+[sub_resource type="Animation" id="Animation_laxj7"]
+resource_name = "Idle"
+length = 0.75
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 1920, 425), Rect2(0, 425, 1920, 425), Rect2(0, 850, 1920, 425)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NameLabel/NameBoxOutline:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 913, 169), Rect2(0, 169, 913, 169), Rect2(0, 338, 913, 169)]
+}
+
+[sub_resource type="Animation" id="Animation_phsex"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 1920, 425)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../NameLabel/NameBoxOutline:texture:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 913, 169)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a858r"]
+_data = {
+&"Idle": SubResource("Animation_laxj7"),
+&"RESET": SubResource("Animation_phsex")
+}
 
 [node name="TextBox" type="Control" groups=["TextBox"]]
 layout_mode = 3
@@ -30,10 +103,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 111.0
-offset_top = -83.0
-offset_right = -1401.0
-offset_bottom = -270.0
+offset_left = 95.0
+offset_top = -113.0
+offset_right = -1417.0
+offset_bottom = -300.0
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/normal_font_size = 64
@@ -43,79 +116,57 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 
-[node name="NameBoxOutline" type="ColorRect" parent="NameLabel"]
+[node name="NameBoxOutline" type="TextureRect" parent="NameLabel"]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -14.0
+offset_top = -2.0
 offset_right = 14.0
+offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-color = Color(0.7666196, 0.76661956, 0.76661956, 1)
+texture = SubResource("AtlasTexture_e5kl6")
+expand_mode = 1
 
-[node name="NameBox" type="ColorRect" parent="NameLabel/NameBoxOutline"]
+[node name="TopTextBox" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
+offset_left = 6.0
+offset_top = 7.5
+offset_right = -10.0
+offset_bottom = -8.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
 mouse_filter = 2
-color = Color(0.2566673, 0, 0.42092627, 0.89411765)
+texture = SubResource("AtlasTexture_adr7c")
 
-[node name="TopTextBoxOutline" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -858.0
-offset_top = -139.0
-offset_right = 858.0
-offset_bottom = 139.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.7666196, 0.76661956, 0.76661956, 1)
-
-[node name="TopTextBox" type="ColorRect" parent="TopTextBoxOutline"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -8.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_vertical = 3
-mouse_filter = 2
-color = Color(0.24125901, 0, 0.14820552, 1)
-
-[node name="TextLabel" type="Label" parent="TopTextBoxOutline/TopTextBox" groups=["TextLabel"]]
+[node name="TextLabel" type="Label" parent="TopTextBox" groups=["TextLabel"]]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 52.0
-offset_top = -101.0
-offset_right = 1670.0
-offset_bottom = 101.0
+offset_left = 65.0
+offset_top = -133.0
+offset_right = 1846.0
+offset_bottom = 152.0
 grow_vertical = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 64
-text = "Empty"
+text = "Empty dsadjdlkasdkldjlkasdlasljkdas daslkdjklasdjalksd ldkasjdlkaslkasjdklajdlask dklasdj lkasjdklas dlkasjdlkasjdl kasdaklsdlkasjdlkas dklasdlkasdlkas dlkas"
 autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TopTextBox"]
+libraries = {
+&"": SubResource("AnimationLibrary_a858r")
+}
+autoplay = "Idle"
 
 [node name="Choices" type="Control" parent="."]
 layout_mode = 1

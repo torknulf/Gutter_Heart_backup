@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2wg6on3kjr42"
-path="res://.godot/imported/GnomeRat_1.png-80d4a0d34b067933a4358e8eec30dc53.ctex"
+uid="uid://drr7ow2va6isw"
+path="res://.godot/imported/WoodPlatform.png-b7d2079b13cbbe1307da0acbc22a74fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/visual/Overworld/Characters/Gnome_Rat/GnomeRat_1.png"
-dest_files=["res://.godot/imported/GnomeRat_1.png-80d4a0d34b067933a4358e8eec30dc53.ctex"]
+source_file="res://Assets/visual/Combat/Stage/WoodPlatform.png"
+dest_files=["res://.godot/imported/WoodPlatform.png-b7d2079b13cbbe1307da0acbc22a74fa.ctex"]
 
 [params]
 

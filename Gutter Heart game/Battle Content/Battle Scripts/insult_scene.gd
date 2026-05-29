@@ -51,10 +51,10 @@ func _physics_process(delta: float) -> void:
 #perfect timing logic
 	elif progress >= 1.05:
 		perfTiming = false
-	elif progress >= 0.95:
+	elif progress >= 0.90:
 		perfTiming = true
 
-	elif progress >= 0.9 and !isAddedToPlayer:
+	elif progress >= 0.7 and !isAddedToPlayer:
 		playerDefendingRef.add_hittable_insult(self) ## HERE CAN BE DESTROYED by player
 		isAddedToPlayer = true 
 	

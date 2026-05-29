@@ -1,6 +1,6 @@
 {
-  "name": "Tutorial Guy",
-
+  "name": "GnomeRat",
+  "combat_ID": "GnomeRat",
 	"timelines": 
 	{
 		"first": 

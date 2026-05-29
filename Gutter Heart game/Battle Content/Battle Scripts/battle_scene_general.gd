@@ -1,11 +1,12 @@
 class_name BattleScene extends RunnableScene
 
-var playerHP: int = 10 ## unused atm
-var playerMaxHP: int = 10
+var playerHP: int = 5 ## unused atm
+var playerMaxHP: int = 5
 
 var enemyMaxProg: int = 3 
 var enemyCurrProg: int = 0 # if currprog reaches maxprog, battle is won!
 
+@export_enum("TutorialGuy", "GnomeRat") var currEnemy: String
 
 enum TurnStates {PREPROMPT, PLAYERTURN, OBSERVATION, RESPONSE, ENEMYTURN}
 var turnState:
@@ -26,7 +27,25 @@ var wasLastWrong: bool = false
 var doneReadingArray: bool = false
 
 
-func load_enemy(path):
+var playerHearts: Array
+
+
+func load_enemy():
+	var path
+	
+	if GameState.queuedCombat:
+		currEnemy = GameState.queuedCombat
+	
+	if currEnemy == "TutorialGuy":
+		path = "res://Battle Content/Combat Dialogue/TutorialGuyCombat.json"
+		%BeatManager.currSong = load("res://Battle Content/SongResources/new_tutorial_bgm.tres")
+		
+	elif currEnemy == "GnomeRat":
+		path = "res://Battle Content/Combat Dialogue/RatGnomeCombat.json"
+		%BeatManager.currSong = load("res://Battle Content/SongResources/GnomeRat_combat.tres")
+		%EnemyPortrait.texture = load("res://Assets/visual/Combat/Enemies/GnomeRat/GnomeRat_1.png")
+		%EnemyPortrait.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+
 	var loader = EnemyDataLoader.new()
 	enemy_data = loader.load_enemy(path)
 
@@ -43,7 +62,7 @@ func _ready() -> void:
 		DialogueManager.nameLabel.visible = false
 	%BeatManager.start_counting_beat()
 	%InsultSpawner.enemyAttackEnded.connect(on_enemy_attack_ended)
-	load_enemy("res://Battle Content/Combat Dialogue/TutorialGuyCombat.json")
+	load_enemy()
 	enemyMaxProg = enemy_data["combat_states"].size()
 	%MetronomeSFX.volume_db = -80
 	%MetronomeSFXFirst.volume_db = -80
@@ -59,7 +78,11 @@ func _ready() -> void:
 
 	update_player_alternatives()
 	
-	%PlayerDefending.updateHP.connect(update_player_hp)
+	%PlayerDefending.updateHP.connect(update_hp_UI)
+	%PlayerDefending.updateResolve.connect(update_resolve_UI)
+	
+	prep_player_hearts()
+	update_resolve_UI()
 
 
 	
@@ -140,7 +163,8 @@ func _on_turn_state_changed(prevState) -> void:
 		TurnStates.PREPROMPT:
 			start_player_turn()
 			print("HIDE APPEALS ", prevState)
-				
+			
+			
 			
 		TurnStates.PLAYERTURN:
 			if prevState != TurnStates.OBSERVATION:
@@ -173,6 +197,8 @@ func _on_turn_state_changed(prevState) -> void:
 		TurnStates.ENEMYTURN:
 			start_enemy_turn()
 			%TextBubble.visible = false
+			
+
 
 
 ## triggers after the last round of insults 
@@ -283,9 +309,10 @@ func update_player_alternatives():
 			alts.append(state["alt_appeals"][i])
 	
 	var index = 0
-	for button : Button in %PlayerAlternatives.get_children():
-		button.text = alts[index]
-		index += 1
+	for appealBox: TextureRect in %PlayerAlternatives.get_children():
+		for button: Button in appealBox.get_children():
+			button.text = alts[index]
+			index += 1
 
 
 
@@ -371,5 +398,28 @@ func play_spotlight_SFX(turnOn: bool = false):
 
 
 
-func update_player_hp(newHP):
+func update_hp_UI(newHP):
 	%HPLabel.text = "HP = " + str(newHP) + "/5"
+
+	var index = 1
+	for heart in playerHearts:
+		if newHP >= index:
+			heart.modulate = Color("ffffffff")
+		else:
+			heart.modulate = Color("555555ff")
+		index += 1
+
+
+func update_resolve_UI(resolve = 0):
+	#%HPLabel.text = "HP = " + str(newHP) + "/5"
+	var maxWidth: float = 312.0
+	
+	# 100 IS THE MAXRESOLVE, but only defined in player atm
+	%ResolveBar.size.x = (maxWidth/100) * resolve
+
+
+func prep_player_hearts():
+	for heart in %PlayerHPContainer.get_children():
+		playerHearts.append(heart)
+	update_hp_UI(playerHP)
+	
