@@ -69,6 +69,12 @@ func try_hit(hitDir: Vector2):
 
 
 func take_damage(insult: Insult):
+	if isInvincible:
+		%PlayerIFrameHurtSFX.play()
+		remove_hittable_insult(insult)
+		return
+	
+	
 	var lostResolve = 50
 	if resolve - lostResolve <= 0:
 		resolve = 0
@@ -145,10 +151,6 @@ func gain_hp(amount: int = 1):
 
 
 
-func _on_hurt_animation_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Player_Hurt":
-		isInvincible = false
-
 
 
 func select_hit_SFX(insult: Insult):
@@ -170,6 +172,10 @@ func select_hit_SFX(insult: Insult):
 	return okSFXAudio[sfxIndex]
 	
 	
+
+func _on_hurt_animation_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "Player_Hurt":
+		isInvincible = false
 
 
 func _on_player_animation_animation_finished(anim_name: StringName) -> void:

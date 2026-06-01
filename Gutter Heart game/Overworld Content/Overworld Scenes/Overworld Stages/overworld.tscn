@@ -25,7 +25,7 @@ script = ExtResource("1_erkj1")
 
 [node name="OverworldPlayer" parent="." instance=ExtResource("1_ehkdd")]
 z_index = 1
-position = Vector2(1112, 130)
+position = Vector2(2366, -102)
 
 [node name="Background" type="TextureRect" parent="."]
 z_index = -3
@@ -53,6 +53,7 @@ position = Vector2(-12, 160.25)
 
 [node name="Ground" type="StaticBody2D" parent="Objects"]
 position = Vector2(-873, -1)
+collision_layer = 16
 
 [node name="ColorRect" type="ColorRect" parent="Objects/Ground"]
 visible = false
@@ -68,6 +69,7 @@ debug_color = Color(0, 0.6, 0.69803923, 1)
 
 [node name="Ground2" type="StaticBody2D" parent="Objects"]
 position = Vector2(1083, -128)
+collision_layer = 16
 
 [node name="ColorRect" type="ColorRect" parent="Objects/Ground2"]
 visible = false

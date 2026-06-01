@@ -113,6 +113,7 @@ func spawn_insult():
 	insultInstance.startPos = startPos * dir
 	insultInstance.hitPos = hitPos * dir
 	insultInstance.approachDir = dir
+	insultInstance.beatAmount = %BeatManager.currSong.beatsPerMeasure
 	insultInstance.beatManagerRef = %BeatManager
 	insultInstance.playerDefendingRef = %PlayerDefending
 	

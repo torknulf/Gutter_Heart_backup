@@ -21,7 +21,7 @@ func _ready() -> void:
 	%BGMusic.volume_db = currSong.volume
 	%BGMusic.play()
 	flip_barstart()
-	
+
 
 func _process(delta: float) -> void:
 	if !isActive:

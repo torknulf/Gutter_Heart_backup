@@ -89,6 +89,7 @@ ToggleMute={
 2d_physics/layer_2="Interactable"
 2d_physics/layer_3="Climbable"
 2d_physics/layer_4="ClimbThroughFloors"
+2d_physics/layer_5="Ground"
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://uollahfe7a55"]
+[gd_scene load_steps=29 format=3 uid="uid://uollahfe7a55"]
 
 [ext_resource type="Script" uid="uid://drq86dc3bsbsr" path="res://Overworld Content/Overworld Scripts/overworld_player.gd" id="1_defio"]
 [ext_resource type="Texture2D" uid="uid://ced1ycpn2n46k" path="res://Assets/visual/Overworld/Characters/Player/Player_Climb.png" id="2_5prka"]
@@ -150,13 +150,6 @@ _data = {
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_5prka"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5prka"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_r1wlt"]
-states/Start/position = Vector2(317, 100)
-transitions = ["Start", "End", SubResource("AnimationNodeStateMachineTransition_5prka")]
-
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_5prka"]
 
 [sub_resource type="AnimationNodeTimeSeek" id="AnimationNodeTimeSeek_r1wlt"]
@@ -166,10 +159,11 @@ animation = &"climb"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b6eyp"]
 animation = &"climb"
+play_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_x8a56"]
-graph_offset = Vector2(-128.14926, 17.279442)
-nodes/output/position = Vector2(880, 80)
+graph_offset = Vector2(-472.37836, 49.15219)
+nodes/output/position = Vector2(640, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_5prka")
 nodes/TimeScale/position = Vector2(400, 120)
 nodes/climb/node = SubResource("AnimationNodeAnimation_r1wlt")
@@ -180,9 +174,7 @@ nodes/reverse_climb/node = SubResource("AnimationNodeAnimation_b6eyp")
 nodes/reverse_climb/position = Vector2(-260, 300)
 nodes/Blend2/node = SubResource("AnimationNodeBlend2_5prka")
 nodes/Blend2/position = Vector2(-40, 160)
-nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_r1wlt")
-nodes/StateMachine/position = Vector2(600, 60)
-node_connections = [&"output", 0, &"StateMachine", &"TimeScale", 0, &"TimeSeek", &"TimeSeek", 0, &"Blend2", &"Blend2", 0, &"climb", &"Blend2", 1, &"reverse_climb"]
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"TimeSeek", &"TimeSeek", 0, &"Blend2", &"Blend2", 0, &"climb", &"Blend2", 1, &"reverse_climb"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_x8a56"]
 animation = &"idle"
@@ -260,11 +252,11 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="AnimationPlayer"]
 unique_name_in_owner = true
 active = false
-root_node = NodePath("%AnimationPlayer/..")
+root_node = NodePath("%AnimationTree/../..")
 tree_root = SubResource("AnimationNodeBlendTree_uxnqe")
 advance_expression_base_node = NodePath("../..")
 anim_player = NodePath("..")
-parameters/Movement/climb/TimeScale/scale = 0.0
+parameters/Movement/climb/TimeScale/scale = 1.0
 parameters/Movement/climb/TimeSeek/seek_request = 1.0
 parameters/Movement/climb/Blend2/blend_amount = 1.0
 parameters/Falling/active = false

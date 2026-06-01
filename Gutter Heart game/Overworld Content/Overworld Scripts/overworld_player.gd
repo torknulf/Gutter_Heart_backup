@@ -3,6 +3,7 @@ class_name OverworldPLayer extends CharacterBody2D
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+const DOWN_PUSH = 100.0
 
 enum States {IDLE, WALKING, FALLING, CLIMBING, LOCKED}
 var state:
@@ -18,12 +19,22 @@ var canAct = [States.IDLE, States.WALKING]
 
 var canClimb: bool = false
 
+var climbAnimPos: float = 0
 
 
 func _on_state_changed(prevState):
 	if state != prevState:
 		print("State: ",state)
 	
+	if prevState == States.CLIMBING and %AnimationTree.active == false:
+		%AnimationTree.active = true
+		%AnimationPlayer.speed_scale = 1
+	
+	## Turn off animationtree, turn on animationplayer instead
+	if state == States.CLIMBING:
+		%AnimationPlayer.stop()
+		%AnimationTree.active = false
+		%AnimationPlayer.play("climb")
 	
 
 
@@ -51,7 +62,6 @@ func _physics_process(delta: float) -> void:
 	if state == States.LOCKED or SceneManager.is_input_disabled():
 		return
 		
-	#print(state)
 
 
 	var direction := Input.get_axis("input_left", "input_right")
@@ -62,14 +72,22 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 		facingDir = velocity.x
 	
+	
 	elif state == States.CLIMBING:
 		velocity.x = 0
+		
 		
 		if verDirection:
 			velocity.y = verDirection * SPEED
 			facingDir = velocity.x
+			
+			update_climb_animation(verDirection)
+		
+			
 		else:
 			velocity = Vector2.ZERO
+			%AnimationPlayer.speed_scale = 0
+		
 		
 		if is_on_floor():
 			state = States.IDLE
@@ -126,6 +144,9 @@ func apply_gravity(delta):
 	
 	if not is_on_floor():
 		velocity += gravity * delta
+	elif is_grounded():
+		velocity.y += DOWN_PUSH
+		
 
 
 
@@ -156,6 +177,9 @@ func _on_interaction_area_2d_area_exited(area: Area2D) -> void:
 	interactionList.erase(interactable)
 
 
+func is_grounded():
+	return %FloorRayCast2D.is_colliding()
+
 
 
 func enter_climb_area():
@@ -169,3 +193,39 @@ func exit_climb_area():
 	velocity.y = 0
 	state = States.IDLE
 	
+	
+
+func update_climb_animation(verDirection):
+	match verDirection:
+		-1.0: # CLIMB UP
+			if %AnimationPlayer.speed_scale != 1:
+				%AnimationPlayer.speed_scale = 1
+					
+		1.0: # CLIMB DOWN
+			if %AnimationPlayer.speed_scale != -1:
+				%AnimationPlayer.speed_scale = -1
+
+
+## Unused for now, tried making it work within the animationTree without success
+func update_climb_animation_OLD(verDirection):
+	var climbAnimLength = %AnimationPlayer.get_animation("climb").length
+	#print(climbAnimLength)
+	
+	print(%AnimationPlayer.get_current_animation_position())
+	var blendTree# = %AnimationTree.get("parameters/Movement/climb/climb/time")
+	#print(blendTree)
+	
+	match verDirection:
+		-1.0: # CLIMB UP
+			if %AnimationTree["parameters/Movement/climb/Blend2/blend_amount"] != 0:
+				%AnimationTree["parameters/Movement/climb/TimeScale/scale"] = 1
+				%AnimationTree["parameters/Movement/climb/Blend2/blend_amount"] = 0
+				#%AnimationTree["parameters/Movement/climb/TimeSeek/seek_request"] = 0
+					
+		1.0: # CLIMB DOWN
+			if %AnimationTree["parameters/Movement/climb/Blend2/blend_amount"] != 1:
+				%AnimationTree["parameters/Movement/climb/TimeScale/scale"] = -1
+				%AnimationTree["parameters/Movement/climb/Blend2/blend_amount"] = 1
+				#%AnimationTree["parameters/Movement/climb/TimeSeek/seek_request"] = 0
+	
+	#print(%AnimationTree["parameters/Movement/climb/Blend2/blend_amount"])

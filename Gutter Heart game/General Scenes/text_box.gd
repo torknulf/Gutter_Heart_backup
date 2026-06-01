@@ -1,5 +1,6 @@
-extends Control
+class_name TextBubble extends Control
 
+@onready var marginContainer: MarginContainer = $TextLabel/MarginContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

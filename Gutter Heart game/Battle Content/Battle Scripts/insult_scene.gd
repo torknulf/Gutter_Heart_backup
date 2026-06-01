@@ -31,6 +31,7 @@ func _ready() -> void:
 
 	#beatManagerRef.newBeat.connect(play_approach_SFX)
 	play_approach_SFX()
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -42,6 +43,15 @@ func _physics_process(delta: float) -> void:
 	progress = clamp(progress, 0.0, 1.1)
 	
 	global_position = startPos.lerp(hitPos, progress)
+	#global_position = global_position.move_toward(hitPos, progress)
+	#global_position *= 1.1/progress 
+	#global_position = clamp(global_position, startPos, hitPos)
+	
+
+	
+	
+	
+	
 	%TimingLabel.text = str(progress).pad_decimals(2)
 	
 

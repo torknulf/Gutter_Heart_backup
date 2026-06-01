@@ -379,11 +379,18 @@ func text_bubble_randpos():
 		return
 	## Add DialogueManager.get_bubble_pos() for JSON key to define pos
 	var positions: Array = [
-		Vector2(1377, 109), Vector2(1450, 269), Vector2(1422, 438), # Right side
-		Vector2(316, 106), Vector2(434, 247), Vector2(366, 360) # Left side
+		Vector2(1377, 109), Vector2(1450, 269), # Right side
+		Vector2(316, 106), Vector2(434, 247) # Left side
 		]
 	
 	var index = randi_range(0, positions.size()-1)
+	
+	# Flip bubble depending on which side it appears 
+	if index in [0, 1]: # Right
+		%TextBubble.marginContainer.scale.x = -1
+	else: # Left
+		%TextBubble.marginContainer.scale.x = 1
+	
 	%TextBubble.position = positions[index]
 	
 	
