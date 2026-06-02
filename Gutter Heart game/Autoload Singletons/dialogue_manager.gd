@@ -33,13 +33,15 @@ var queueOverworld: bool
 
 var canAdvance: bool = true
 
+var activeLabel
 
 
 func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
 	nameLabel = get_tree().get_first_node_in_group("NameLabel")
 	observeLabel = get_tree().get_first_node_in_group("ObserveLabel") 
-
+	
+	activeLabel = textLabel
 
 
 
@@ -89,7 +91,7 @@ func process_text_type(timeline : Dictionary):
 ## to show only 1 text screen
 func display_text(text, label = textLabel):
 	_ready() # JUST TEMPORARY FOR SCENE SWITCH TO WORK
-	
+	activeLabel = label
 	
 	if label == null:
 		return
@@ -178,6 +180,7 @@ func next_line():
 
 
 func advance_dialogue():
+	print("ADVANCE DIALOGUE")
 	if isTyping:
 		finish_current_line()
 
@@ -186,8 +189,9 @@ func advance_dialogue():
 	
 	
 func finish_current_line():
+	activeLabel.visible_characters = fullText.length()
 	isTyping = false
-	textLabel.visible_characters = fullText.length()
+	
 	
 	
 	
@@ -205,7 +209,6 @@ func end_dialogue():
 		queueOverworld = false
 		SceneManager.load_scene("res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn")
 		
-	
 	inDialogue.emit(false) 
 	textLabel.get_parent().get_parent().visible = false
 	

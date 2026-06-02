@@ -40,6 +40,10 @@ ChoiceSound=""
 ObserveLabel=""
 GameScene=""
 
+[gui]
+
+theme/custom_font="uid://dxk6m2r4ajxhd"
+
 [input]
 
 input_right={

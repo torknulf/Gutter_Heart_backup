@@ -80,6 +80,7 @@ func _ready() -> void:
 	
 	%PlayerDefending.updateHP.connect(update_hp_UI)
 	%PlayerDefending.updateResolve.connect(update_resolve_UI)
+	DialogueManager.advancePressed.connect(_on_advance_pressed)
 	
 	prep_player_hearts()
 	update_resolve_UI()
@@ -93,13 +94,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	#print(turnState)
 	# To continue to enemy turn after pressing away enemy response
-	if Input.is_action_just_pressed("Interact"):
-		if turnState == TurnStates.OBSERVATION:
-			if !DialogueManager.isTyping:
-				print("back to playerturn")
-				turnState = TurnStates.PLAYERTURN
+	#if Input.is_action_just_pressed("Interact") and DialogueManager.isTyping == false:
+	#	print("WE INTERACT ", DialogueManager.isTyping)
+	#	if turnState == TurnStates.OBSERVATION:
+	#		if !DialogueManager.isTyping:
+	#			print("back to playerturn")
+	#			#turnState = TurnStates.PLAYERTURN
 		
-	elif Input.is_action_just_pressed("ToggleMute"):
+	if Input.is_action_just_pressed("ToggleMute"):
 		if %MetronomeSFX.volume_db != 0:
 			%MetronomeSFX.volume_db = 0
 			%MetronomeSFXFirst.volume_db = 0
@@ -177,7 +179,6 @@ func _on_turn_state_changed(prevState) -> void:
 				print("Start 2nd await")
 				await DialogueManager.doneWriting
 				
-			print("MAKE APPEALS VISIBLE")
 			%PlayerAlternatives.visible = true
 			%ObserveButton.disabled = false
 			%ObservationTextLabel.visible = false
@@ -336,6 +337,7 @@ func _on_oppose_button_pressed() -> void:
 func _on_observe_button_pressed() -> void:
 	if turnState == TurnStates.PLAYERTURN and !DialogueManager.isTyping:
 		turnState = TurnStates.OBSERVATION
+		DialogueManager.playChoiceSFX.emit()
 
 
 
@@ -430,3 +432,13 @@ func prep_player_hearts():
 		playerHearts.append(heart)
 	update_hp_UI(playerHP)
 	
+
+
+
+## for observation mechanic
+func _on_advance_pressed():
+	#DialogueManager.isTyping == false:
+	#	print("WE INTERACT ", DialogueManager.isTyping)
+	if turnState == TurnStates.OBSERVATION and !DialogueManager.isTyping:
+		turnState = TurnStates.PLAYERTURN
+		DialogueManager.playNextTextSFX.emit()
