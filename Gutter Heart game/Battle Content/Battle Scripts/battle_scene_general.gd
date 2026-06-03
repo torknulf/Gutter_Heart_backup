@@ -29,6 +29,8 @@ var doneReadingArray: bool = false
 
 var playerHearts: Array
 
+signal changeDifficulty
+
 
 func load_enemy():
 	var path
@@ -275,6 +277,8 @@ func on_correct_appeal():
 	
 	enemyCurrProg += 1
 	
+	if "change_difficulty" in state.keys():
+		%InsultSpawner.change_difficulty(state["change_difficulty"])
 
 
 

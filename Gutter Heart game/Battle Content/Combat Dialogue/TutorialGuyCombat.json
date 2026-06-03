@@ -46,7 +46,9 @@
 			"1": "Does it make a difference?",
 			"2": "...",
 			"3": "Are you stupid?"
-		}
+		},
+
+	  "change_difficulty": "1",
 
 	},
 	
@@ -73,7 +75,7 @@
 			"3": "You can never be wrong to assume the worst. Tends to turn out that way."
 		}
 
-
+		
 	},
 	{
 	  "prompt": "You're a soulless man, and I'm the fading spirit of a forgotten memory. How would we prevail?",

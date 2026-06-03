@@ -10,14 +10,18 @@ var isSpawning: bool = false
 
 var spawnQueue = []
 
+var difficultyLevel = 0
 
 signal enemyAttackEnded
+
+var lastInsult = 0
+var lastDir = Vector2.UP # just placeholder direction
 
 func _ready() -> void:
 	randomize()
 	%BeatManager.newBeat.connect(spawn_first_in_queue)
 	%BeatManager.newBar.connect(_on_signal_new_bar)
-	
+
 
 func _process(delta: float) -> void:
 	pass
@@ -32,9 +36,16 @@ func spawn_first_in_queue():
 	if !isSpawning or spawnQueue == []:
 		return
 	
-	
 	if spawnQueue[0] == 1:
-		spawn_insult()
+		var repeatDir: bool
+		if lastInsult == 1:
+			repeatDir = true
+		else:
+			repeatDir = false
+		
+		spawn_insult(repeatDir)
+	
+	lastInsult = spawnQueue[0]
 	spawnQueue.remove_at(0)
 	
 	
@@ -58,6 +69,9 @@ func choose_insult_dir():
 		3:
 			dir = Vector2.DOWN
 	
+	
+	lastDir = dir
+	
 	return dir
 
 
@@ -72,7 +86,12 @@ func generate_insult_queue():
 		match %BeatManager.currSong.beatsPerMeasure:
 			3: patterns = [[1, 1, 1], [1, 0, 1], [1, 1, 0]]
 			
-			4: patterns = [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 1, 0, 1]]#, [1, 1, 0, 1], [1, 0, 1, 0], [1, 0, 1, 1]]
+			4: 
+				patterns = [[1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 1, 0, 1]]#, [1, 1, 0, 1], [1, 0, 1, 0], [1, 0, 1, 1]]
+				if difficultyLevel >= 1:
+					var hardPatterns = [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 1, 1, 0, 1]]
+					for pattern in hardPatterns:
+						patterns.append(pattern)
 			
 			5: pass
 			
@@ -101,8 +120,14 @@ func generate_insult_queue():
 
 
 
-func spawn_insult():
-	var dir = choose_insult_dir()
+func spawn_insult(repeatDir: bool = false):
+	
+	var dir
+	
+	if repeatDir:
+		dir = lastDir
+	else: 
+		dir = choose_insult_dir()
 	
 	var insultInstance: Insult = insultRef.instantiate()
 	
@@ -116,6 +141,8 @@ func spawn_insult():
 	insultInstance.beatAmount = %BeatManager.currSong.beatsPerMeasure
 	insultInstance.beatManagerRef = %BeatManager
 	insultInstance.playerDefendingRef = %PlayerDefending
+	
+	
 	
 	get_parent().add_child(insultInstance)
 	
@@ -140,6 +167,7 @@ func _on_signal_new_bar(barStart: bool):
 		
 		if spawnRounds > 0:
 			isSpawning = true
+			lastInsult = 0
 			spawnQueue = generate_insult_queue()
 			spawn_first_in_queue()
 
@@ -153,3 +181,8 @@ func _on_signal_new_bar(barStart: bool):
 func initialize_attack():
 	isSpawning = true
 	spawnRounds = 5
+
+
+
+func change_difficulty(diffLevel):
+	difficultyLevel = int(diffLevel)

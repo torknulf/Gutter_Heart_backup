@@ -33,6 +33,8 @@ func _ready() -> void:
 	play_approach_SFX()
 	
 
+	
+
 
 func _physics_process(delta: float) -> void:
 	var currentTime = beatManagerRef.get_song_time()

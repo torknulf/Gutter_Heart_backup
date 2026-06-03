@@ -75,17 +75,19 @@ func take_damage(insult: Insult):
 		return
 	
 	
-	var lostResolve = 50
-	if resolve - lostResolve <= 0:
-		resolve = 0
-	else:
-		resolve -= lostResolve
-	updateResolve.emit(resolve)
-	lose_hp()
-	
-	%PlayerHurtSFX.play()
-	remove_hittable_insult(insult)
+	var lostHP = 1
 
+	lose_hp(lostHP)
+	remove_hittable_insult(insult)
+	%PlayerHurtSFX.play()
+	
+	if resolve == maxResolve:
+		update_resolve(0)
+
+	
+
+	
+	
 
 
 func add_hittable_insult(insult: Insult):
@@ -131,8 +133,12 @@ func lose_hp(amount: int = 1):
 	
 	if hp - amount <= 0:
 		hp = 0
+	elif amount == 0: # hit with max resolve
+		isInvincible = true
+		%HurtAnimation.play("Player_Hurt")
+		%PlayerIFrameHurtSFX.play()
 	else:
-		hp -= 1
+		hp -= amount
 	
 	updateHP.emit(hp)
 	isInvincible = true
