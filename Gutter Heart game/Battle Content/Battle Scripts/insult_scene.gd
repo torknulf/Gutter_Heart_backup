@@ -1,6 +1,7 @@
 class_name Insult extends Node2D
 
-@export var spawnSFXAudio: Array[AudioStream]
+var spawnSFXAudio: Array # from songData, order is DOWN, LEFT, RIGHT, UP 
+var spawnSFXVolume
 
 var spawnTime # the time when the insult spawns
 var hitTime # the time when the insult hits the player
@@ -21,22 +22,33 @@ var isAddedToPlayer = false
 
 var perfTiming: bool = false
 
+# wobble
+@export var wobbleSpeed: float = 10.0
+@export var wobbleAmount: float = 5.0
+
+var isBreaking: bool = false
 
 func _ready() -> void:
+	randomize()
 	
 	spawnTime = beatManagerRef.get_song_time()
 	hitTime = spawnTime + (beatManagerRef.get_bps() * beatAmount) 
 	
-	global_position = startPos
+	
+	startPos += Vector2(randf(), randf()) * 40
+	global_position = startPos 
 
+	%SpawnSFX.volume_db = spawnSFXVolume
 	#beatManagerRef.newBeat.connect(play_approach_SFX)
 	play_approach_SFX()
 	
 
 	
-
-
 func _physics_process(delta: float) -> void:
+	if isBreaking:
+		return
+	
+	
 	var currentTime = beatManagerRef.get_song_time()
 	
 	
@@ -59,6 +71,7 @@ func _physics_process(delta: float) -> void:
 
 	if progress >= 1.1:
 		playerDefendingRef.take_damage(self)
+		start_breaking()
 
 #perfect timing logic
 	elif progress >= 1.05:
@@ -69,6 +82,12 @@ func _physics_process(delta: float) -> void:
 	elif progress >= 0.7 and !isAddedToPlayer:
 		playerDefendingRef.add_hittable_insult(self) ## HERE CAN BE DESTROYED by player
 		isAddedToPlayer = true 
+
+
+	apply_wobble()
+
+
+	
 	
 	
 func play_approach_SFX():
@@ -76,7 +95,6 @@ func play_approach_SFX():
 	if currBeat >= beatAmount:
 		return
 	
-	%SpawnSFX.volume_db = 0
 	%SpawnSFX.stream = select_spawn_SFX()
 	%SpawnSFX.play()
 
@@ -99,5 +117,32 @@ func select_spawn_SFX():
 
 
 ## happens when an insult reaches a player
-func damage_player(hp: int = 1):
-	queue_free()
+func start_breaking(isHit: bool = false):
+	isBreaking = true
+	%AnimationPlayer.play("break")
+	
+	if isHit:
+		%HitBreakSFX.play()
+
+
+
+func apply_wobble():
+	var timeVal = Time.get_ticks_msec() / 1000.0 * wobbleSpeed + randf() 
+	var wobble = sin(timeVal) * wobbleAmount
+	
+	%Sprite2D.offset = Vector2(wobble, wobble)
+
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "spawn":
+		
+		#Randomize which insult the animation starts on 
+		randomize()
+		var spawnTimes = [0.0, 0.25, 0.5, 0.75, 1.0]
+		var index = randi_range(0, spawnTimes.size()-1)
+		%AnimationPlayer.play("fly")
+		%AnimationPlayer.seek(spawnTimes[index], true)
+	
+	if anim_name == "break":
+		queue_free()

@@ -11,3 +11,7 @@ class_name SongData extends Resource
 @export var beatOffset: float = 0.0
 
 @export var volume: float =  0.0
+
+@export var spawnSFX: Array[AudioStream]
+
+@export var spawnSFXVolume: float
