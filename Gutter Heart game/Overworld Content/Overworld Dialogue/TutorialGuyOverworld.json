@@ -1,48 +1,180 @@
 {
-  "name": "???",
+  "name": "Gaviota",
   "combat_ID": "TutorialGuy",
   "timelines": 
 	{
 		"first": 
 		[
 			{
+				"name": "???",
 				"text": "Well look who it is!"
 			},
 			
 			{
+				"name": "???",
 				"text": "A lost soul, fallen through the veil. Cast into the world of manifested thought..."
 			},
 			
 			{
-				"text": "And you look about as lost as they come."
+				"name": "Hubert",
+				"text": "Where am I?"
 			},
 			
 			{
-				"text": "Worry not, lost one. You'll find your way home when the time is right."
+				"name": "???",
+				"text": "You are elsewhere, nowhere, up above and down below. You are not home, no, you are not indeed.",
 			},
 			
 			{
-				"text": "Though your path will surely be long, and lined with adversity."
+				"name": "???",
+				"text": "My name is Gaviota, and-"
 			},
 			
 			{
-				"text": "You will need to defend yourself against the many spirits who will stand in your way."
+				"name": "Hubert",
+				"text": "Oh my god...",
 			},
 			
 			{
-				"text": "Though not with force."
+				"name": "Hubert",
+				"text": "I've been spirited away, haven't I?"
 			},
 			
 			{
-				"text": "Violence does very little to defeat one's spirit."
+				"text": "You’ve been cast into- uh… yes. Yes you have.",
 			},
 			
 			{
-				"text": "Here, words hold great power."
+				"text": "And to get back home, you have to-"
 			},
 			
 			{
-				"text": "To subdue your foes, you'll need to ARGUE.",
+				"name": "Hubert",
+				"text": "Uuuuughhhh maan I gotta call my boss…",
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "How am I gonna tell him I’m in one of those damn “complete these challenges three” situations again…"
+			},
+			
+			{
+				"text": "Wait, how did you-"
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "This is the third time this month I get kidnapped by you gnome bastards trying to magic spell my ass into psychology!"
+			},
+			
+			{
+				"text": "We’re not gnomes, we’re elves…"
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "My boss is gonna kill me. I gotta get back."
+			},
+			
+			{
+				"text": "Well, to do that you have to complete the three… challenges."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "There’s no phone service here."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "ugh…"
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "I swear. You gnomes are gonna be the death of me."
+			},
+			
+			{
+				"text": "Elves-"
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "I'll punch you."
+			},
+			
+			{
+				"text": "No no no. In this world, a forceful approach will not get you far."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "How very magical of you..."
+			},
+			
+			{
+				"text": "Yes indeed. You cannot defeat your foes with violence here."
+			},
+			
+			{
+				"text": "You're in the world of spirits now."
+			},
+			
+			{
+				"text": "Yes, force does very little to dim one’s spirit. Very little, indeed."
+			},
+			
+			{
+				"text": "To prevail you must use your WORDS!",
+			},
+			
+			{
+				"text": "Yeees. Only words can help you hereeeeeeeeeeeeeeee."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "Ok."
+			},
+			
+			{
+				"text": "Your first challenge will be to fetch me my goblets. Yes, my GOBLETS! The goblets that I love oh so much."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "No... I don't really want to."
+			},
+			
+			{
+				"text": "But... but you must."
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "No, seriously, I-"
+			},
+			
+			{
+				"text": "If you want to get back home you have to do the challenges and learn a great lesson and-"
+			},
+			
+			{
+				"name": "Hubert",
+				"text": "No, I just want to fix the sink. Just point the way, Mr. Gnome and I’ll leave."
+			},
+			
+			{
+				"text": "We're NOT GNOMES!"
+			},
+			
+			{
+				"text": "You know, what- fine."
+			},
+			
+			{
+				"text": "If you don't want to complete my challenge, I'll just have to teach you your lesson MYSELF!",
 				"effect": "start_battle"
 			}
 		],
@@ -50,8 +182,8 @@
 		"after_battle":
 		[
 			{
-				"text": "Go on now, lost one. Find your way home."
-			}
+				"text": "Just go!"
+			},
 		]
 	}
 }
