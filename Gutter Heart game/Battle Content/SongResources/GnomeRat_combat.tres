@@ -1,14 +1,20 @@
-[gd_resource type="Resource" script_class="SongData" load_steps=3 format=3 uid="uid://6r1w525dr234"]
+[gd_resource type="Resource" script_class="SongData" load_steps=7 format=3 uid="uid://6r1w525dr234"]
 
+[ext_resource type="AudioStream" uid="uid://bkbbk3tmlm3ng" path="res://Assets/audio/Music/GnomeRatCombatFinal170bpm.ogg" id="1_oa1kg"]
 [ext_resource type="Script" uid="uid://b2tpelwvv2fj7" path="res://Battle Content/Battle Scripts/song_data.gd" id="1_rdq4c"]
-[ext_resource type="AudioStream" uid="uid://cq1nc0wsexp56" path="res://Assets/audio/Music/GnomeRatCombat170bpm.ogg" id="1_xd5e3"]
+[ext_resource type="AudioStream" uid="uid://bcg6hf0oyt4tb" path="res://Assets/audio/SFX/Combat/InsultSpawnGnomeRatDOWN.wav" id="3_oa1kg"]
+[ext_resource type="AudioStream" uid="uid://0yhujmt02l2l" path="res://Assets/audio/SFX/Combat/InsultSpawnGnomeRatLEFT.wav" id="4_0qarv"]
+[ext_resource type="AudioStream" uid="uid://dux4lipdncce8" path="res://Assets/audio/SFX/Combat/InsultSpawnGnomeRatRIGHT.wav" id="5_vsb7x"]
+[ext_resource type="AudioStream" uid="uid://dqssjis0p406w" path="res://Assets/audio/SFX/Combat/InsultSpawnGnomeRatUP.wav" id="6_5tb2m"]
 
 [resource]
 script = ExtResource("1_rdq4c")
 songName = "GnomeRatBGM"
-music = ExtResource("1_xd5e3")
+music = ExtResource("1_oa1kg")
 bpm = 340.0
 beatsPerMeasure = 6
-beatOffset = -0.56
-volume = -17.0
+beatOffset = -0.5
+volume = -15.5
+spawnSFX = Array[AudioStream]([ExtResource("3_oa1kg"), ExtResource("4_0qarv"), ExtResource("5_vsb7x"), ExtResource("6_5tb2m")])
+spawnSFXVolume = 17.0
 metadata/_custom_type_script = "uid://b2tpelwvv2fj7"

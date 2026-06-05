@@ -204,7 +204,31 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
+"values": [Vector2(1384.505, 456)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%PlayerHPContainer:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
 "values": [Vector2(1409, 456)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%PlayerResolve:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1385, 517)]
 }
 
 [sub_resource type="Animation" id="Animation_oqjw7"]
@@ -273,7 +297,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(1385, 517), Vector2(1005, 910)]
+"values": [Vector2(1385, 517), Vector2(1133, 910)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -285,7 +309,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(1409, 456), Vector2(508, 923)]
+"values": [Vector2(1409, 456), Vector2(314, 922)]
 }
 
 [sub_resource type="Animation" id="Animation_jfwgj"]
@@ -354,7 +378,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(1005, 910), Vector2(1385, 517)]
+"values": [Vector2(1133, 910), Vector2(1385, 517)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -366,7 +390,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [Vector2(508, 923), Vector2(1409, 456)]
+"values": [Vector2(314, 922), Vector2(1409, 456)]
 }
 
 [sub_resource type="Animation" id="Animation_tmt65"]
@@ -859,7 +883,7 @@ visible = false
 
 [node name="CircleSpotlight" type="PointLight2D" parent="EnemyTurn/Stage"]
 rotation = 3.1415927
-scale = Vector2(1.69, 1.69)
+scale = Vector2(1.865, 1.865)
 texture = ExtResource("5_oqjw7")
 
 [node name="StageSprite2D" type="Sprite2D" parent="EnemyTurn/Stage"]

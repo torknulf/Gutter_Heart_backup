@@ -1,17 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://050phl7wkbov"]
+[gd_scene load_steps=10 format=3 uid="uid://050phl7wkbov"]
 
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
-[ext_resource type="AudioStream" uid="uid://btjte1tviff5a" path="res://Assets/audio/SFX/Combat/InsultSpawnDOWN.wav" id="3_m0yxv"]
-[ext_resource type="AudioStream" uid="uid://b3mo1o3xuysgf" path="res://Assets/audio/SFX/Combat/InsultSpawnLEFT.wav" id="4_ej2se"]
-[ext_resource type="AudioStream" uid="uid://cy63kjmpiyx2f" path="res://Assets/audio/SFX/Combat/InsultSpawnRIGHT.wav" id="5_capee"]
-[ext_resource type="AudioStream" uid="uid://cotmn54juruay" path="res://Assets/audio/SFX/Combat/InsultSpawnUP.wav" id="6_e5scw"]
-[ext_resource type="Texture2D" uid="uid://buty215j3qk02" path="res://Assets/visual/Combat/Insults/Insults.png" id="6_k17x7"]
+[ext_resource type="Texture2D" uid="uid://dfdt7jr6n1tn1" path="res://Assets/visual/Combat/Insults/InsultsSheet.png" id="6_k17x7"]
+[ext_resource type="AudioStream" uid="uid://dimktokrr21kh" path="res://Assets/audio/SFX/Combat/InsultHitBreakSFX.wav" id="7_m0yxv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k17x7"]
 light_mode = 1
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_krp3i"]
-size = Vector2(100, 100)
 
 [sub_resource type="Animation" id="Animation_m0yxv"]
 length = 0.001
@@ -40,11 +34,28 @@ tracks/1/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_capee"]
+resource_name = "break"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_k17x7"]
 resource_name = "fly"
 length = 1.25
 loop_mode = 1
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,27 +81,40 @@ tracks/1/keys = {
 "values": [Vector2(0, 0), Vector2(-5, 5), Vector2(7.0000005, 4), Vector2(-6.0000005, -5.9999995), Vector2(6, -11), Vector2(-7.9999995, 8.000001), Vector2(18, -3), Vector2(-2.000001, -11), Vector2(-13, 3), Vector2(5, -8), Vector2(-1, -13), Vector2(-6, -6), Vector2(0, 6)]
 }
 
+[sub_resource type="Animation" id="Animation_ej2se"]
+resource_name = "spawn"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ej2se"]
 _data = {
 &"RESET": SubResource("Animation_m0yxv"),
-&"fly": SubResource("Animation_k17x7")
+&"break": SubResource("Animation_capee"),
+&"fly": SubResource("Animation_k17x7"),
+&"spawn": SubResource("Animation_ej2se")
 }
 
 [node name="InsultScene" type="Node2D"]
 material = SubResource("CanvasItemMaterial_k17x7")
 script = ExtResource("1_rf25y")
-spawnSFXAudio = Array[AudioStream]([ExtResource("3_m0yxv"), ExtResource("4_ej2se"), ExtResource("5_capee"), ExtResource("6_e5scw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 use_parent_material = true
 texture = ExtResource("6_k17x7")
-hframes = 5
-
-[node name="Area2D" type="Area2D" parent="."]
-scale = Vector2(0.3, 0.3)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_krp3i")
+hframes = 9
 
 [node name="TimingLabel" type="Label" parent="."]
 unique_name_in_owner = true
@@ -104,10 +128,20 @@ horizontal_alignment = 1
 
 [node name="SpawnSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="HitBreakSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_m0yxv")
+volume_db = -4.0
 bus = &"SFX"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_ej2se")
 }
-autoplay = "fly"
+autoplay = "spawn"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
