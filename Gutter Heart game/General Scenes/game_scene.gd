@@ -22,6 +22,7 @@ func fade_in():
 func _on_scene_transition_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "fade_out":
 		hasFadedOut.emit()
+		get_tree().paused = false
 		
 	
 	elif anim_name == "fade_in":

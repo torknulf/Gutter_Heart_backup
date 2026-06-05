@@ -70,6 +70,7 @@ func _ready() -> void:
 	%MetronomeSFXFirst.volume_db = -80
 	%PlayerAlternatives.visible = false
 	%TextBubble.visible = true
+	%GameOverScreen.visible = false
 
 	var gameScene = get_tree().get_first_node_in_group("GameScene")
 	#await gameScene.hasFadedOut
@@ -82,6 +83,7 @@ func _ready() -> void:
 	
 	%PlayerDefending.updateHP.connect(update_hp_UI)
 	%PlayerDefending.updateResolve.connect(update_resolve_UI)
+	%PlayerDefending.hasDied.connect(_on_has_died)
 	DialogueManager.advancePressed.connect(_on_advance_pressed)
 	
 	prep_player_hearts()
@@ -233,6 +235,7 @@ func read_through_text_array(array: Array):
 	
 	for line in array:
 		text_bubble_randpos()
+		DialogueManager.textSFXPitch = DialogueManager.get_character_voice("???")
 		DialogueManager.display_text(line)
 		#if array.size() <= 1: 
 		#	break
@@ -446,3 +449,10 @@ func _on_advance_pressed():
 	if turnState == TurnStates.OBSERVATION and !DialogueManager.isTyping:
 		turnState = TurnStates.PLAYERTURN
 		DialogueManager.playNextTextSFX.emit()
+
+
+## For game over
+func _on_has_died():
+	get_tree().paused = true
+	%GameOverScreen.visible = true
+	

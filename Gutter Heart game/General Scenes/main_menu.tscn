@@ -1,0 +1,196 @@
+[gd_scene load_steps=13 format=3 uid="uid://csa0ge26dve5o"]
+
+[ext_resource type="Script" uid="uid://dbnbrsmgdttny" path="res://General Scenes/main_menu.gd" id="1_a07j4"]
+[ext_resource type="Texture2D" uid="uid://coe4btk3hjyh3" path="res://Assets/visual/Combat/Combat_UI/Small_Box.png" id="1_wgbnl"]
+[ext_resource type="Theme" uid="uid://cj0d0yovpm4at" path="res://Battle Content/Battle Scenes/AppealBoxTheme.tres" id="2_a07j4"]
+[ext_resource type="AudioStream" uid="uid://cxo65l2yxrwem" path="res://Assets/audio/SFX/UI/MenuSelect.wav" id="4_vrlsu"]
+[ext_resource type="PackedScene" uid="uid://2v6gnlnigqpu" path="res://General Scenes/settings_menu.tscn" id="5_8pusu"]
+[ext_resource type="AudioStream" uid="uid://drr2cs43xjpfv" path="res://Assets/audio/Music/TutorialGuyCombat.ogg" id="6_cfyw1"]
+
+[sub_resource type="Gradient" id="Gradient_iw6u5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vuc3s"]
+gradient = SubResource("Gradient_iw6u5")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wgbnl"]
+frequency = 0.0004
+offset = Vector3(0, 439.02, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wgbnl"]
+width = 807
+height = 192
+noise = SubResource("FastNoiseLite_wgbnl")
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vrlsu"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pusu"]
+atlas = ExtResource("1_wgbnl")
+region = Rect2(0, 0, 913, 169)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_a07j4")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+texture = SubResource("GradientTexture1D_vuc3s")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -456.5
+offset_top = -417.5
+offset_right = 456.5
+offset_bottom = 417.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainLayout" type="VBoxContainer" parent="Background/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+
+[node name="TitleContainer" type="VBoxContainer" parent="Background/MarginContainer/MainLayout"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TitleTextBackground" type="TextureRect" parent="Background/MarginContainer/MainLayout/TitleContainer"]
+layout_mode = 2
+texture = SubResource("NoiseTexture2D_wgbnl")
+
+[node name="TitleText" type="Label" parent="Background/MarginContainer/MainLayout/TitleContainer/TitleTextBackground"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -391.5
+offset_top = -89.5
+offset_right = 391.5
+offset_bottom = 89.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.043137256, 0.043137256, 0.043137256, 0.32941177)
+theme_override_colors/font_outline_color = Color(0.08468992, 0.08468992, 0.08468992, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 46
+theme_override_font_sizes/font_size = 128
+text = "Gutter Heart"
+
+[node name="OptionsContainer" type="VBoxContainer" parent="Background/MarginContainer/MainLayout"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="StartButtonBox" type="TextureRect" parent="Background/MarginContainer/MainLayout/OptionsContainer"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_vrlsu")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8pusu")
+
+[node name="StartButton" type="Button" parent="Background/MarginContainer/MainLayout/OptionsContainer/StartButtonBox"]
+material = SubResource("CanvasItemMaterial_vrlsu")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_a07j4")
+theme_override_font_sizes/font_size = 46
+text = "          Start          "
+
+[node name="SettingsButtonBox" type="TextureRect" parent="Background/MarginContainer/MainLayout/OptionsContainer"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_vrlsu")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8pusu")
+stretch_mode = 2
+
+[node name="SettingsButton" type="Button" parent="Background/MarginContainer/MainLayout/OptionsContainer/SettingsButtonBox"]
+material = SubResource("CanvasItemMaterial_vrlsu")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_a07j4")
+theme_override_font_sizes/font_size = 46
+text = "Settings
+"
+
+[node name="QuitButtonBox" type="TextureRect" parent="Background/MarginContainer/MainLayout/OptionsContainer"]
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_vrlsu")
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8pusu")
+
+[node name="QuitButton" type="Button" parent="Background/MarginContainer/MainLayout/OptionsContainer/QuitButtonBox"]
+material = SubResource("CanvasItemMaterial_vrlsu")
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_a07j4")
+theme_override_font_sizes/font_size = 46
+text = "Quit"
+
+[node name="ChoiceSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_vrlsu")
+volume_db = 12.0
+bus = &"SFX"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_cfyw1")
+volume_db = -19.0
+autoplay = true
+bus = &"Music"
+
+[node name="SettingsMenu" parent="." instance=ExtResource("5_8pusu")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 960.0
+offset_top = 540.0
+offset_right = 960.0
+offset_bottom = 540.0
+
+[connection signal="pressed" from="Background/MarginContainer/MainLayout/OptionsContainer/StartButtonBox/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/MainLayout/OptionsContainer/SettingsButtonBox/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Background/MarginContainer/MainLayout/OptionsContainer/QuitButtonBox/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -14,7 +14,9 @@ func _ready() -> void:
 func _on_play_choice_SFX():
 	%ChoiceSFX.play()
 
-func _on_play_text_SFX():
+func _on_play_text_SFX(pitch):
+	print(pitch)
+	%TextSFX.pitch_scale = pitch
 	%TextSFX.play()
 
 func _on_play_next_text_SFX():

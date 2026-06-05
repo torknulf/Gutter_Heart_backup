@@ -19,6 +19,7 @@ var isTyping = false
 
 var lineIndex = 0 # for overworld dialogue mostly? which line nr to read
 
+var textSFXPitch: float = 0
 
 signal inDialogue
 
@@ -75,9 +76,11 @@ func process_text_type(timeline : Dictionary):
 	
 	if "name" in timeline.keys(): # this is the line-specific name
 		DialogueManager.nameLabel.text = timeline["name"]
+		textSFXPitch = get_character_voice(timeline["name"])
 	
 	elif "name" in currentNPC.keys(): # this is the general name
 		DialogueManager.nameLabel.text = currentNPC["name"]
+		textSFXPitch = get_character_voice(currentNPC["name"])
 	
 
 	if "effect" in timeline.keys():
@@ -127,7 +130,7 @@ func play_text_SFX(index):
 	var letterSkip:= 3
 	
 	if index % letterSkip == 0: #skips as many letters as letterSkip is
-		playTextSFX.emit()
+		playTextSFX.emit(textSFXPitch)
 
 
 
@@ -276,5 +279,25 @@ func display_observation_text(enemyState, enemyData):
 	
 	else: # in case no observation is defined
 		observation = "(No observation)"
-		
+	
+	textSFXPitch = get_character_voice("Hubert")
+	
 	display_text(observation, observeLabel)
+
+
+
+
+
+func get_character_voice(character):
+	var voiceDic: Dictionary = {
+	"Hubert": 1,
+	"Gaviota": 1.5,
+	"???" : 2  #also Gaviota
+	}
+	
+	
+	if character in voiceDic.keys():
+		return voiceDic[character]
+	
+	return 1 # standard pitch
+	
