@@ -32,6 +32,22 @@ func load_scene(newScenePath: String, spawnPos: Vector2 = Vector2.ZERO):
 	gameScene.fade_out()
 
 
+func reload_scene():
+	
+	get_scene_refs()
+	
+	for child in currSceneNode.get_children():
+		if child is RunnableScene:
+			sceneToLoad = child.get_scene_file_path()
+	
+	
+	disable_input()
+	
+	gameScene.fade_out()
+
+
+
+
 
 func get_scene_refs():
 	gameScene = get_tree().get_first_node_in_group("GameScene")
@@ -51,17 +67,11 @@ func transition_scene():
 	await get_tree().process_frame # to let nodes actually disappear completely
 
 
-	if newSceneInstance is OverworldScene:
-		#newSceneInstance.spawnPos = newSpawnPos
-		currSceneNode.call_deferred("add_child", newSceneInstance)
-		print("SceneManager: loading world") 
-		
-		
-	elif newSceneInstance is BattleScene:
-		currSceneNode.call_deferred("add_child", newSceneInstance)
-		print("SceneManager: loading combat")
+	currSceneNode.call_deferred("add_child", newSceneInstance)
+
 
 	gameScene.fade_in()
+	
 
 
 

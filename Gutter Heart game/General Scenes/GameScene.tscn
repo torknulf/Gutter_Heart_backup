@@ -3,6 +3,21 @@
 [ext_resource type="Script" uid="uid://bmooh3fcjnhb1" path="res://General Scenes/game_scene.gd" id="1_mxat3"]
 [ext_resource type="PackedScene" uid="uid://ct5d623ju72ef" path="res://Overworld Content/Overworld Scenes/Overworld Stages/overworld.tscn" id="2_fvkpy"]
 
+[sub_resource type="Animation" id="Animation_3g14p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportContainer/Viewport/SceneTransitionPlayer/Fade:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_fvkpy"]
 resource_name = "fade_in"
 length = 0.5
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_3g14p"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ViewportContainer/Viewport/SceneTransitionPlayer/Fade:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_bd2sb"]
@@ -60,21 +60,26 @@ _data = {
 }
 
 [node name="GameScene" type="Node" groups=["GameScene"]]
+process_mode = 3
 script = ExtResource("1_mxat3")
 
 [node name="ViewportContainer" type="SubViewportContainer" parent="."]
+process_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Viewport" type="SubViewport" parent="ViewportContainer"]
+process_mode = 3
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="current_scene" type="Node2D" parent="ViewportContainer/Viewport"]
+process_mode = 1
 
 [node name="Overworld" parent="ViewportContainer/Viewport/current_scene" instance=ExtResource("2_fvkpy")]
 

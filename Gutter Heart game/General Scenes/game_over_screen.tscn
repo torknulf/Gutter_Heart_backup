@@ -1,0 +1,123 @@
+[gd_scene load_steps=6 format=3 uid="uid://csj621qbysp81"]
+
+[ext_resource type="Script" uid="uid://c21eoqn2cwj48" path="res://game_over_screen.gd" id="1_t3wi2"]
+[ext_resource type="AudioStream" uid="uid://cxo65l2yxrwem" path="res://Assets/audio/SFX/UI/MenuSelect.wav" id="2_21mds"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_t3wi2"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_21mds"]
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 35
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkwqi"]
+bg_color = Color(0.32544088, 0.3254409, 0.32544076, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="GameOverScreen" type="Control"]
+process_mode = 3
+z_index = 15
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_t3wi2")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_t3wi2")
+
+[node name="Panel" type="Panel" parent="."]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -482.0
+offset_top = -312.0
+offset_right = 482.0
+offset_bottom = 179.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_21mds")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+use_parent_material = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 17
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 18
+
+[node name="MainLayout" type="VBoxContainer" parent="Panel/MarginContainer"]
+use_parent_material = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 15
+
+[node name="TopLabel" type="Label" parent="Panel/MarginContainer/MainLayout"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 9
+theme_override_font_sizes/font_size = 128
+text = "GAME OVER"
+
+[node name="ContentPanel" type="PanelContainer" parent="Panel/MarginContainer/MainLayout"]
+use_parent_material = true
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xkwqi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/MainLayout/ContentPanel"]
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 44
+
+[node name="RetryButton" type="Button" parent="Panel/MarginContainer/MainLayout/ContentPanel/VBoxContainer"]
+process_mode = 3
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Retry Encounter"
+
+[node name="MainMenuButton" type="Button" parent="Panel/MarginContainer/MainLayout/ContentPanel/VBoxContainer"]
+process_mode = 3
+use_parent_material = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 48
+text = "Back to Main Menu"
+
+[node name="ChoiceSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_21mds")
+volume_db = 12.0
+bus = &"SFX"
+
+[connection signal="pressed" from="Panel/MarginContainer/MainLayout/ContentPanel/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/MainLayout/ContentPanel/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

@@ -14,6 +14,7 @@ var hp: int = 5
 
 signal updateHP
 signal updateResolve
+signal hasDied
 
 var isInvincible: bool = false
 
@@ -134,6 +135,7 @@ func lose_hp(amount: int = 1):
 	
 	if hp - amount <= 0:
 		hp = 0
+		hasDied.emit()
 	elif amount == 0: # hit with max resolve
 		isInvincible = true
 		%HurtAnimation.play("Player_Hurt")

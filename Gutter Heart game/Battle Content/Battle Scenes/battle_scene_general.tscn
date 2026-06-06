@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://bb8dlj3nj2gqf"]
+[gd_scene load_steps=58 format=4 uid="uid://bb8dlj3nj2gqf"]
 
 [ext_resource type="Script" uid="uid://c4k00kql5vsox" path="res://Battle Content/Battle Scripts/battle_scene_general.gd" id="1_3nfe8"]
 [ext_resource type="Script" uid="uid://bq28p3v3vsvnr" path="res://Battle Content/Battle Scripts/beat_manager.gd" id="2_6koaw"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://c14gftakvyiai" path="res://Assets/visual/Combat/Combat_UI/Big_Box.png" id="15_nq208"]
 [ext_resource type="Texture2D" uid="uid://coe4btk3hjyh3" path="res://Assets/visual/Combat/Combat_UI/Small_Box.png" id="16_20hbv"]
 [ext_resource type="Theme" uid="uid://cj0d0yovpm4at" path="res://Battle Content/Battle Scenes/AppealBoxTheme.tres" id="17_i3v7s"]
+[ext_resource type="PackedScene" uid="uid://csj621qbysp81" path="res://General Scenes/game_over_screen.tscn" id="19_i3v7s"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bsghg"]
 light_mode = 1
@@ -794,6 +795,7 @@ texture = SubResource("AtlasTexture_p0ot6")
 stretch_mode = 1
 
 [node name="Background1" type="TextureRect" parent="Visuals"]
+process_mode = 3
 z_index = -4
 offset_left = -640.0
 offset_top = -384.0
@@ -803,6 +805,7 @@ texture = SubResource("NoiseTexture2D_w3c6v")
 expand_mode = 1
 
 [node name="Background2" type="TextureRect" parent="Visuals"]
+process_mode = 3
 z_index = -4
 offset_left = -640.0
 offset_top = -1152.0
@@ -829,6 +832,7 @@ pitch_scale = 0.7
 bus = &"SFX"
 
 [node name="Backgroundscroll" type="AnimationPlayer" parent="Visuals"]
+process_mode = 3
 root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_w3c6v")
@@ -872,6 +876,7 @@ bus = &"SFX"
 
 [node name="BGMusic" type="AudioStreamPlayer" parent="BeatManager"]
 unique_name_in_owner = true
+process_mode = 3
 volume_db = -19.0
 bus = &"Music"
 
@@ -1181,6 +1186,14 @@ theme = ExtResource("17_i3v7s")
 theme_override_font_sizes/font_size = 46
 text = "/Oppose
 "
+
+[node name="GameOverScreen" parent="." instance=ExtResource("19_i3v7s")]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 
 [connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/EnemyContainer/EnemyPortrait/ObserveButton" to="." method="_on_observe_button_pressed"]
 [connection signal="pressed" from="PlayerTurn/PlayerUI/VBoxContainer/PlayerContainer/PlayerUIBoxOutline/PlayerAlternatives/ComplimentTextureRect/ComplimentButton" to="." method="_on_compliment_button_pressed"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Gutter Heart"
-run/main_scene="uid://yse6lfooiu72"
+run/main_scene="uid://csa0ge26dve5o"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://Assets/visual/Misc/icon.svg"
 
@@ -20,6 +20,7 @@ config/icon="res://Assets/visual/Misc/icon.svg"
 DialogueManager="*res://Autoload Singletons/dialogue_manager.gd"
 GameState="*res://game_state.gd"
 SceneManager="*res://scene_manager.gd"
+SettingsManager="*res://settings_manager.gd"
 
 [display]
 
