@@ -63,9 +63,10 @@ func try_hit(hitDir: Vector2):
 		var insult = hittableInsults[hitDir][0]
 
 		update_resolve(insult.perfTiming)
-		remove_hittable_insult(insult)
+		remove_hittable_insult(insult, true)
 		%InsultHitSFX.stream = select_hit_SFX(insult)
 		%InsultHitSFX.play()
+		
 
 
 func take_damage(insult: Insult):
@@ -95,9 +96,9 @@ func add_hittable_insult(insult: Insult):
 
 
 
-func remove_hittable_insult(insult: Insult):
+func remove_hittable_insult(insult: Insult, isHit: bool = false):
 	hittableInsults[insult.approachDir].remove_at(0) # should always be the oldest object that gets removed?
-	insult.queue_free()
+	insult.start_breaking(isHit)
 
 
 func _on_hitzone_visibility_timer_timeout() -> void:

@@ -89,13 +89,13 @@ func generate_insult_queue():
 			4: 
 				patterns = [[1, 0, 1, 1, 1], [1, 0, 1, 0, 1], [1, 1, 1, 0, 1]]#, [1, 1, 0, 1], [1, 0, 1, 0], [1, 0, 1, 1]]
 				if difficultyLevel >= 1:
-					var hardPatterns = [[1, 1, 1, 1, 1, 1, 1, 1, 1], [1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 1, 1, 0, 1]]
+					var hardPatterns = [[1, 1, 0, 1, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 0, 1, 1, 1], [1, 1, 1, 0, 1, 1, 1, 0, 1]]
 					for pattern in hardPatterns:
 						patterns.append(pattern)
 			
 			5: pass
 			
-			6: patterns = [[1, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 1], [1, 0, 1, 1, 1, 1, 1], [1, 0, 1, 0, 1, 1, 1]]
+			6: patterns = [[1, 1, 1, 0, 1, 1], [1, 1, 1, 0, 1, 1, 1], [1, 0, 1, 1, 1, 1, 1], [1, 0, 1, 0, 1, 1, 1], [1, 0, 1, 1, 1, 0, 1]]
 		
 		var index = randi_range(0, patterns.size()-1)
 		insultQueue = patterns[index]
@@ -141,7 +141,8 @@ func spawn_insult(repeatDir: bool = false):
 	insultInstance.beatAmount = %BeatManager.currSong.beatsPerMeasure
 	insultInstance.beatManagerRef = %BeatManager
 	insultInstance.playerDefendingRef = %PlayerDefending
-	
+	insultInstance.spawnSFXAudio = %BeatManager.currSong.spawnSFX
+	insultInstance.spawnSFXVolume = %BeatManager.currSong.spawnSFXVolume
 	
 	
 	get_parent().add_child(insultInstance)
