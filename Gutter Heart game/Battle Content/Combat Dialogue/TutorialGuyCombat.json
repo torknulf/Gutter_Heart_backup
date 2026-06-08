@@ -47,7 +47,7 @@
 			"0": "Laugh at him.", 
 			"1": "Point at him.",
 			"2": "Comment on the nose.",
-			"3": "Mention his mother."
+			"3": ""
 		},
 
 	  "success_response": ["It's not big!", "It's ROBUST!"],
@@ -62,9 +62,9 @@
 	},
 	
 	{
-	  "pre_prompt": ["It's a shame you didn't go for the trials I prepared.", "It really is.", "Probably my finest work yet.", "But don't worry.", "you're going to learn your lesson.", "I'll make sure of it."],
-	  "prompt": "",
-	  "prompt_repeat": "",
+	  "pre_prompt": ["It's a shame you didn't go for the trials I prepared.", "It really is.", "Probably my finest work yet.", "But don't worry.", "you're going to learn your lesson."],
+	  "prompt": "I'll make sure of it.",
+	  "prompt_repeat": "I'll teach you your lesson.",
 
 	  "observation": "Gaviota is thinking about his trials. He's angry about it.",
 	
@@ -83,8 +83,120 @@
 		{
 			"0": "-", 
 			"1": ["Yeah, wring it dry.",  "It always has the same punch the fifth time."],
-			"2": ["That's just nasty and irritating.", "Why did you do that?"],
+			"2": ["That's just nasty and irritating.", "Why... why did you do that?"],
 			"3": ["Stop that.", "It's making me uncomfortable.", "Stop!", "...", "Thank you."],
+		}
+
+	},
+	
+	{
+	  "pre_prompt": ["You know nothing of my artform!", "Do you know how much work goes into this?", "You ungrateful slob.", "Just do some easy tasks.", "Face some minor hardship-", "And become a BETTER MAN!", "But nooooo- just slam some leaking pipes instead.", "Sure!"],
+	  "prompt": "You're just boring.",
+	  "prompt_repeat": "You're just boring.",
+
+	  "observation": "",
+	
+	  "correct_appeal": "2",
+	
+	"alt_appeals":
+		{
+			"0": "YoU'rE JuSt BoRiNg- Myeh myeh myehh!", 
+			"1": "Slam this pipe, loser.",
+			"2": "Boring like your trials?",
+			"3": "No."
+		},
+
+	  "success_response": "THEY'RE NOT BORING!!!",
+	  "wrong_response":
+		{
+			"0": ["Okay that-", "That's just annoying."], 
+			"1": "I'm calling HR.",
+			"2": "-",
+			"3": ["What?", "You're supposed to insult me.", "What was that?", "Are you even trying?"],
+		}
+
+	},
+	
+	{
+	  "pre_prompt": ["You pig-headed cretin.", "You are by far the worst soul I've had to deal with."],
+	  "prompt": "You're just too stubborn to learn ANYTHING!",
+	  "prompt_repeat": "I can't stand you.",
+
+	  "observation": "Gaviota stumbles slightly as he delivers this last line.",
+	
+	  "correct_appeal": "3",
+	
+	"alt_appeals":
+		{
+			"0": "Call him pig-headed back.", 
+			"1": "Flip him off.",
+			"2": "Push him over.",
+			"3": "Why do you stand so weird?"
+		},
+
+	  "success_response": ["I just changed my footing!", "YOU stand weird..."],
+	  "wrong_response":
+		{
+			"0": "Couldn't think of anything good, huh?", 
+			"1": "Creative...",
+			"2": ["I already told you.", "I'm a spirit.", "You can't harm me physically.", "...", "But don't do that again."],
+			"3": "-",
+		}
+
+	},
+	
+	{
+	  "pre_prompt": ["This magical wonder is wasted on the likes of you.", "A grimm-approach would've suited you better."],
+	  "prompt": "I never liked those stories.",
+	  "prompt_repeat": "My mother was right. Majoring in magical morality was a bad idea",
+
+	  "observation": "Gaviota seems vulnerable. A heavy-hitter seems appropriate!",
+	
+	  "correct_appeal": "2",
+	
+	"alt_appeals":
+		{
+			"0": "Call him dumb.", 
+			"1": "Punch him.",
+			"2": "Speak ill of his mother.",
+			"3": "Do an insulting backflip."
+		},
+
+	  "success_response": ["Aah!", "My heart...", "My soul...", "You're using forbidden techniques now, plumber.", "Oww..."],
+	  "wrong_response":
+		{
+			"0": "That's really not very creative.", 
+			"1": ["I still can't be hurt physically.", "We already went through this.", "Did you listen at all?"],
+			"2": "-",
+			"3": "Nice.",
+		}
+
+	},
+	
+	{
+	  "pre_prompt": ["To think-", "All you had to do was fetch some goblets.", "But you just had to go and refuse.", "And you even called me a gnome!", "A gnome?!", "I don't even look like a gnome!"],
+	  "prompt": "You are insufferable.",
+	  "prompt_repeat": "You are insufferable.",
+
+	  "observation": "Gaviota is touching his hat to see it's suddenly tapered or something.",
+	
+	  "correct_appeal": "3",
+	
+	"alt_appeals":
+		{
+			"0": "Tell him that he smells.", 
+			"1": "Stand threateningly.",
+			"2": "Goblet these nuts!",
+			"3": "Call him a gnome again."
+		},
+
+	  "success_response": ["NOOOOooooooooooo-", "...", "I'm an elf."],
+	  "wrong_response":
+		{
+			"0": "Magic beings don't smell like anything but magic.", 
+			"1": ["Why are you standing like that?", "...", "That just looks uncomfortable.", "It's a bit threatiening, though..."],
+			"2": ["Haha!", "That is the funniest thing I have EVER heard!"],
+			"3": "-",
 		}
 
 	},
