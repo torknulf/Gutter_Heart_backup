@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://050phl7wkbov"]
+[gd_scene load_steps=11 format=3 uid="uid://050phl7wkbov"]
 
 [ext_resource type="Script" uid="uid://cym80ttrd528d" path="res://Battle Content/Battle Scripts/insult_scene.gd" id="1_rf25y"]
+[ext_resource type="AudioStream" uid="uid://btrkqi17aqrsc" path="res://Assets/audio/SFX/temp/PlayerHurt.wav" id="4_st4qw"]
 [ext_resource type="Texture2D" uid="uid://dfdt7jr6n1tn1" path="res://Assets/visual/Combat/Insults/InsultsSheet.png" id="6_k17x7"]
 [ext_resource type="AudioStream" uid="uid://dimktokrr21kh" path="res://Assets/audio/SFX/Combat/InsultHitBreakSFX.wav" id="7_m0yxv"]
 
@@ -134,8 +135,14 @@ bus = &"SFX"
 [node name="HitBreakSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_m0yxv")
-volume_db = -4.0
+volume_db = -2.0
 bus = &"SFX"
+
+[node name="ComboNoiseSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_st4qw")
+volume_db = -15.0
+bus = &"Muffle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true

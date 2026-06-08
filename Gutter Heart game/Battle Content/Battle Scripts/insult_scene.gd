@@ -79,10 +79,9 @@ func _physics_process(delta: float) -> void:
 	elif progress >= 0.90:
 		perfTiming = true
 
-	elif progress >= 0.7 and !isAddedToPlayer:
+	elif progress >= 0.75   and !isAddedToPlayer:
 		playerDefendingRef.add_hittable_insult(self) ## HERE CAN BE DESTROYED by player
 		isAddedToPlayer = true 
-
 
 	apply_wobble()
 
@@ -117,13 +116,33 @@ func select_spawn_SFX():
 
 
 ## happens when an insult reaches a player
-func start_breaking(isHit: bool = false):
+func start_breaking(isHit: bool = false, combo: int = 0):
 	isBreaking = true
 	%AnimationPlayer.play("break")
 	
 	if isHit:
-		%HitBreakSFX.play()
+		
+		print("COMBO: ", combo)
+		if combo >= 1:
+			
+			var comboSpriteScaler: float = 0.3
+			%Sprite2D.scale = Vector2(1 + comboSpriteScaler * combo, 1 + comboSpriteScaler * combo)
+		
+		play_combo_SFX(combo)
 
+
+func play_combo_SFX(combo):
+	var comboScaler: float = 0.1
+	%HitBreakSFX.pitch_scale = 1 + comboScaler * combo
+	%HitBreakSFX.play()
+	
+	# to make volume higher with higher combos
+	if combo > 3 and perfTiming:
+		%ComboNoiseSFX.volume_db = -15 - (8 / (combo - 3))
+		%ComboNoiseSFX.pitch_scale = combo 
+		%ComboNoiseSFX.play()
+	
+	
 
 
 func apply_wobble():

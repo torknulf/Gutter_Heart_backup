@@ -124,7 +124,7 @@ func _process(delta: float) -> void:
 
 
 func start_enemy_turn() -> void:
-	#print("ENEMY TURN")
+	%PlayerDefending.currCombo = 0
 	%InsultSpawner.initialize_attack()
 	%TurnTransition.play("spotlight_transition_to_enemyturn")
 
@@ -456,3 +456,26 @@ func _on_has_died():
 	get_tree().paused = true
 	%GameOverScreen.visible = true
 	
+
+
+func _on_observe_button_mouse_entered() -> void:
+	await get_tree().process_frame
+	if turnState == TurnStates.PLAYERTURN:
+		%EnemyPortrait.material.set_shader_parameter("highlight", 0.45)
+
+func _on_observe_button_mouse_exited() -> void:
+	await get_tree().process_frame
+	if turnState == TurnStates.PLAYERTURN:
+		%EnemyPortrait.material.set_shader_parameter("highlight", 0.0)
+
+func _on_observe_button_button_down() -> void:
+	await get_tree().process_frame
+	if turnState == TurnStates.PLAYERTURN:
+		%EnemyPortrait.material.set_shader_parameter("highlight", 0.2)
+
+func _on_observe_button_button_up() -> void:
+	await get_tree().process_frame
+	if turnState == TurnStates.OBSERVATION:
+		%EnemyPortrait.material.set_shader_parameter("highlight", 0.7)
+		await get_tree().create_timer(0.15).timeout
+		%EnemyPortrait.material.set_shader_parameter("highlight", 0.0)

@@ -17,10 +17,12 @@ signal enemyAttackEnded
 var lastInsult = 0
 var lastDir = Vector2.UP # just placeholder direction
 
+
 func _ready() -> void:
 	randomize()
 	%BeatManager.newBeat.connect(spawn_first_in_queue)
 	%BeatManager.newBar.connect(_on_signal_new_bar)
+
 
 
 func _process(delta: float) -> void:
@@ -102,7 +104,7 @@ func generate_insult_queue():
 		
 		
 		
-	
+	# generate patterns randomly
 	else:
 		insultQueue.resize(%BeatManager.currSong.beatsPerMeasure)
 		var insultAmount = randi_range(2, %BeatManager.currSong.beatsPerMeasure) # should be length of list
@@ -134,7 +136,7 @@ func spawn_insult(repeatDir: bool = false):
 	var hitPos = 150
 	var startPos = 450
 	
-	# these two magic numbers are just eyed distances
+	
 	insultInstance.startPos = startPos * dir
 	insultInstance.hitPos = hitPos * dir
 	insultInstance.approachDir = dir

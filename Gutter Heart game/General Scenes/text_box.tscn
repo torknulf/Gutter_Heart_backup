@@ -168,6 +168,20 @@ libraries = {
 }
 autoplay = "Idle"
 
+[node name="ColorRect" type="ColorRect" parent="TopTextBox"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = 44.5
+offset_right = -35.0
+offset_bottom = -33.5
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.050980393, 0.050980393, 0.050980393, 0.6784314)
+
 [node name="Choices" type="Control" parent="."]
 visible = false
 layout_mode = 1

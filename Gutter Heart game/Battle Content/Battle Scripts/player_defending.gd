@@ -16,7 +16,12 @@ signal updateHP
 signal updateResolve
 signal hasDied
 
+signal comboShake # for screen shake
+
 var isInvincible: bool = false
+
+
+var currCombo: int = 0
 
 func _ready() -> void:
 	hp = maxHP
@@ -62,9 +67,9 @@ func try_hit(hitDir: Vector2):
 	
 	if hittableInsults[hitDir] != []:
 		var insult = hittableInsults[hitDir][0]
-
+		update_combo(insult.perfTiming)
 		update_resolve(insult.perfTiming)
-		remove_hittable_insult(insult, true)
+		remove_hittable_insult(insult, true, currCombo)
 		%InsultHitSFX.stream = select_hit_SFX(insult)
 		%InsultHitSFX.play()
 		
@@ -97,21 +102,55 @@ func add_hittable_insult(insult: Insult):
 
 
 
-func remove_hittable_insult(insult: Insult, isHit: bool = false):
+func remove_hittable_insult(insult: Insult, isHit: bool = false, combo: int = 0):
 	hittableInsults[insult.approachDir].remove_at(0) # should always be the oldest object that gets removed?
-	insult.start_breaking(isHit)
+	insult.start_breaking(isHit, combo)
+	
+	if isHit:
+		play_combo_SFX(combo)
+	
+	
 
 
 func _on_hitzone_visibility_timer_timeout() -> void:
 	%Hitzone.visible = false
 
 
+
+func update_combo(isHitPerfect):
+	var shakeFactor = currCombo
+	
+	if isHitPerfect:
+		if currCombo < 10:
+			currCombo += 1
+		
+	
+	else:
+		if currCombo - 5 < 0:
+			currCombo = 0
+		else:
+			currCombo -= 5
+		shakeFactor *= 0.8
+
+
+	if currCombo < 3: # weak
+		shakeFactor = 2
+	elif currCombo < 6: # medium
+		shakeFactor = 2.6
+	else: # strong
+		shakeFactor = 3.5
+	
+	comboShake.emit(shakeFactor)
+	print("SHAKE: ", shakeFactor)
+
+
 func update_resolve(isHitPerfect):
 	var amount
 	if isHitPerfect:
-		amount = 15
+		amount = 2 * currCombo
+
 	else:
-		amount = 5
+		amount = 2
 	
 	if resolve + amount >= maxResolve:
 		if hp == maxHP:
@@ -143,6 +182,8 @@ func lose_hp(amount: int = 1):
 	else:
 		hp -= amount
 	
+	currCombo = 0
+	comboShake.emit(4)
 	updateHP.emit(hp)
 	isInvincible = true
 	%HurtAnimation.play("Player_Hurt")
@@ -177,6 +218,7 @@ func select_hit_SFX(insult: Insult):
 	if insult.perfTiming:
 		%InsultHitSFX.volume_db = 19
 		return perfectSFXAudio[sfxIndex]
+	
 	%InsultHitSFX.volume_db = 13
 	return okSFXAudio[sfxIndex]
 	
@@ -190,3 +232,14 @@ func _on_hurt_animation_animation_finished(anim_name: StringName) -> void:
 func _on_player_animation_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Wrench_Swing":
 		%PlayerAnimation.play("Idle")
+
+
+func play_combo_SFX(combo):
+	var comboScaler: float = 0.4 
+	%ComboSFX.pitch_scale = 1 + comboScaler * combo
+	%ComboSFX.volume_db = -12 + comboScaler * combo 
+	
+	%ComboSFX.play()
+	
+	
+	

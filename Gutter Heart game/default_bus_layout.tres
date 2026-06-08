@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=6 format=3 uid="uid://bq4jo717xbh8p"]
+[gd_resource type="AudioBusLayout" load_steps=15 format=3 uid="uid://bq4jo717xbh8p"]
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_j3pel"]
 resource_name = "Compressor"
@@ -26,6 +26,67 @@ band_db/1000_hz = -8.6
 band_db/3200_hz = -58.8
 band_db/10000_hz = -60.0
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_n8wo2"]
+resource_name = "Compressor"
+ratio = 9.8
+attack_us = 58.0
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_j3pel"]
+resource_name = "Reverb"
+room_size = 0.12
+hipass = 0.42
+wet = 0.37
+
+[sub_resource type="AudioEffectDelay" id="AudioEffectDelay_j3pel"]
+resource_name = "Delay"
+dry = 0.0
+tap1_level_db = 0.0
+tap2_active = false
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_j3pel"]
+resource_name = "Chorus"
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_j3pel"]
+resource_name = "Phaser"
+
+[sub_resource type="AudioEffectNotchFilter" id="AudioEffectNotchFilter_j3pel"]
+resource_name = "NotchFilter"
+
+[sub_resource type="AudioEffectRecord" id="AudioEffectRecord_j3pel"]
+resource_name = "Record"
+format = 0
+
+[sub_resource type="AudioEffectEQ10" id="AudioEffectEQ10_j3pel"]
+resource_name = "EQ10"
+band_db/31_hz = 2.7
+band_db/62_hz = 19.5
+band_db/125_hz = 16.0
+band_db/250_hz = -21.2
+band_db/500_hz = -60.0
+band_db/1000_hz = -60.0
+band_db/2000_hz = -60.0
+band_db/4000_hz = -60.0
+band_db/8000_hz = -60.0
+band_db/16000_hz = -60.0
+
+[sub_resource type="AudioEffectChorus" id="AudioEffectChorus_g28q7"]
+resource_name = "Chorus"
+voice_count = 4
+dry = 0.0
+wet = 1.0
+voice/3/delay_ms = 12.0
+voice/3/rate_hz = 1.0
+voice/3/depth_ms = 0.0
+voice/3/level_db = 0.0
+voice/3/cutoff_hz = 16000.0
+voice/3/pan = 0.0
+voice/4/delay_ms = 12.0
+voice/4/rate_hz = 1.0
+voice/4/depth_ms = 0.0
+voice/4/level_db = 0.0
+voice/4/cutoff_hz = 16000.0
+voice/4/pan = 0.0
+
 [resource]
 bus/0/volume_db = 3.8379936
 bus/1/name = &"SFX"
@@ -50,3 +111,27 @@ bus/2/effect/0/effect = SubResource("AudioEffectCompressor_g28q7")
 bus/2/effect/0/enabled = false
 bus/2/effect/1/effect = SubResource("AudioEffectEQ_j3pel")
 bus/2/effect/1/enabled = false
+bus/3/name = &"Muffle"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 4.0357533
+bus/3/send = &"SFX"
+bus/3/effect/0/effect = SubResource("AudioEffectCompressor_n8wo2")
+bus/3/effect/0/enabled = false
+bus/3/effect/1/effect = SubResource("AudioEffectReverb_j3pel")
+bus/3/effect/1/enabled = true
+bus/3/effect/2/effect = SubResource("AudioEffectDelay_j3pel")
+bus/3/effect/2/enabled = false
+bus/3/effect/3/effect = SubResource("AudioEffectChorus_j3pel")
+bus/3/effect/3/enabled = false
+bus/3/effect/4/effect = SubResource("AudioEffectPhaser_j3pel")
+bus/3/effect/4/enabled = false
+bus/3/effect/5/effect = SubResource("AudioEffectNotchFilter_j3pel")
+bus/3/effect/5/enabled = false
+bus/3/effect/6/effect = SubResource("AudioEffectRecord_j3pel")
+bus/3/effect/6/enabled = false
+bus/3/effect/7/effect = SubResource("AudioEffectEQ10_j3pel")
+bus/3/effect/7/enabled = false
+bus/3/effect/8/effect = SubResource("AudioEffectChorus_g28q7")
+bus/3/effect/8/enabled = true
