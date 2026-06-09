@@ -3,6 +3,7 @@ extends Node
 var textLabel
 var nameLabel: RichTextLabel
 var observeLabel: Label
+var tutorialLabel: Label
 
 signal playTextSFX
 signal playChoiceSFX
@@ -41,6 +42,7 @@ func _ready() -> void:
 	textLabel = get_tree().get_first_node_in_group("TextLabel")
 	nameLabel = get_tree().get_first_node_in_group("NameLabel")
 	observeLabel = get_tree().get_first_node_in_group("ObserveLabel") 
+	tutorialLabel = get_tree().get_first_node_in_group("TutorialLabel") 
 	
 	activeLabel = textLabel
 
@@ -149,7 +151,7 @@ func _input(event: InputEvent) -> void:
 	if textBox == null:
 		return
 	
-	elif textBox.visible == false:
+	elif textBox.visible == false and tutorialLabel.visible == false:
 		return # here the textbox is invisible, so no dialogue is there
 	
 	
@@ -285,7 +287,21 @@ func display_observation_text(enemyState, enemyData):
 	display_text(observation, observeLabel)
 
 
-
+func display_tutorial_text():
+	# not so good practice, should be a separate tutorial loader, but we only have one now anyway
+	var tutorialData = EnemyDataLoader.new().load_enemy("res://Battle Content/Combat Dialogue/CombatTutorial.json")
+	
+	if "tutorials" in tutorialData.keys():
+		if "enemy_turn" in tutorialData["tutorials"].keys():
+			for index in tutorialData["tutorials"]["enemy_turn"]:
+				tutorialLabel.position = Vector2(index["pos_x"], index["pos_y"])
+				display_text(index["text"] , tutorialLabel)
+				await advancePressed
+				playNextTextSFX.emit()
+	
+	tutorialLabel.visible = false
+	GameState.hadCombatTutorial = true
+	
 
 
 func get_character_voice(character):

@@ -1,6 +1,9 @@
 extends Node
 
 var inCombat: bool = false
+
+var hadCombatTutorial: bool = false
+
 var queuedCombat
 
 var npcStates = {

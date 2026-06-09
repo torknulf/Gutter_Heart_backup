@@ -8,6 +8,8 @@ var enemyCurrProg: int = 0 # if currprog reaches maxprog, battle is won!
 
 @export_enum("TutorialGuy", "GnomeRat") var currEnemy: String
 
+@export var skipTutorial: bool = false
+
 enum TurnStates {PREPROMPT, PLAYERTURN, OBSERVATION, RESPONSE, ENEMYTURN}
 var turnState:
 	set(state):
@@ -72,6 +74,10 @@ func _ready() -> void:
 	%TextBubble.visible = true
 	%GameOverScreen.visible = false
 
+	if skipTutorial:
+		GameState.hadCombatTutorial = true
+		$EnemyTurn/ColorRect/TutorialLabel.visible = false
+
 	var gameScene = get_tree().get_first_node_in_group("GameScene")
 	#await gameScene.hasFadedOut
 	
@@ -127,6 +133,9 @@ func start_enemy_turn() -> void:
 	%PlayerDefending.currCombo = 0
 	%InsultSpawner.initialize_attack()
 	%TurnTransition.play("spotlight_transition_to_enemyturn")
+	
+	if GameState.hadCombatTutorial == false:
+		DialogueManager.display_tutorial_text()
 
 
 

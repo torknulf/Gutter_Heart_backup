@@ -11,7 +11,7 @@
 script = ExtResource("1_xwthk")
 music = ExtResource("1_ii02e")
 bpm = 320.0
-beatOffset = 0.22
+beatOffset = 0.035
 volume = -19.0
 spawnSFX = Array[AudioStream]([ExtResource("3_x468y"), ExtResource("4_gdi32"), ExtResource("5_qt0y8"), ExtResource("6_aruk6")])
 spawnSFXVolume = 7.0

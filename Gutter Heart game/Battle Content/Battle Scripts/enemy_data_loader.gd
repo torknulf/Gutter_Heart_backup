@@ -1,6 +1,6 @@
 class_name EnemyDataLoader extends Node
 
-## Returns dictionary with enemy data
+## returns dictionary with enemy data
 func load_enemy(enemy_path: String) -> Dictionary:
 	var file = FileAccess.open(enemy_path, FileAccess.READ)
 	

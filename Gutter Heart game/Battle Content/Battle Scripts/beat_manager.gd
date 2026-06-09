@@ -9,7 +9,7 @@ var isActive: bool = false
 signal newBeat
 signal newBar
 
-var barStart = true 
+var barStart = false 
 
 
 
@@ -17,10 +17,10 @@ var barStart = true
 
 func _ready() -> void:
 	await get_tree().process_frame
-	%BGMusic.stream = currSong.music
-	%BGMusic.volume_db = currSong.volume
-	%BGMusic.play()
-	flip_barstart()
+	var gameScene = get_tree().get_first_node_in_group("GameScene")
+	gameScene.hasFadedIn.connect(start_music)
+
+
 
 
 func _process(delta: float) -> void:
@@ -71,8 +71,13 @@ func flip_barstart():
 		return true
 
 
-
-	
+func start_music():
+	%BGMusic.stream = currSong.music
+	%BGMusic.volume_db = currSong.volume
+	%BGMusic.play()
+	flip_barstart()
+	flip_barstart()
+	  
 
 ## --- GET FUNCTIONS ---
 

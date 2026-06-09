@@ -1,0 +1,50 @@
+{
+  "name": "Tutorial",
+  "tutorials": 
+	{
+		"enemy_turn": 
+		[
+			{
+				"text": "[TUTORIAL] The enemy will now attack by casting INSULTS at you.",
+				"pos_x": -733,
+				"pos_y": 337
+			},
+			
+			{
+				"text": "Use [W], [A], [S], [D] or the arrow keys to defend against an incoming INSULT.!",
+				"pos_x": -733,
+				"pos_y": 337
+			},
+			
+			{
+				"text": "These are your lives, the game ends if they deplete.",
+				"pos_x": -1116, 
+				"pos_y": 409
+			},
+			
+			{
+				"text": "This is your RESOLVE gague. Filling it up will earn you a new life.",
+				"pos_x": -293,
+				"pos_y": 353
+			},
+			
+			{
+				"text": "Gain RESOLVE by successfully defending against INSULTS!",
+				"pos_x": -733,
+				"pos_y": 337
+			},
+			
+			{
+				"text": "Timing your hits to the music, which boosts your RESOLVE gain!",
+				"pos_x": -733,
+				"pos_y": 337
+			},
+			
+			{
+				"text": "Watch out, the enemy is about to insult you! Have fun! ",
+				"pos_x": -733,
+				"pos_y": 337
+			},
+		],
+	}
+}

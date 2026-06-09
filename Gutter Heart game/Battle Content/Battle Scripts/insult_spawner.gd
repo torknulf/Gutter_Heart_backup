@@ -154,7 +154,7 @@ func spawn_insult(repeatDir: bool = false):
 
 # happens whenever a new bar occurs. Mainly toggles on/off spawning between rhythm game attacking/defending rounds
 func _on_signal_new_bar(barStart: bool):
-	if $"../..".turnState != $"../..".TurnStates.ENEMYTURN:
+	if $"../..".turnState != $"../..".TurnStates.ENEMYTURN or GameState.hadCombatTutorial == false:
 		return
 	#print("BEAT", isSpawning)
 	
